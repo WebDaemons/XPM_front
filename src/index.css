@@ -1,2 +1,11 @@
+@import url(./reset.css);
+
 :root {
+
+	--primary-blue: #1B76FF;
+
+}
+
+* {
+  box-sizing: border-box;
 }

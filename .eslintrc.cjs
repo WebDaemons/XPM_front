@@ -17,6 +17,9 @@ module.exports = {
       parserOptions: {
         sourceType: 'script',
       },
+      rules: {
+        'react/prop-types': 'off',
+      },
     },
   ],
   parserOptions: {
@@ -27,7 +30,6 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'off',
     'prettier/prettier': [
       'warn',
       {
