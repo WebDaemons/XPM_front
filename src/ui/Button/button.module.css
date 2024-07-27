@@ -22,7 +22,7 @@
 .signByButton {
   color: #647080;
   background-color: white;
-  border: 2px solid #e1e8ee;
+  border: 1px solid #e1e8ee;
 }
 
 .signByButton:hover {
@@ -31,10 +31,10 @@
 
 .mainButton {
   color: white;
-  background-color: #2a63fa;
+  background-color: var(--primary-blue);
   border: none;
 }
 
 .mainButton:hover {
-  box-shadow: 0px 2px 9px 0px #1e85fe;
+  box-shadow: 0px 2px 9px 0px var(--primary-blue);
 }

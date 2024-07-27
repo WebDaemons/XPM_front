@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './button.module.css';
 
-const Button = ({ label, type, icon, variant }) => {
+export const Button = ({ label, type = 'button', icon, variant }) => {
   const className =
     variant === 'signByButton' ? styles.signByButton : styles.mainButton;
 
@@ -20,5 +20,3 @@ const Button = ({ label, type, icon, variant }) => {
     </button>
   );
 };
-
-export default Button;
