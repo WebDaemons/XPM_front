@@ -8,7 +8,7 @@ export const navElements = [
     link: '/todo',
     icon: (
       <LuListTodo
-        size={24}
+        size={32}
         color="#ffffff"
       />
     ),
@@ -18,7 +18,7 @@ export const navElements = [
     link: '/notes',
     icon: (
       <LiaStickyNoteSolid
-        size={24}
+        size={32}
         color="#ffffff"
       />
     ),
@@ -28,7 +28,7 @@ export const navElements = [
     link: '/settings',
     icon: (
       <IoSettingsOutline
-        size={24}
+        size={32}
         color="#ffffff"
       />
     ),
