@@ -1,0 +1,24 @@
+.navLinkItem {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+  cursor: pointer;
+  padding: 15px;
+}
+
+.navLinkItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: var(--primary-blue);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
