@@ -1,10 +1,16 @@
 import React from 'react';
-import styles from './auth.module.css';
-import AuthForm from '../../components/AuthForm/AuthForm';
+import AuthForm from '@components/AuthForm/AuthForm';
 
 function Auth() {
   return (
-    <div>
+    <div
+      style={{
+        height: '100svh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <AuthForm />
     </div>
   );

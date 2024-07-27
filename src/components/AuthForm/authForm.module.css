@@ -1,0 +1,38 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+
+.fullName {
+  display: flex;
+  gap: 10px;
+}
+
+/* OR DELIMITER */
+
+.orDelimiter {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.orDelimiter::before,
+.orDelimiter::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 180px;
+  background-color: #e7e7e9;
+}
+
+.orDelimiter::before {
+  left: 0;
+}
+
+.orDelimiter::after {
+  right: 0;
+}
