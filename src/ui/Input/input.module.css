@@ -1,0 +1,36 @@
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  width: 20px;
+  height: 20px;
+  user-select: none;
+}
+
+.inputController {
+  font-family: Jost, Poppins, sans-serif;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.inputController::placeholder {
+  color: #cbcbcb;
+}
+
+.togglePasswordIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
