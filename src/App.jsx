@@ -6,20 +6,21 @@ import {
   Outlet,
   Navigate,
 } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import Sidebar from './components/Sidebar/Sidebar';
-import Auth from './pages/AuthPage/Auth';
-import Todolist from './pages/TodolistPage/Todolist';
-import Settings from './pages/SettingsPage/Settings';
-import Home from './pages/HomePage/Home';
-import NotFound from './pages/NotFoundPage/NotFound';
+import { useAuth } from '@context/AuthContext';
+import { Sidebar } from '@components/Sidebar/Sidebar';
+import Auth from '@pages/AuthPage/Auth';
+import Todolist from '@pages/TodolistPage/Todolist';
+import Settings from '@pages/SettingsPage/Settings';
+import Home from '@pages/HomePage/Home';
+import NotFound from '@pages/NotFoundPage/NotFound';
+import Notes from './pages/NotesPage/Notes';
 
 function App() {
   const { isAuthenticated } = useAuth();
 
   const Layout = () => {
     return (
-      <div>
+      <div style={{ display: 'flex', transition: 'all 0.5s ease' }}>
         <Sidebar />
         <Outlet />
       </div>
@@ -52,6 +53,10 @@ function App() {
         {
           path: 'todo',
           element: <Todolist />,
+        },
+        {
+          path: 'notes',
+          element: <Notes />,
         },
         {
           path: 'settings',
