@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  background-color: aliceblue;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.categoryListItem {
+  width: 100%;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tasksCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+
+.taskList {
+  margin-top: 10px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.taskListItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 0;
+  border-bottom: 1px solid #d9d9d9;
+  flex-wrap: wrap;
+}
+
+.taskName {
+  margin-left: 5px;
+  min-width: 200px;
+}
+
+.rotated {
+  transform: rotateY(90deg);
+}
+
+.dragIcon,
+.editIcon {
+  visibility: hidden;
+}
+
+.taskListItem:hover .dragIcon,
+.taskListItem:hover .editIcon {
+  visibility: visible;
+}
