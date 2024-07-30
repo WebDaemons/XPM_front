@@ -1,18 +1,25 @@
-.header {
-  display: flex;
-  background-color: aliceblue;
-  padding: 10px;
-  border-radius: 10px 10px 0 0;
-}
-
+.categoryList,
 .categoryListItem {
   width: 100%;
 }
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* CATEGORY HEADER */
 
 .categoryHeader {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.showTasksIcon {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 .tasksCount {
@@ -22,41 +29,140 @@
   width: 25px;
   height: 25px;
   border-radius: 5px;
-  background-color: aliceblue;
-}
-
-.taskList {
-  margin-top: 10px;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-}
-
-.taskListItem {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 0;
-  border-bottom: 1px solid #d9d9d9;
-  flex-wrap: wrap;
-}
-
-.taskName {
-  margin-left: 5px;
-  min-width: 200px;
+  background-color: #f4f8ff;
 }
 
 .rotated {
   transform: rotateY(90deg);
 }
 
+/* TASKS LIST */
+
+.taskList {
+  width: 100%;
+  margin-top: 10px;
+  /* margin-left: 20px; */
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.taskListHeader {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  font-weight: 500;
+  background-color: #f4f8ff;
+  border-radius: 10px 10px 0 0;
+}
+
+.taskHeaderInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskHeaderInfo {
+  padding: 7px 0 7px 11px;
+  border-left: 1px solid white;
+  width: 130px;
+}
+
+.taskListItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  border-bottom: 1px solid #e8f1ff;
+  overflow: hidden;
+}
+
+.taskNameWrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.taskName {
+  margin-left: 5px;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.taskDetails {
+  display: flex;
+  align-items: center;
+}
+
+.taskDetails > div {
+  border-left: 1px solid #e8f1ff;
+}
+
+.taskDetails > .status,
+.taskDetails > .dueDate,
+.taskDetails > .createdAt {
+  padding: 10px;
+  width: 130px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dueDate,
+.status {
+  display: flex;
+}
+
+.taskName {
+  padding: 10px;
+}
+
 .dragIcon,
-.editIcon {
+.deleteTaskIcon {
   visibility: hidden;
 }
 
-.taskListItem:hover .dragIcon,
-.taskListItem:hover .editIcon {
+.deleteIcon {
+  visibility: hidden;
+}
+
+.deleteIcon:hover {
+  color: red;
+  transition: all 0.2s ease;
+}
+
+.addStatusIcon:hover {
+  color: var(--primary-blue);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.calendarIcon {
+  cursor: pointer;
+  border: 1px solid #121212;
+  border-radius: 50%;
+  padding: 2px;
+  transition: all 0.3s ease;
+}
+
+.calendarIcon:hover {
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+}
+
+.dueDate:hover .deleteIcon,
+.status:hover .deleteIcon {
   visibility: visible;
+  cursor: pointer;
+}
+
+.taskListItem:hover .dragIcon,
+.taskListItem:hover .deleteTaskIcon {
+  visibility: visible;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .taskDetails {
+    display: none;
+  }
 }

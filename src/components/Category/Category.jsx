@@ -1,31 +1,101 @@
 import React, { useState } from 'react';
 import { PiDotsSixVertical } from 'react-icons/pi';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import { MdKeyboardArrowDown, MdOutlineDelete } from 'react-icons/md';
 import { RxDotsVertical } from 'react-icons/rx';
-import { PiDotsThreeVerticalBold } from 'react-icons/pi';
-import { TbLayoutKanban } from 'react-icons/tb';
-import { FiList } from 'react-icons/fi';
+import { PiCalendarDotsLight } from 'react-icons/pi';
+import { IoIosClose, IoIosAddCircleOutline } from 'react-icons/io';
 import styles from './category.module.css';
-import { Button } from '@ui/index';
+import { CategoryInfo } from './category.data';
 
 export const Category = () => {
-  function getCurrentFormattedDate() {
-    const now = new Date();
+  const [rotatedStates, setRotatedStates] = useState(
+    CategoryInfo.map(() => false),
+  );
 
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
+  const handleArrowClick = (index) => {
+    const newRotatedStates = [...rotatedStates];
+    newRotatedStates[index] = !newRotatedStates[index];
+    setRotatedStates(newRotatedStates);
+  };
 
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+  const [categoryElements, setCategoryElements] = useState(CategoryInfo);
 
-    return `${day}.${month}.${year} ${hours}.${minutes}`;
-  }
+  const clearField = (categoryId, taskId, fieldName) => {
+    setCategoryElements(
+      categoryElements.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            tasks: category.tasks.map((task) => {
+              return task.id === taskId ? { ...task, [fieldName]: '' } : task;
+            }),
+          };
+        }
+        return category;
+      }),
+    );
+  };
 
-  const [isRotated, setIsRotated] = useState(false);
+  const handleDeleteTask = (categoryId, taskId) => {
+    setCategoryElements(
+      categoryElements.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            tasks: category.tasks.filter((_, index) => index !== taskId),
+          };
+        }
+        return category;
+      }),
+    );
+    console.log(categoryElements);
+  };
 
-  const handleIconClick = () => {
-    setIsRotated(!isRotated);
+  const handleDeleteCategory = (categoryId) => {
+    setCategoryElements(
+      categoryElements.filter((category) => category.id !== categoryId),
+    );
+    console.log(categoryElements);
+  };
+
+  const getTaskCount = (categoryId) => {
+    const category = categoryElements.find((cat) => cat.id === categoryId);
+    return category ? category.tasks.length : '0';
+  };
+
+  const handleClearStatus = (categoryId, taskId) => {
+    clearField(categoryId, taskId, 'status');
+  };
+  const handleClearDueDate = (categoryId, taskId) => {
+    clearField(categoryId, taskId, 'dueDate');
+  };
+
+  const addTask = (categoryId, data) => {
+    setCategoryElements(
+      categoryElements.map((category) => {
+        if (category.id === categoryId) {
+          const newTask = {
+            id: category.tasks.length
+              ? category.tasks[category.tasks.length - 1].id + 1
+              : 0,
+            title: data,
+            status: '',
+            dueDate: '',
+            createdAt: new Date().toISOString().split('T')[0],
+          };
+          return {
+            ...category,
+            tasks: [...category.tasks, newTask],
+          };
+        }
+        return category;
+      }),
+    );
+  };
+
+  const handleAddTaskClick = () => {
+    const newTaskData = document.getElementById('addTaskInput').value;
+    addTask(1, newTaskData);
   };
 
   return (
@@ -37,121 +107,135 @@ export const Category = () => {
         gap: '15px',
       }}
     >
-      {/* <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '20px',
-        }}
-      >
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <TbLayoutKanban size={20} />
-            <span>Board</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <FiList size={20} />
-            <span>List</span>
-          </div>
-        </div>
-        <div style={{ display: 'flex' }}>
-          <Button
-            label="+ Create task"
-            variant="mainButton"
-          />
-          <Button
-            label="+ Create category"
-            variant="mainButton"
-          />
-        </div>
-      </div> */}
-      <div className={styles.categoryListItem}>
-        <div className={styles.categoryHeader}>
-          <PiDotsSixVertical
-            size={24}
-            color="#121212"
-          />
-          <MdKeyboardArrowDown
-            size={24}
-            color="#121212"
-            style={{
-              cursor: 'pointer',
-              transition: 'transform 0.3s ease-in-out',
-              transform: isRotated ? 'rotate(0)' : 'rotate(-90deg)',
-            }}
-            onClick={handleIconClick}
-            className={isRotated ? 'rotated' : ''}
-          />
-          <span className={styles.categoryName}>Work</span>
-          <div className={styles.tasksCount}>5</div>
-          <RxDotsVertical
-            size={24}
-            color="#121212"
-          />
-        </div>
-        {isRotated && (
-          <div className={styles.taskList}>
-            <div className={styles.header}>
-              <span style={{ flexGrow: '1' }}>Task name</span>
-              <span style={{ width: '95px' }}>Status</span>
-              <span style={{ width: '135px' }}>Due date</span>
-              <span style={{ width: '150px' }}>Creation date</span>
-            </div>
-            <div className={styles.taskListItem}>
+      <div className={styles.categoryList}>
+        {categoryElements.map((categoryElement, index) => (
+          <div
+            className={styles.categoryListItem}
+            key={categoryElement.id}
+          >
+            <div className={styles.categoryHeader}>
               <PiDotsSixVertical
-                size={18}
+                size={24}
                 color="#121212"
-                className={styles.dragIcon}
               />
-              <input
-                type="checkbox"
-                style={{ margin: '0 7px' }}
-              />
-              <p
-                className={styles.taskName}
-                style={{ flexGrow: '1', whiteSpace: 'pre' }}
-              >
-                Create design system
-              </p>
-              <div
+              <MdKeyboardArrowDown
+                size={24}
+                color="#121212"
+                className={`${styles.showTasksIcon} ${rotatedStates[index] ? 'rotated' : ''}`}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '3px',
-                  padding: '5px',
+                  transform: rotatedStates[index]
+                    ? 'rotate(0)'
+                    : 'rotate(-90deg)',
                 }}
-              >
-                <div
-                  style={{
-                    height: '7px',
-                    width: '7px',
-                    borderRadius: '50%',
-                    backgroundColor: '#00a426',
-                  }}
-                ></div>
-                <span style={{}}>In progress</span>
+                onClick={() => handleArrowClick(index)}
+              />
+              <span className={styles.categoryName}>
+                {categoryElement.name}
+              </span>
+              <div className={styles.tasksCount}>
+                {getTaskCount(categoryElement.id)}
               </div>
-              <span
-                style={{
-                  display: 'flex',
-                  width: '130px',
-                }}
-              >
-                {getCurrentFormattedDate()}
-              </span>
-              <span style={{ width: '130px' }}>
-                {getCurrentFormattedDate()}
-              </span>
-              <PiDotsThreeVerticalBold
+              <RxDotsVertical
                 size={20}
                 color="#121212"
-                className={styles.editIcon}
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleDeleteCategory(categoryElement.id)}
               />
             </div>
+            {rotatedStates[index] && (
+              <div className={styles.taskList}>
+                {!!getTaskCount(categoryElement.id) && (
+                  <div className={styles.taskListHeader}>
+                    <span style={{ marginLeft: '25px', flexGrow: 1 }}>
+                      Task name
+                    </span>
+                    <div className={styles.taskHeaderInfoWrapper}>
+                      <div className={styles.taskHeaderInfo}>Status</div>
+                      <div className={styles.taskHeaderInfo}>Due date</div>
+                      <div className={styles.taskHeaderInfo}>Created at</div>
+                    </div>
+                    <div style={{ width: '16px', height: '16px' }}></div>
+                  </div>
+                )}
+
+                {categoryElement.tasks.map((task, taskIndex) => (
+                  <div
+                    className={styles.taskListItem}
+                    key={task.id}
+                  >
+                    <div className={styles.taskNameWrapper}>
+                      <PiDotsSixVertical
+                        size={16}
+                        color="#121212"
+                        className={styles.dragIcon}
+                      />
+                      <input
+                        type="checkbox"
+                        style={{ margin: '0 7px' }}
+                      />
+                      <p className={styles.taskName}>{task.title}</p>
+                    </div>
+                    <div className={styles.taskDetails}>
+                      <div className={styles.status}>
+                        {task.status}
+                        {task.status ? (
+                          <IoIosClose
+                            className={styles.deleteIcon}
+                            size={20}
+                            onClick={() => {
+                              handleClearStatus(categoryElement.id, taskIndex);
+                            }}
+                          />
+                        ) : (
+                          <IoIosAddCircleOutline
+                            className={styles.addStatusIcon}
+                            size={20}
+                          />
+                        )}
+                      </div>
+                      <div className={styles.dueDate}>
+                        {task.dueDate}
+                        {task.dueDate ? (
+                          <IoIosClose
+                            className={styles.deleteIcon}
+                            size={20}
+                            onClick={() => {
+                              handleClearDueDate(categoryElement.id, taskIndex);
+                            }}
+                          />
+                        ) : (
+                          <PiCalendarDotsLight
+                            className={styles.calendarIcon}
+                            size={20}
+                          />
+                        )}
+                      </div>
+                      <div className={styles.createdAt}>{task.createdAt}</div>
+                    </div>
+                    <MdOutlineDelete
+                      size={16}
+                      color="#121212"
+                      className={styles.deleteTaskIcon}
+                      onClick={() => {
+                        handleDeleteTask(categoryElement.id, taskIndex);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        ))}
       </div>
+      <input
+        type="text"
+        id="addTaskInput"
+      />
+      <input
+        type="button"
+        value="Add"
+        onClick={handleAddTaskClick}
+      />
     </div>
   );
 };
