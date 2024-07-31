@@ -1,14 +1,15 @@
 import React from 'react';
-import styles from './authForm.module.css';
+import { useState } from 'react';
+import styles from './signInForm.module.css';
 import { useForm } from 'react-hook-form';
 import { Button, Input, ErrorMessage } from '@ui/index';
 import { MdOutlineMail } from 'react-icons/md';
-import { FiLock, FiUnlock } from 'react-icons/fi';
-import { BiUser } from 'react-icons/bi';
-import { RiProfileLine } from 'react-icons/ri';
+import { FiLock } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
 
-function AuthForm() {
+
+function SignInForm() {
+
   const {
     handleSubmit,
     control,
@@ -21,39 +22,24 @@ function AuthForm() {
     },
   });
 
+  const [checked, setChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
+
   const onSubmit = (data) => {
     console.log(data);
   };
 
   return (
     <form
-      className={styles.authForm}
+      className={styles.signInForm}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Button
-        label="Sign up with Google"
-        variant="signByButton"
-      />
-      <div className={styles.orDelimiter}>
-        <span>OR</span>
-      </div>
-      <div className={styles.fullName}>
-        <Input
-          name="name"
-          type="text"
-          control={control}
-          placeholder="Name"
-          icon={BiUser}
-          showPasswordToggle
-        />
-        <Input
-          name="surname"
-          type="text"
-          control={control}
-          placeholder="Surname"
-          icon={RiProfileLine}
-          showPasswordToggle
-        />
+      <div className={styles.formHeader}>
+        <h1 className={styles.headerName}>Sign In</h1>
+        <h2 className={styles.headerText}>Enter your email address and password to get access to account</h2>
       </div>
       <Input
         name="email"
@@ -72,24 +58,34 @@ function AuthForm() {
         icon={FiLock}
         showPasswordToggle
       />
-      <Input
-        name="passwordConfirm"
-        type="password"
-        control={control}
-        placeholder="Confirm Password"
-        icon={FiUnlock}
-        showPasswordToggle
-      />
+      <div className={styles.signInOptions}>
+        <label>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={handleCheckboxChange}
+          />
+          Remember me
+        </label>
+        <NavLink to='/login/resetpassword'><span style={{color:"#1B76FF"}}>Forgot password?</span></NavLink>
+      </div>
       <Button
-        label="Sign Up Now"
+        label="Sign In"
         type="submit"
         variant="mainButton"
       />
+      <div className={styles.orDelimiter}>
+        <span>OR</span>
+      </div>
+      <Button
+        label="Sign in with Google"
+        variant="signByButton"
+      />
       <div className={styles.formFooter}>
-        <p>Already have an account? 
-          <NavLink to='/login' key='Login'>
+        <p>Don`t have an account? 
+          <NavLink to='/signup' key='Registration'>
             <span style={{color:"#1B76FF"}}>
-              Sign In
+              Sign Up
             </span>
           </NavLink>
         </p>
@@ -98,4 +94,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default SignInForm;

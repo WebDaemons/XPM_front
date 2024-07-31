@@ -36,3 +36,8 @@
 .orDelimiter::after {
   right: 0;
 }
+
+.formFooter{
+  display: flex;
+  justify-content: end;
+}

@@ -1,0 +1,59 @@
+.signInForm{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+
+.orDelimiter {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  .orDelimiter::before,
+  .orDelimiter::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 180px;
+    background-color: #e7e7e9;
+  }
+  
+  .orDelimiter::before {
+    left: 0;
+  }
+  
+  .orDelimiter::after {
+    right: 0;
+  }
+
+.formFooter{
+  display: flex;
+  justify-content: end;
+}
+
+.signInOptions{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.formHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headerName{
+  font-size: 32px;
+}
+
+.headerText{
+  font-size: 18px;
+  color: #777777;
+  margin-top: 15px;
+  text-align: center;
+}
