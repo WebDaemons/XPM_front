@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './modal.module.css';
+import { DropDown } from '@ui/index';
 
-export const Modal = ({ isOpen, onClose, onSave, modalType }) => {
+export const Modal = ({ isOpen, onClose, onSave, modalType, categories }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
@@ -16,13 +17,6 @@ export const Modal = ({ isOpen, onClose, onSave, modalType }) => {
           id: 'title',
           value: title,
           onChange: setTitle,
-        },
-        {
-          label: 'Select category',
-          type: 'text',
-          id: 'category',
-          value: category,
-          onChange: setCategory,
         },
         {
           label: 'Choose date',
@@ -52,6 +46,14 @@ export const Modal = ({ isOpen, onClose, onSave, modalType }) => {
   const handleSave = () => {
     onSave({ title, date, category });
     onClose();
+    resetFields();
+    console.log(...categories);
+  };
+
+  const resetFields = () => {
+    setTitle('');
+    setDate('');
+    setCategory('');
   };
 
   const handleChange = (setter) => (e) => {
@@ -81,6 +83,13 @@ export const Modal = ({ isOpen, onClose, onSave, modalType }) => {
             />
           </div>
         ))}
+        {modalType === 'task' && (
+          <DropDown
+            options={categories}
+            placeholder="Select category"
+            onOptionSelect={(option) => setCategory(option.id)}
+          />
+        )}
         <div className={styles.modalButtons}>
           <button onClick={onClose}>Cancel</button>
           <button onClick={handleSave}>Save</button>
