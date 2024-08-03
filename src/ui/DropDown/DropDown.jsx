@@ -45,7 +45,7 @@ export const DropDown = ({ options, placeholder, onOptionSelect }) => {
         <ul className={styles.dropdownMenu}>
           {options.map((option) => (
             <li
-              key={option.value}
+              key={option.id}
               className={styles.dropdownMenuItem}
               onClick={() => handleOptionClick(option)}
             >
