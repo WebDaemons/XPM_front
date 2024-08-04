@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login } from '../api/authApi';
+import { login, register } from '../api/authApi';
+import { getUserAction } from '../slices/userSlice';
 
 const initialState = {
     user: null,
@@ -10,8 +11,15 @@ const initialState = {
     error: null,
 };
 
-export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
+export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, { dispatch }) => {
     const response = await login(credentials);
+    dispatch(getUserAction(response.data.user.token));
+    return response.data.user;
+});
+
+export const registerUser = createAsyncThunk('auth/registerUser', async (data, { dispatch }) => {
+    const response = await register(data);
+    dispatch(getUserAction(response.data.user.token));
     return response.data.user;
 });
 
@@ -43,9 +51,25 @@ export const authSlice = createSlice({
                 state.accessToken = action.payload.token;
                 state.refreshToken = action.payload.refresh;
                 state.user = action.payload.email;
-                localStorage.setItem('token', action.payload.token); 
+                localStorage.setItem('token', action.payload.token);
             })
             .addCase(loginUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+            .addCase(registerUser.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.loading = false;
+                state.isAuthenticated = true;
+                state.accessToken = action.payload.token;
+                state.refreshToken = action.payload.refresh;
+                state.user = action.payload.email;
+                localStorage.setItem('token', action.payload.token);
+            })
+            .addCase(registerUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });
