@@ -41,3 +41,19 @@
   display: flex;
   justify-content: end;
 }
+
+.headerName{
+  font-size: 32px;
+  text-align: center;
+}
+
+.headerText{
+  font-size: 18px;
+  color: #777777;
+  text-align: center;
+}
+
+.registerError{
+  text-align: center;
+  color: red;
+}

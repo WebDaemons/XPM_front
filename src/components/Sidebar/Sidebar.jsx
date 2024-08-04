@@ -6,16 +6,32 @@ import { NavLink } from 'react-router-dom';
 import { navElements } from './nav.data';
 import { IoSearch } from 'react-icons/io5';
 import { MdLogout } from 'react-icons/md';
+import { useAuth } from '../../context/AuthContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserAction } from '../../store/slices/userSlice';
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const searchRef = useRef(null);
 
+  const dispatch = useDispatch();
+  const email = useSelector((state) => state.user.email);
+  const name = useSelector((state) => state.user.name);
+  const surname = useSelector((state) => state.user.surname);
+  const image = useSelector((state) => state.user.image);
+  const status = useSelector((state) => state.user.status);
+  const error = useSelector((state) => state.user.error);
+
+  const { logout } = useAuth();
+
   useEffect(() => {
     if (!isCollapsed && searchRef.current) {
       searchRef.current.focus();
     }
-  }, [isCollapsed]);
+    if (status === 'idle') {
+      dispatch(getUserAction());
+    }
+  }, [dispatch, status, isCollapsed]);
 
   return (
     <div
@@ -99,7 +115,7 @@ export const Sidebar = () => {
                 color: '#fff',
               }}
             >
-              Nazarii Yankiv
+              {name + ' ' + surname}
             </p>
             <p
               style={{
@@ -107,7 +123,7 @@ export const Sidebar = () => {
                 color: '#1B76FF',
               }}
             >
-              nazar2k10@gmail.com
+              {email}
             </p>
           </div>
         )}
@@ -117,7 +133,7 @@ export const Sidebar = () => {
           style={{
             cursor: 'pointer',
           }}
-          onClick={() => {}}
+          onClick={logout}
         />
       </div>
     </div>
