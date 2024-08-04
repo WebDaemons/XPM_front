@@ -14,9 +14,9 @@ export const selectToken = (state) => state.auth.accessToken;
 
 export const getUserAction = createAsyncThunk(
     'user/getUser',
-    async (_, { rejectWithValue, getState }) => {
+    async (loginToken, { rejectWithValue, getState }) => {
         try {
-            const token = selectToken(getState()); 
+            const token = loginToken || selectToken(getState()); 
             const response = await getUser(token);
             return response.data.user;
         } catch (error) {
