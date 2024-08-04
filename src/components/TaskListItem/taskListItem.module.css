@@ -1,0 +1,101 @@
+.taskListItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  border-bottom: 1px solid #e8f1ff;
+}
+
+.taskNameWrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.taskName {
+  margin-left: 5px;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.taskDetails {
+  display: flex;
+  align-items: center;
+}
+
+.taskDetails > div {
+  border-left: 1px solid #e8f1ff;
+}
+
+.taskDetails > .priority,
+.taskDetails > .dueDate,
+.taskDetails > .createdAt {
+  padding: 10px;
+  width: 130px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priority {
+  padding: 0 10px !important;
+}
+
+.dueDate,
+.priority {
+  display: flex;
+}
+
+.taskName {
+  padding: 10px;
+}
+
+.dragIcon,
+.deleteTaskIcon {
+  visibility: hidden;
+}
+
+.deleteIcon {
+  visibility: hidden;
+}
+
+.deleteIcon:hover {
+  color: red;
+  transition: all 0.2s ease;
+}
+
+.addPriorityIcon:hover {
+  color: var(--primary-blue);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.calendarIcon {
+  cursor: pointer;
+  border: 1px solid #121212;
+  border-radius: 50%;
+  padding: 2px;
+  transition: all 0.3s ease;
+}
+
+.calendarIcon:hover {
+  color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+}
+
+.dueDate:hover .deleteIcon,
+.priority:hover .deleteIcon {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.taskListItem:hover .dragIcon,
+.taskListItem:hover .deleteTaskIcon {
+  visibility: visible;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .taskDetails {
+    display: none;
+  }
+}
