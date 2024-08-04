@@ -116,7 +116,7 @@
   border-left: 1px solid #e8f1ff;
 }
 
-.taskDetails > .status,
+.taskDetails > .priority,
 .taskDetails > .dueDate,
 .taskDetails > .createdAt {
   padding: 10px;
@@ -125,12 +125,12 @@
   align-items: center;
 }
 
-.status {
+.priority {
   padding: 0 10px !important;
 }
 
 .dueDate,
-.status {
+.priority {
   display: flex;
 }
 
@@ -152,7 +152,7 @@
   transition: all 0.2s ease;
 }
 
-.addStatusIcon:hover {
+.addPriorityIcon:hover {
   color: var(--primary-blue);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -172,7 +172,7 @@
 }
 
 .dueDate:hover .deleteIcon,
-.status:hover .deleteIcon {
+.priority:hover .deleteIcon {
   visibility: visible;
   cursor: pointer;
 }

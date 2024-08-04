@@ -96,8 +96,8 @@ export const Category = () => {
     return category ? category.tasks.length : '0';
   };
 
-  const handleClearStatus = (categoryId, taskId) => {
-    clearField(categoryId, taskId, 'status');
+  const handleClearPriority = (categoryId, taskId) => {
+    clearField(categoryId, taskId, 'priority');
   };
   const handleClearDueDate = (categoryId, taskId) => {
     clearField(categoryId, taskId, 'dueDate');
@@ -112,7 +112,7 @@ export const Category = () => {
               ? category.tasks[category.tasks.length - 1].id + 1
               : 0,
             title: task.title,
-            status: '',
+            priority: '',
             dueDate: task.date,
             createdAt: new Date().toLocaleDateString(),
           };
@@ -135,7 +135,7 @@ export const Category = () => {
             ...category,
             tasks: category.tasks.map((task) => {
               return task.id === taskId
-                ? { ...task, status: selectedOption }
+                ? { ...task, priority: selectedOption }
                 : task;
             }),
           };
@@ -153,7 +153,7 @@ export const Category = () => {
             ...category,
             tasks: category.tasks.map((task) => {
               return task.id === taskId
-                ? { ...task, status: 'Completed' }
+                ? { ...task, priority: 'Completed' }
                 : task;
             }),
           };
@@ -164,9 +164,9 @@ export const Category = () => {
   };
 
   const options = [
-    { value: 'In progress', label: 'In progress' },
-    { value: 'Pending', label: 'Pending' },
-    { value: 'Completed', label: 'Completed' },
+    { value: 'High', label: 'High' },
+    { value: 'Medium', label: 'Medium' },
+    { value: 'Low', label: 'Low' },
   ];
 
   const categoryOptions = categoryElements.map((category) => ({
@@ -232,7 +232,7 @@ export const Category = () => {
                       Task name
                     </span>
                     <div className={styles.taskHeaderInfoWrapper}>
-                      <div className={styles.taskHeaderInfo}>Status</div>
+                      <div className={styles.taskHeaderInfo}>Priority</div>
                       <div className={styles.taskHeaderInfo}>Due date</div>
                       <div className={styles.taskHeaderInfo}>Created at</div>
                     </div>
@@ -244,8 +244,18 @@ export const Category = () => {
                   <div
                     className={styles.taskListItem}
                     key={task.id}
+                    style={
+                      task.priority === 'Completed' ? { color: '#d9d9d9' } : {}
+                    }
                   >
-                    <div className={styles.taskNameWrapper}>
+                    <div
+                      className={styles.taskNameWrapper}
+                      style={
+                        task.priority === 'Completed'
+                          ? { textDecoration: 'line-through' }
+                          : {}
+                      }
+                    >
                       <PiDotsSixVertical
                         size={16}
                         color="#121212"
@@ -262,14 +272,17 @@ export const Category = () => {
                       <p className={styles.taskName}>{task.title}</p>
                     </div>
                     <div className={styles.taskDetails}>
-                      <div className={styles.status}>
-                        {task.status}
-                        {task.status ? (
+                      <div className={styles.priority}>
+                        {task.priority}
+                        {task.priority ? (
                           <IoIosClose
                             className={styles.deleteIcon}
                             size={20}
                             onClick={() => {
-                              handleClearStatus(categoryElement.id, taskIndex);
+                              handleClearPriority(
+                                categoryElement.id,
+                                taskIndex,
+                              );
                             }}
                           />
                         ) : (
@@ -319,6 +332,9 @@ export const Category = () => {
             )}
           </div>
         ))}
+        <div className={styles.completedTasks}>
+          <div>eawhah</div>
+        </div>
       </div>
       <Modal
         isOpen={isModalOpen}
