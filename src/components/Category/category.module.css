@@ -1,3 +1,22 @@
+.header {
+  display: flex;
+  gap: 15px;
+  justify-content: end;
+  /* background-color: #d9d9d9; */
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #e8f1ff;
+}
+
+.header button {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 30px;
+  width: 100px;
+}
+
 .categoryList,
 .categoryListItem {
   width: 100%;
@@ -74,7 +93,6 @@
   align-items: center;
   font-size: 16px;
   border-bottom: 1px solid #e8f1ff;
-  overflow: hidden;
 }
 
 .taskNameWrapper {
@@ -105,6 +123,10 @@
   width: 130px;
   justify-content: space-between;
   align-items: center;
+}
+
+.status {
+  padding: 0 10px !important;
 }
 
 .dueDate,

@@ -1,24 +1,59 @@
 import React, { useState } from 'react';
-import { PiDotsSixVertical } from 'react-icons/pi';
-import { MdKeyboardArrowDown, MdOutlineDelete } from 'react-icons/md';
-import { RxDotsVertical } from 'react-icons/rx';
-import { PiCalendarDotsLight } from 'react-icons/pi';
-import { IoIosClose, IoIosAddCircleOutline } from 'react-icons/io';
-import styles from './category.module.css';
 import { CategoryInfo } from './category.data';
+import styles from './category.module.css';
+import { DropDown, Modal } from '@ui/index';
+import {
+  PiDotsSixVertical,
+  PiCalendarDotsLight,
+  MdKeyboardArrowDown,
+  MdOutlineDelete,
+  RxDotsVertical,
+  IoIosClose,
+} from '@ui/icons';
 
 export const Category = () => {
   const [rotatedStates, setRotatedStates] = useState(
     CategoryInfo.map(() => false),
   );
 
+  const [categoryElements, setCategoryElements] = useState(CategoryInfo);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [modalType, setModalType] = useState('');
+
+  const handleOpenModal = (type) => {
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleSave = (task) => {
+    modalType === 'task' ? addTask(task) : addCategory(task);
+
+    console.log('task save: ', task.title);
+  };
+
+  const addCategory = (task) => {
+    if (!task.title) return;
+    const newCategory = {
+      id:
+        categoryElements.length > 0
+          ? Math.max(...categoryElements.map((category) => category.id)) + 1
+          : 0,
+      name: task.title,
+      tasks: [],
+    };
+    setCategoryElements([...categoryElements, newCategory]);
+  };
+
   const handleArrowClick = (index) => {
     const newRotatedStates = [...rotatedStates];
     newRotatedStates[index] = !newRotatedStates[index];
     setRotatedStates(newRotatedStates);
   };
-
-  const [categoryElements, setCategoryElements] = useState(CategoryInfo);
 
   const clearField = (categoryId, taskId, fieldName) => {
     setCategoryElements(
@@ -48,14 +83,12 @@ export const Category = () => {
         return category;
       }),
     );
-    console.log(categoryElements);
   };
 
   const handleDeleteCategory = (categoryId) => {
     setCategoryElements(
       categoryElements.filter((category) => category.id !== categoryId),
     );
-    console.log(categoryElements);
   };
 
   const getTaskCount = (categoryId) => {
@@ -70,18 +103,18 @@ export const Category = () => {
     clearField(categoryId, taskId, 'dueDate');
   };
 
-  const addTask = (categoryId, data) => {
+  const addTask = (task) => {
     setCategoryElements(
       categoryElements.map((category) => {
-        if (category.id === categoryId) {
+        if (category.id === Number(task.category)) {
           const newTask = {
             id: category.tasks.length
               ? category.tasks[category.tasks.length - 1].id + 1
               : 0,
-            title: data,
+            title: task.title,
             status: '',
-            dueDate: '',
-            createdAt: new Date().toISOString().split('T')[0],
+            dueDate: task.date,
+            createdAt: new Date().toLocaleDateString(),
           };
           return {
             ...category,
@@ -93,10 +126,53 @@ export const Category = () => {
     );
   };
 
-  const handleAddTaskClick = () => {
-    const newTaskData = document.getElementById('addTaskInput').value;
-    addTask(1, newTaskData);
+  const handleOptionSelect = (option, categoryId, taskId) => {
+    setSelectedOption(option.value);
+    setCategoryElements(
+      categoryElements.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            tasks: category.tasks.map((task) => {
+              return task.id === taskId
+                ? { ...task, status: selectedOption }
+                : task;
+            }),
+          };
+        }
+        return category;
+      }),
+    );
   };
+
+  const handleChecked = (categoryId, taskId) => {
+    setCategoryElements(
+      categoryElements.map((category) => {
+        if (category.id === categoryId) {
+          return {
+            ...category,
+            tasks: category.tasks.map((task) => {
+              return task.id === taskId
+                ? { ...task, status: 'Completed' }
+                : task;
+            }),
+          };
+        }
+        return category;
+      }),
+    );
+  };
+
+  const options = [
+    { value: 'In progress', label: 'In progress' },
+    { value: 'Pending', label: 'Pending' },
+    { value: 'Completed', label: 'Completed' },
+  ];
+
+  const categoryOptions = categoryElements.map((category) => ({
+    id: category.id,
+    label: category.name,
+  }));
 
   return (
     <div
@@ -104,9 +180,15 @@ export const Category = () => {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        gap: '15px',
+        gap: '10px',
       }}
     >
+      <div className={styles.header}>
+        <button onClick={() => handleOpenModal('task')}>Add task</button>
+        <button onClick={() => handleOpenModal('category')}>
+          Add category
+        </button>
+      </div>
       <div className={styles.categoryList}>
         {categoryElements.map((categoryElement, index) => (
           <div
@@ -172,6 +254,10 @@ export const Category = () => {
                       <input
                         type="checkbox"
                         style={{ margin: '0 7px' }}
+                        onClick={() => {
+                          handleChecked(categoryElement.id, taskIndex);
+                          console.log(categoryElement.id, taskIndex);
+                        }}
                       />
                       <p className={styles.taskName}>{task.title}</p>
                     </div>
@@ -187,9 +273,16 @@ export const Category = () => {
                             }}
                           />
                         ) : (
-                          <IoIosAddCircleOutline
-                            className={styles.addStatusIcon}
-                            size={20}
+                          <DropDown
+                            options={options}
+                            placeholder=""
+                            onOptionSelect={(option) =>
+                              handleOptionSelect(
+                                option,
+                                categoryElement.id,
+                                taskIndex,
+                              )
+                            }
                           />
                         )}
                       </div>
@@ -227,14 +320,12 @@ export const Category = () => {
           </div>
         ))}
       </div>
-      <input
-        type="text"
-        id="addTaskInput"
-      />
-      <input
-        type="button"
-        value="Add"
-        onClick={handleAddTaskClick}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSave={handleSave}
+        modalType={modalType}
+        categories={categoryOptions}
       />
     </div>
   );
