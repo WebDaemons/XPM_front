@@ -11,6 +11,7 @@ export const Input = ({
   icon: Icon,
   showPasswordToggle,
   defaultValue = '',
+  onValueChange,
   ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(true);
@@ -59,6 +60,9 @@ export const Input = ({
             onChange={(e) => {
               field.onChange(e);
               setInputValue(e.target.value);
+              if (onValueChange) {
+                onValueChange(e.target.value);
+              }
             }}
             className={styles.inputController}
             style={{
