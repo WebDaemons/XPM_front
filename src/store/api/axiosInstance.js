@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://176.98.26.195/',
+    baseURL: 'http://backend.xpm.com.ua/',
     headers: {
         'Content-Type': 'application/json',
     },
