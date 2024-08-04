@@ -7,8 +7,6 @@ export const Modal = ({ isOpen, onClose, onSave, modalType, categories }) => {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
 
-  // eahahahaheah
-
   const taskModal = [
     {
       header: 'Add task',

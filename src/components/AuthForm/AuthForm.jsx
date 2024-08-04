@@ -2,11 +2,14 @@ import React from 'react';
 import styles from './authForm.module.css';
 import { useForm } from 'react-hook-form';
 import { Button, Input, ErrorMessage } from '@ui/index';
-import { MdOutlineMail } from 'react-icons/md';
-import { FiLock, FiUnlock } from 'react-icons/fi';
-import { BiUser } from 'react-icons/bi';
-import { RiProfileLine } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
+import {
+  MdOutlineMail,
+  FiLock,
+  FiUnlock,
+  BiUser,
+  RiProfileLine,
+} from '@ui/icons';
 
 function AuthForm() {
   const {
@@ -86,11 +89,13 @@ function AuthForm() {
         variant="mainButton"
       />
       <div className={styles.formFooter}>
-        <p>Already have an account? 
-          <NavLink to='/login' key='Login'>
-            <span style={{color:"#1B76FF"}}>
-              Sign In
-            </span>
+        <p>
+          Already have an account?
+          <NavLink
+            to="/login"
+            key="Login"
+          >
+            <span style={{ color: '#1B76FF' }}>Sign In</span>
           </NavLink>
         </p>
       </div>
