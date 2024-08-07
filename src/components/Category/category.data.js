@@ -9,6 +9,7 @@ export const CategoryInfo = [
         priority: 'High',
         dueDate: '2024-08-01',
         createdAt: '2024-07-20',
+        status: false,
       },
       {
         id: 1,
@@ -16,6 +17,7 @@ export const CategoryInfo = [
         priority: 'Medium',
         dueDate: '2024-07-25',
         createdAt: '2024-07-18',
+        status: true,
       },
       {
         id: 2,
@@ -23,6 +25,7 @@ export const CategoryInfo = [
         priority: 'Medium',
         dueDate: '',
         createdAt: '2024-07-22',
+        status: false,
       },
     ],
   },
@@ -36,6 +39,7 @@ export const CategoryInfo = [
         priority: 'Medium',
         dueDate: '2024-07-26',
         createdAt: '2024-07-01',
+        status: true,
       },
       {
         id: 1,
@@ -43,6 +47,7 @@ export const CategoryInfo = [
         priority: '',
         dueDate: '2024-07-28',
         createdAt: '2024-07-10',
+        status: false,
       },
       {
         id: 2,
@@ -50,6 +55,7 @@ export const CategoryInfo = [
         priority: '',
         dueDate: '2024-07-30',
         createdAt: '2024-07-15',
+        status: false,
       },
       {
         id: 3,
@@ -57,6 +63,7 @@ export const CategoryInfo = [
         priority: 'Low',
         dueDate: '2024-07-25',
         createdAt: '2024-07-05',
+        status: true,
       },
     ],
   },
@@ -70,6 +77,7 @@ export const CategoryInfo = [
         priority: 'Low',
         dueDate: '2024-07-27',
         createdAt: '2024-07-20',
+        status: false,
       },
     ],
   },

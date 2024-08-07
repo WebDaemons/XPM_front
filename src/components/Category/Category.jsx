@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CategoryInfo } from './category.data';
 import styles from './category.module.css';
 import { Modal } from '@ui/index';
-import { CategoryListItem } from '@components/index';
+import { CategoryListItem, TaskListItem } from '@components/index';
 
 export const Category = () => {
   const [rotatedStates, setRotatedStates] = useState(
@@ -146,9 +146,7 @@ export const Category = () => {
           return {
             ...category,
             tasks: category.tasks.map((task) => {
-              return task.id === taskId
-                ? { ...task, priority: 'Completed' }
-                : task;
+              return task.id === taskId ? { ...task, status: true } : task;
             }),
           };
         }
@@ -158,15 +156,25 @@ export const Category = () => {
   };
 
   const options = [
-    { value: 'High', label: 'High' },
-    { value: 'Medium', label: 'Medium' },
-    { value: 'Low', label: 'Low' },
+    { value: 'High', label: 'High', color: 'red' },
+    { value: 'Medium', label: 'Medium', color: 'orange' },
+    { value: 'Low', label: 'Low', color: 'green' },
   ];
 
   const categoryOptions = categoryElements.map((category) => ({
     id: category.id,
     label: category.name,
   }));
+
+  const incompleteTasks = CategoryInfo.flatMap((category) =>
+    category.tasks
+      .filter((task) => task.status === false)
+      .map((task) => ({
+        ...task,
+        categoryId: category.id,
+        categoryName: category.name,
+      })),
+  );
 
   return (
     <div
@@ -200,6 +208,28 @@ export const Category = () => {
             handleOptionSelect={handleOptionSelect}
             options={options}
           />
+        ))}
+      </div>
+      <div>
+        <h2>Completed tasks</h2>
+        {incompleteTasks.map((task, taskIndex) => (
+          <div
+            key={task.id}
+            className="taskWrapper"
+          >
+            <h3>{task.categoryName}</h3>
+            <TaskListItem
+              task={task}
+              categoryId={task.categoryId}
+              taskIndex={taskIndex}
+              handleChecked={handleChecked}
+              handleClearPriority={handleClearPriority}
+              handleClearDueDate={handleClearDueDate}
+              handleDeleteTask={handleDeleteTask}
+              handleOptionSelect={handleOptionSelect}
+              options={options}
+            />
+          </div>
         ))}
       </div>
       <Modal

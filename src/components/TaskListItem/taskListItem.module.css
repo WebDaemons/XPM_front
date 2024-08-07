@@ -37,7 +37,8 @@
 }
 
 .priority {
-  padding: 0 10px !important;
+  padding: 0 !important;
+  height: 40px;
 }
 
 .dueDate,
@@ -92,6 +93,11 @@
 .taskListItem:hover .deleteTaskIcon {
   visibility: visible;
   cursor: pointer;
+}
+
+.taskListItem:hover {
+  background-color: #f4f8ff;
+  transition: background 0.2s ease;
 }
 
 @media (max-width: 700px) {
