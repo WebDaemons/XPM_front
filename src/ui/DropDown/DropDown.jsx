@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './dropDown.module.css';
+import { HiOutlineFlag, HiFlag } from '@ui/icons';
 
 export const DropDown = ({ options, placeholder, onOptionSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +41,10 @@ export const DropDown = ({ options, placeholder, onOptionSelect }) => {
       >
         {selectedOption ? selectedOption.label : placeholder}
         <span className={`${styles.arrow} ${isOpen ? styles.open : ''}`}></span>
+        {/* <HiOutlineFlag
+          className={styles.plusIcon}
+          onClick={toggleDropdown}
+        /> */}
       </div>
       {isOpen && (
         <ul className={styles.dropdownMenu}>
@@ -49,6 +54,7 @@ export const DropDown = ({ options, placeholder, onOptionSelect }) => {
               className={styles.dropdownMenuItem}
               onClick={() => handleOptionClick(option)}
             >
+              <HiFlag color={option.color} />
               {option.label}
             </li>
           ))}
