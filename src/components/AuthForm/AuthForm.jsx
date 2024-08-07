@@ -5,7 +5,6 @@ import styles from './authForm.module.css';
 import { useForm } from 'react-hook-form';
 import { Button, Input, ErrorMessage } from '@ui/index';
 import { NavLink } from 'react-router-dom';
-<<<<<<< HEAD
 import {
   MdOutlineMail,
   FiLock,
@@ -13,9 +12,7 @@ import {
   BiUser,
   RiProfileLine,
 } from '@ui/icons';
-=======
 import { registerUser } from '../../store/slices/authSlice';
->>>>>>> origin/master
 
 function AuthForm() {
   const {
@@ -69,7 +66,7 @@ function AuthForm() {
   };
 
   const onSubmit = () => {
-    if(password !== passwordConfirm) {
+    if (password !== passwordConfirm) {
       setPasswordMatch(true);
       return;
     }
@@ -147,23 +144,16 @@ function AuthForm() {
         onValueChange={handlePasswordConfirmChange}
       />
       <label>
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={handleCheckboxChange}
-          />
-          I agree to 
-          <span style={{color:"#1B76FF"}}>
-            &thinsp;
-            Term
-          </span>
-          &thinsp;
-          &
-          <span style={{color:"#1B76FF"}}>
-            &thinsp;
-            Privacy Policy
-          </span>  
-        </label>
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={handleCheckboxChange}
+        />
+        I agree to
+        <span style={{ color: '#1B76FF' }}>&thinsp; Term</span>
+        &thinsp; &
+        <span style={{ color: '#1B76FF' }}>&thinsp; Privacy Policy</span>
+      </label>
       <Button
         label="Sign Up Now"
         type="submit"
@@ -171,7 +161,7 @@ function AuthForm() {
       />
       <h3 className={styles.registerError}>{authError}</h3>
       {passwordMatch && (
-        <h3 className={styles.registerError}>Password don't match</h3>
+        <h3 className={styles.registerError}>Password don`t match</h3>
       )}
       <div className={styles.formFooter}>
         <p>
