@@ -16,6 +16,10 @@ export default defineConfig({
       '@ui': path.resolve(__dirname, 'src/ui'),
       '@context': path.resolve(__dirname, 'src/context'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@store': path.resolve(__dirname, 'src/store'),
+      '@api': path.resolve(__dirname, 'src/store/api'),
+      '@reducers': path.resolve(__dirname, 'src/store/reducers'),
+      '@slices': path.resolve(__dirname, 'src/store/slices'),
     },
   },
 });
