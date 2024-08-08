@@ -39,6 +39,12 @@ function App() {
         {
           path: 'resetpassword',
           element: <Auth />,
+          children:[
+            {
+              path: 'confirm',
+              element: <Auth />,
+            },
+          ],
         },
       ],
     },

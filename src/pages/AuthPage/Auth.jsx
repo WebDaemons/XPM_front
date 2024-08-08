@@ -3,6 +3,8 @@ import { useLocation, NavLink } from 'react-router-dom';
 import { useState, useEffect  } from 'react';
 import AuthForm from '@components/AuthForm/AuthForm';
 import SignInForm from '../../components/SignInForm/SignInForm';
+import ResetPassForm from '../../components/ResetPassFrom/ResetPassForm';
+import ResetPassConfirmForm from '../../components/ResetPassConfirmForm/ResetPassConfirmForm';
 
 function Auth() {
 
@@ -15,6 +17,10 @@ function Auth() {
       setPageSelector('login');
     } else if (path === '/signup') {
       setPageSelector('signup');
+    } else if (path === '/login/resetpassword') {
+      setPageSelector('resetpassword');
+    } else if (path === '/login/resetpassword/confirm') {
+      setPageSelector('confirm');
     }
     console.log(path)
   }, [location.pathname]);
@@ -25,6 +31,10 @@ function Auth() {
         return <AuthForm />;
       case 'login':
         return <SignInForm />;
+      case 'resetpassword':
+        return <ResetPassForm />;
+      case 'confirm':
+        return <ResetPassConfirmForm />;
       default:
         return <SignInForm />;
     }

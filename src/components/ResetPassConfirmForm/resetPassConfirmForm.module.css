@@ -1,0 +1,22 @@
+.resetPassConfirmForm{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+  
+.headerName{
+  font-size: 32px;
+  text-align: center;
+}
+    
+.headerText{
+  font-size: 18px;
+  color: #777777;
+  text-align: center;
+}
+
+.passError{
+  text-align: center;
+  color: red;
+}

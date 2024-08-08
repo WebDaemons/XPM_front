@@ -1,0 +1,33 @@
+.resetPassForm{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+
+.headerName{
+  font-size: 32px;
+  text-align: center;
+}
+  
+.headerText{
+  font-size: 18px;
+  color: #777777;
+  text-align: center;
+}
+
+.returnButton{
+  font-size: 18px;
+  color: #1B76FF;
+  text-align: end;
+}
+
+.emailError{
+  text-align: center;
+  color: red;
+}
+
+.emailSuccess{
+  text-align: center;
+  color: green;
+}

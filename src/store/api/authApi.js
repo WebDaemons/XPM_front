@@ -9,3 +9,13 @@ export const register = async (data) => {
   const response = await axiosInstance.post('/core/user/registration/', data);
   return response;
 };
+
+export const resetPassword = async (data) => {
+  const response = await axiosInstance.post('/core/user/password_reset/', data);
+  return response;
+};
+
+export const resetPasswordConfirm = async (data) => {
+  const response = await axiosInstance.post('/core/user/password_reset/confirm/', data);
+  return response;
+};
