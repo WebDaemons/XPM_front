@@ -67,6 +67,24 @@ function App() {
         {
           path: 'settings',
           element: <Settings />,
+          children: [
+            {
+              path: 'profile',
+              element: <Settings />,
+            },
+            {
+              path: 'password',
+              element: <Settings />,
+            },
+            {
+              path: 'notifications',
+              element: <Settings />,
+            },
+            {
+              path: 'appearance',
+              element: <Settings />,
+            },
+          ],
         },
         {
           path: '*',

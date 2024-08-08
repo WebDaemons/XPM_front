@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import { CategoryInfo } from './category.data';
 import styles from './category.module.css';
-import { DropDown, Modal } from '@ui/index';
-import {
-  PiDotsSixVertical,
-  PiCalendarDotsLight,
-  MdKeyboardArrowDown,
-  MdOutlineDelete,
-  RxDotsVertical,
-  IoIosClose,
-} from '@ui/icons';
+import { Modal } from '@ui/index';
+import { CategoryListItem, TaskListItem } from '@components/index';
 
 export const Category = () => {
   const [rotatedStates, setRotatedStates] = useState(
@@ -28,11 +21,11 @@ export const Category = () => {
     setModalType(type);
     setIsModalOpen(true);
   };
+
   const closeModal = () => setIsModalOpen(false);
 
   const handleSave = (task) => {
     modalType === 'task' ? addTask(task) : addCategory(task);
-
     console.log('task save: ', task.title);
   };
 
@@ -96,9 +89,10 @@ export const Category = () => {
     return category ? category.tasks.length : '0';
   };
 
-  const handleClearStatus = (categoryId, taskId) => {
-    clearField(categoryId, taskId, 'status');
+  const handleClearPriority = (categoryId, taskId) => {
+    clearField(categoryId, taskId, 'priority');
   };
+
   const handleClearDueDate = (categoryId, taskId) => {
     clearField(categoryId, taskId, 'dueDate');
   };
@@ -112,7 +106,7 @@ export const Category = () => {
               ? category.tasks[category.tasks.length - 1].id + 1
               : 0,
             title: task.title,
-            status: '',
+            priority: '',
             dueDate: task.date,
             createdAt: new Date().toLocaleDateString(),
           };
@@ -135,7 +129,7 @@ export const Category = () => {
             ...category,
             tasks: category.tasks.map((task) => {
               return task.id === taskId
-                ? { ...task, status: selectedOption }
+                ? { ...task, priority: selectedOption }
                 : task;
             }),
           };
@@ -152,9 +146,7 @@ export const Category = () => {
           return {
             ...category,
             tasks: category.tasks.map((task) => {
-              return task.id === taskId
-                ? { ...task, status: 'Completed' }
-                : task;
+              return task.id === taskId ? { ...task, status: true } : task;
             }),
           };
         }
@@ -164,15 +156,25 @@ export const Category = () => {
   };
 
   const options = [
-    { value: 'In progress', label: 'In progress' },
-    { value: 'Pending', label: 'Pending' },
-    { value: 'Completed', label: 'Completed' },
+    { value: 'High', label: 'High', color: 'red' },
+    { value: 'Medium', label: 'Medium', color: 'orange' },
+    { value: 'Low', label: 'Low', color: 'green' },
   ];
 
   const categoryOptions = categoryElements.map((category) => ({
     id: category.id,
     label: category.name,
   }));
+
+  const incompleteTasks = CategoryInfo.flatMap((category) =>
+    category.tasks
+      .filter((task) => task.status === false)
+      .map((task) => ({
+        ...task,
+        categoryId: category.id,
+        categoryName: category.name,
+      })),
+  );
 
   return (
     <div
@@ -191,132 +193,42 @@ export const Category = () => {
       </div>
       <div className={styles.categoryList}>
         {categoryElements.map((categoryElement, index) => (
-          <div
-            className={styles.categoryListItem}
+          <CategoryListItem
             key={categoryElement.id}
+            categoryElement={categoryElement}
+            index={index}
+            rotatedState={rotatedStates[index]}
+            handleArrowClick={handleArrowClick}
+            getTaskCount={getTaskCount}
+            handleDeleteCategory={handleDeleteCategory}
+            handleChecked={handleChecked}
+            handleClearPriority={handleClearPriority}
+            handleClearDueDate={handleClearDueDate}
+            handleDeleteTask={handleDeleteTask}
+            handleOptionSelect={handleOptionSelect}
+            options={options}
+          />
+        ))}
+      </div>
+      <div>
+        <h2>Completed tasks</h2>
+        {incompleteTasks.map((task, taskIndex) => (
+          <div
+            key={task.id}
+            className="taskWrapper"
           >
-            <div className={styles.categoryHeader}>
-              <PiDotsSixVertical
-                size={24}
-                color="#121212"
-              />
-              <MdKeyboardArrowDown
-                size={24}
-                color="#121212"
-                className={`${styles.showTasksIcon} ${rotatedStates[index] ? 'rotated' : ''}`}
-                style={{
-                  transform: rotatedStates[index]
-                    ? 'rotate(0)'
-                    : 'rotate(-90deg)',
-                }}
-                onClick={() => handleArrowClick(index)}
-              />
-              <span className={styles.categoryName}>
-                {categoryElement.name}
-              </span>
-              <div className={styles.tasksCount}>
-                {getTaskCount(categoryElement.id)}
-              </div>
-              <RxDotsVertical
-                size={20}
-                color="#121212"
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleDeleteCategory(categoryElement.id)}
-              />
-            </div>
-            {rotatedStates[index] && (
-              <div className={styles.taskList}>
-                {!!getTaskCount(categoryElement.id) && (
-                  <div className={styles.taskListHeader}>
-                    <span style={{ marginLeft: '25px', flexGrow: 1 }}>
-                      Task name
-                    </span>
-                    <div className={styles.taskHeaderInfoWrapper}>
-                      <div className={styles.taskHeaderInfo}>Status</div>
-                      <div className={styles.taskHeaderInfo}>Due date</div>
-                      <div className={styles.taskHeaderInfo}>Created at</div>
-                    </div>
-                    <div style={{ width: '16px', height: '16px' }}></div>
-                  </div>
-                )}
-
-                {categoryElement.tasks.map((task, taskIndex) => (
-                  <div
-                    className={styles.taskListItem}
-                    key={task.id}
-                  >
-                    <div className={styles.taskNameWrapper}>
-                      <PiDotsSixVertical
-                        size={16}
-                        color="#121212"
-                        className={styles.dragIcon}
-                      />
-                      <input
-                        type="checkbox"
-                        style={{ margin: '0 7px' }}
-                        onClick={() => {
-                          handleChecked(categoryElement.id, taskIndex);
-                          console.log(categoryElement.id, taskIndex);
-                        }}
-                      />
-                      <p className={styles.taskName}>{task.title}</p>
-                    </div>
-                    <div className={styles.taskDetails}>
-                      <div className={styles.status}>
-                        {task.status}
-                        {task.status ? (
-                          <IoIosClose
-                            className={styles.deleteIcon}
-                            size={20}
-                            onClick={() => {
-                              handleClearStatus(categoryElement.id, taskIndex);
-                            }}
-                          />
-                        ) : (
-                          <DropDown
-                            options={options}
-                            placeholder=""
-                            onOptionSelect={(option) =>
-                              handleOptionSelect(
-                                option,
-                                categoryElement.id,
-                                taskIndex,
-                              )
-                            }
-                          />
-                        )}
-                      </div>
-                      <div className={styles.dueDate}>
-                        {task.dueDate}
-                        {task.dueDate ? (
-                          <IoIosClose
-                            className={styles.deleteIcon}
-                            size={20}
-                            onClick={() => {
-                              handleClearDueDate(categoryElement.id, taskIndex);
-                            }}
-                          />
-                        ) : (
-                          <PiCalendarDotsLight
-                            className={styles.calendarIcon}
-                            size={20}
-                          />
-                        )}
-                      </div>
-                      <div className={styles.createdAt}>{task.createdAt}</div>
-                    </div>
-                    <MdOutlineDelete
-                      size={16}
-                      color="#121212"
-                      className={styles.deleteTaskIcon}
-                      onClick={() => {
-                        handleDeleteTask(categoryElement.id, taskIndex);
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <h3>{task.categoryName}</h3>
+            <TaskListItem
+              task={task}
+              categoryId={task.categoryId}
+              taskIndex={taskIndex}
+              handleChecked={handleChecked}
+              handleClearPriority={handleClearPriority}
+              handleClearDueDate={handleClearDueDate}
+              handleDeleteTask={handleDeleteTask}
+              handleOptionSelect={handleOptionSelect}
+              options={options}
+            />
           </div>
         ))}
       </div>

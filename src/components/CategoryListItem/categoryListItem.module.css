@@ -1,0 +1,78 @@
+.categoryList,
+.categoryListItem {
+  width: 100%;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* CATEGORY HEADER */
+
+.dragIcon {
+  visibility: hidden;
+}
+
+.categoryListItem:hover .dragIcon {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.showTasksIcon {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tasksCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: #f4f8ff;
+}
+
+.rotated {
+  transform: rotateY(90deg);
+}
+
+.taskList {
+  width: 100%;
+  margin-top: 10px;
+  /* margin-left: 20px; */
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.taskListHeader {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  font-weight: 500;
+  background-color: #f4f8ff;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #e8f1ff;
+}
+
+.taskHeaderInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskHeaderInfo {
+  padding: 7px 0 7px 11px;
+  border-left: 1px solid #e8f1ff;
+
+  width: 130px;
+}

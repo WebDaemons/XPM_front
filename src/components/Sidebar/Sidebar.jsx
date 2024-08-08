@@ -1,14 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './sidebar.module.css';
 import { useState } from 'react';
-import { CiMenuFries } from 'react-icons/ci';
 import { NavLink } from 'react-router-dom';
 import { navElements } from './nav.data';
-import { IoSearch } from 'react-icons/io5';
-import { MdLogout } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserAction } from '../../store/slices/userSlice';
+import { CiMenuFries, IoSearch, MdLogout } from '@ui/icons';
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
