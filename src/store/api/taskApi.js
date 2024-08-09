@@ -14,9 +14,9 @@ export const getTasks = async (token) => {
   }
 };
 
-export const getTask = async (token) => {
+export const getTask = async (token, taskId) => {
   try {
-    const response = await axiosInstance.get('/tasks/{id}', {
+    const response = await axiosInstance.get(`/tasks/${taskId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
