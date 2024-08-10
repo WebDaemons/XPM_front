@@ -57,7 +57,7 @@ export const editCategory = createAsyncThunk(
 const categorySlice = createSlice({
   name: 'categories',
   initialState: {
-    items: [],
+    categories: [],
     status: 'idle',
     error: null,
   },
@@ -69,20 +69,20 @@ const categorySlice = createSlice({
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.categories = action.payload;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
       .addCase(addCategory.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        state.categories.push(action.payload);
       })
       .addCase(addCategory.rejected, (state, action) => {
         state.error = action.payload;
       })
       .addCase(removeCategory.fulfilled, (state, action) => {
-        state.items = state.items.filter(
+        state.categories = state.categories.filter(
           (category) => category.id !== action.payload,
         );
       })
@@ -90,11 +90,11 @@ const categorySlice = createSlice({
         state.error = action.payload;
       })
       .addCase(editCategory.fulfilled, (state, action) => {
-        const index = state.items.findIndex(
+        const index = state.categories.findIndex(
           (category) => category.id === action.payload.id,
         );
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.categories[index] = action.payload;
         }
       })
       .addCase(editCategory.rejected, (state, action) => {

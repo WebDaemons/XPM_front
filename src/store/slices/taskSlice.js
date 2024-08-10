@@ -54,7 +54,7 @@ export const removeTask = createAsyncThunk(
 
 export const editTask = createAsyncThunk(
   'tasks/editTask',
-  async ({ token, taskId, taskData }, { rejectWithValue }) => {
+  async ({ token, taskData, taskId }, { rejectWithValue }) => {
     try {
       const data = await updateTask(token, taskData, taskId);
       return data;
@@ -67,7 +67,7 @@ export const editTask = createAsyncThunk(
 const taskSlice = createSlice({
   name: 'tasks',
   initialState: {
-    items: [],
+    tasks: [],
     status: 'idle',
     error: null,
   },
@@ -79,7 +79,7 @@ const taskSlice = createSlice({
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.tasks = action.payload;
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = 'failed';
@@ -90,30 +90,30 @@ const taskSlice = createSlice({
       })
       .addCase(fetchTask.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.tasks = action.payload;
       })
       .addCase(fetchTask.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       })
-      .addCase(addTask.fulfilled, (state, action, categoryId) => {
-        state.items.push(action.payload);
+      .addCase(addTask.fulfilled, (state, action) => {
+        state.tasks.push(action.payload);
       })
       .addCase(addTask.rejected, (state, action) => {
         state.error = action.payload;
       })
-      .addCase(removeTask.fulfilled, (state, action, categoryId) => {
-        state.items = state.items.filter((task) => task.id !== action.payload);
+      .addCase(removeTask.fulfilled, (state, action) => {
+        state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       })
       .addCase(removeTask.rejected, (state, action) => {
         state.error = action.payload;
       })
-      .addCase(editTask.fulfilled, (state, action, categoryId) => {
-        const index = state.items.findIndex(
+      .addCase(editTask.fulfilled, (state, action) => {
+        const index = state.tasks.findIndex(
           (task) => task.id === action.payload.id,
         );
         if (index !== -1) {
-          state.items[index] = action.payload;
+          state.tasks[index] = action.payload;
         }
       })
       .addCase(editTask.rejected, (state, action) => {
