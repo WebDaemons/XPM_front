@@ -43,7 +43,7 @@ export const createTask = async (token, data) => {
 };
 export const deleteTask = async (token, taskId) => {
   try {
-    const response = await axiosInstance.post(`/tasks/delete/${taskId}`, {
+    const response = await axiosInstance.delete(`/tasks/delete/${taskId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -56,7 +56,7 @@ export const deleteTask = async (token, taskId) => {
 };
 export const updateTask = async (token, data, taskId) => {
   try {
-    const response = await axiosInstance.post(`/tasks/update/${taskId}`, data, {
+    const response = await axiosInstance.put(`/tasks/update/${taskId}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
