@@ -8,9 +8,21 @@ import {
 import styles from './taskListItem.module.css';
 import { DropDown } from '@ui/index';
 
+const getPriorityLabel = (priority) => {
+  switch (priority) {
+    case 'H':
+      return 'High';
+    case 'M':
+      return 'Medium';
+    case 'L':
+      return 'Low';
+    default:
+      return 'No priority';
+  }
+};
+
 export const TaskListItem = ({
   task,
-  categoryId,
   taskId,
   handleChecked,
   handleClearPriority,
@@ -18,6 +30,7 @@ export const TaskListItem = ({
   handleDeleteTask,
   handleOptionSelect,
   options,
+  icon,
 }) => (
   <div
     className={styles.taskListItem}
@@ -39,7 +52,7 @@ export const TaskListItem = ({
       <p className={styles.taskName}>{task.name}</p>
     </div>
     <div className={styles.taskDetails}>
-      <div className={styles.priority}>
+      {/* <div className={styles.priority}>
         {task.priority}
         {task.priority ? (
           <IoIosClose
@@ -54,12 +67,12 @@ export const TaskListItem = ({
             options={options}
             placeholder=""
             onOptionSelect={(option) =>
-              handleOptionSelect(option, categoryId, taskId)
+              handleOptionSelect(option,taskId)
             }
           />
         )}
-      </div>
-      <div className={styles.due_date}>
+      </div> */}
+      {/* <div className={styles.dueDate}>
         {task.due_date}
         {task.due_date ? (
           <IoIosClose
@@ -75,7 +88,24 @@ export const TaskListItem = ({
             size={20}
           />
         )}
+      </div> */}
+      <div className={styles.priority}>
+        <DropDown
+          options={options}
+          placeholder={getPriorityLabel(task.priority)}
+          onOptionSelect={(option) => handleOptionSelect(taskId, option)}
+          icon={icon}
+        />
       </div>
+      {/* <div className={styles.dueDateInputWrapper}>
+        <input
+          type="date"
+          name="date"
+          id="dateInput"
+          lang="en-GB"
+          className={styles.dueDateInput}
+        />
+      </div> */}
       <div className={styles.createdAt}>{task.created_at.split('T')[0]}</div>
     </div>
     <MdOutlineDelete

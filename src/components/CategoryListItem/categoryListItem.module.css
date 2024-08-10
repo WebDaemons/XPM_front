@@ -58,7 +58,6 @@
 .taskListHeader {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   font-weight: 500;
   background-color: #f4f8ff;
   border-radius: 10px 10px 0 0;

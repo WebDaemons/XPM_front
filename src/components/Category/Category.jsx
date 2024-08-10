@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { CategoryInfo } from './category.data';
 import styles from './category.module.css';
 import { Modal } from '@ui/index';
 import { CategoryListItem } from '@components/index';
@@ -17,16 +16,13 @@ import {
   removeTask,
   editTask,
 } from '@slices/taskSlice';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export const Category = () => {
   const [selectedOption, setSelectedOption] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [modalType, setModalType] = useState('');
-
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
+  const [token] = useState(localStorage.getItem('token'));
   const [categoryElements, setCategories] = useState('');
 
   const handleOpenModal = (type) => {
@@ -37,10 +33,9 @@ export const Category = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const handleSave = (task) => {
+    if (!task.title) return;
     modalType === 'task' ? handleAddTask(task) : handleAddCategory(task);
   };
-
-  // EXPERIMENTAL BLOCK
 
   const dispatch = useDispatch();
   const {
@@ -64,8 +59,6 @@ export const Category = () => {
     categories.map(() => false),
   );
 
-  // console.log(rotatedStates);
-
   // CATEGORY METHODS
 
   const handleAddCategory = (data) => {
@@ -78,8 +71,6 @@ export const Category = () => {
   const handleDeleteCategory = (categoryId) => {
     dispatch(removeCategory({ token, categoryId }));
   };
-
-  // TASK METHODS
 
   const handleAddTask = (data) => {
     const taskData = {
@@ -94,7 +85,7 @@ export const Category = () => {
   };
 
   const handleEditTask = (taskId, taskData) => {
-    console.log(taskData);
+    console.log(taskData.priority);
     dispatch(editTask({ token, taskId, taskData }));
   };
 
@@ -104,6 +95,22 @@ export const Category = () => {
   };
   const handleClearDueDate = (taskId) => {
     handleEditTask(taskId, { due_date: '' });
+  };
+
+  const handleOptionSelect = (taskId, taskData) => {
+    console.log(taskData.value); // Выводит правильное значение
+    handleEditTask(taskId, { priority: taskData.value });
+  };
+
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) return;
+
+    const taskId = parseInt(draggableId);
+    const newCategoryId = parseInt(destination.droppableId);
+
+    handleEditTask(taskId, { category: newCategoryId });
   };
 
   // console.log(JSON.stringify(categories, null, 2));
@@ -117,65 +124,14 @@ export const Category = () => {
     setRotatedStates(newRotatedStates);
   };
 
-  // const clearField = (categoryId, taskId, fieldName) => {
-  //   setCategories(
-  //     categories.map((category) => {
-  //       if (category.id === categoryId) {
-  //         return {
-  //           ...category,
-  //           tasks: category.tasks.map((task) => {
-  //             return task.id === taskId ? { ...task, [fieldName]: '' } : task;
-  //           }),
-  //         };
-  //       }
-  //       return category;
-  //     }),
-  //   );
-  // };
-
   const getTaskCount = (categoryId) => {
     return tasks.filter((item) => item.category === categoryId).length;
   };
 
-  const handleOptionSelect = (option, categoryId, taskId) => {
-    setSelectedOption(option.value);
-    setCategories(
-      categories.map((category) => {
-        if (category.id === categoryId) {
-          return {
-            ...category,
-            tasks: category.tasks.map((task) => {
-              return task.id === taskId
-                ? { ...task, priority: selectedOption }
-                : task;
-            }),
-          };
-        }
-        return category;
-      }),
-    );
-  };
-
-  const handleChecked = (categoryId, taskId) => {
-    setCategories(
-      categories.map((category) => {
-        if (category.id === categoryId) {
-          return {
-            ...category,
-            tasks: category.tasks.map((task) => {
-              return task.id === taskId ? { ...task, status: true } : task;
-            }),
-          };
-        }
-        return category;
-      }),
-    );
-  };
-
   const options = [
-    { value: 'High', label: 'High', color: 'red' },
-    { value: 'Medium', label: 'Medium', color: 'orange' },
-    { value: 'Low', label: 'Low', color: 'green' },
+    { value: 'H', label: 'High', color: 'red' },
+    { value: 'M', label: 'Medium', color: 'orange' },
+    { value: 'L', label: 'Low', color: 'green' },
   ];
 
   const categoryOptions = categories.map((category) => ({
@@ -198,26 +154,43 @@ export const Category = () => {
           Add category
         </button>
       </div>
-      <div className={styles.categoryList}>
-        {categories.map((category, index) => (
-          <CategoryListItem
-            key={category.id}
-            category={category}
-            tasks={tasks}
-            index={index}
-            rotatedState={rotatedStates[index]}
-            handleArrowClick={handleArrowClick}
-            getTaskCount={getTaskCount}
-            handleDeleteCategory={handleDeleteCategory}
-            handleChecked={handleChecked}
-            handleClearPriority={handleClearPriority}
-            handleClearDueDate={handleClearDueDate}
-            handleDeleteTask={handleDeleteTask}
-            handleOptionSelect={handleOptionSelect}
-            options={options}
-          />
-        ))}
-      </div>
+
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className={styles.categoryList}>
+          {categories.map((category, index) => (
+            <Droppable
+              droppableId={String(category.id)}
+              key={category.id}
+            >
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <CategoryListItem
+                    key={category.id}
+                    category={category}
+                    tasks={tasks}
+                    index={index}
+                    rotatedState={rotatedStates[index]}
+                    handleArrowClick={handleArrowClick}
+                    getTaskCount={getTaskCount}
+                    handleDeleteCategory={handleDeleteCategory}
+                    // handleChecked={handleChecked}
+                    handleClearPriority={handleClearPriority}
+                    handleClearDueDate={handleClearDueDate}
+                    handleDeleteTask={handleDeleteTask}
+                    handleOptionSelect={handleOptionSelect}
+                    options={options}
+                  />
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </div>
+      </DragDropContext>
+
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}

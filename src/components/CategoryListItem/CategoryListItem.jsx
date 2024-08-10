@@ -6,6 +6,7 @@ import {
 } from '@ui/icons';
 import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@components/index';
+import { Draggable } from 'react-beautiful-dnd';
 
 export const CategoryListItem = ({
   category,
@@ -53,17 +54,41 @@ export const CategoryListItem = ({
       </div>
       {rotatedState && (
         <div className={styles.taskList}>
-          {!!category.length && (
-            <div className={styles.taskListHeader}>
-              <span style={{ marginLeft: '25px', flexGrow: 1 }}>Task name</span>
-              <div className={styles.taskHeaderInfoWrapper}>
-                <div className={styles.taskHeaderInfo}>Priority</div>
-                <div className={styles.taskHeaderInfo}>Due date</div>
-                <div className={styles.taskHeaderInfo}>Created at</div>
-              </div>
-              <div style={{ width: '16px', height: '16px' }}></div>
-            </div>
-          )}
+          {tasks
+            .filter((task) => task.category === category.id)
+            .map((task, index) => (
+              <Draggable
+                draggableId={String(task.id)}
+                index={index}
+                key={task.id}
+              >
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <TaskListItem
+                      key={task.id}
+                      task={task}
+                      categoryId={task.category}
+                      taskId={task.id}
+                      handleChecked={handleChecked}
+                      handleClearPriority={handleClearPriority}
+                      handleClearDueDate={handleClearDueDate}
+                      handleDeleteTask={handleDeleteTask}
+                      handleOptionSelect={handleOptionSelect}
+                      options={options}
+                    />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+        </div>
+      )}
+      {/* {rotatedState && (
+        <div className={styles.taskList}>
+
           {tasks.map(
             (task) =>
               task.category === category.id && (
@@ -82,7 +107,7 @@ export const CategoryListItem = ({
               ),
           )}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

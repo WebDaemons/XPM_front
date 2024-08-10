@@ -18,13 +18,13 @@ export const Modal = ({ isOpen, onClose, onSave, modalType, categories }) => {
           value: title,
           onChange: setTitle,
         },
-        {
-          label: 'Choose date',
-          type: 'date',
-          id: 'title',
-          value: date,
-          onChange: setDate,
-        },
+        // {
+        //   label: 'Choose date',
+        //   type: 'date',
+        //   id: 'title',
+        //   value: date,
+        //   onChange: setDate,
+        // },
       ],
     },
   ];
