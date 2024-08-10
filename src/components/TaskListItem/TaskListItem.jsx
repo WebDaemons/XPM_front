@@ -11,7 +11,7 @@ import { DropDown } from '@ui/index';
 export const TaskListItem = ({
   task,
   categoryId,
-  taskIndex,
+  taskId,
   handleChecked,
   handleClearPriority,
   handleClearDueDate,
@@ -22,14 +22,8 @@ export const TaskListItem = ({
   <div
     className={styles.taskListItem}
     key={task.id}
-    style={task.priority === 'Completed' ? { color: '#d9d9d9' } : {}}
   >
-    <div
-      className={styles.taskNameWrapper}
-      style={
-        task.priority === 'Completed' ? { textDecoration: 'line-through' } : {}
-      }
-    >
+    <div className={styles.taskNameWrapper}>
       <PiDotsSixVertical
         size={16}
         color="#121212"
@@ -39,10 +33,10 @@ export const TaskListItem = ({
         type="checkbox"
         style={{ margin: '0 7px' }}
         onClick={() => {
-          handleChecked(categoryId, taskIndex);
+          handleChecked(taskId);
         }}
       />
-      <p className={styles.taskName}>{task.title}</p>
+      <p className={styles.taskName}>{task.name}</p>
     </div>
     <div className={styles.taskDetails}>
       <div className={styles.priority}>
@@ -52,7 +46,7 @@ export const TaskListItem = ({
             className={styles.deleteIcon}
             size={20}
             onClick={() => {
-              handleClearPriority(categoryId, taskIndex);
+              handleClearPriority(taskId);
             }}
           />
         ) : (
@@ -60,19 +54,19 @@ export const TaskListItem = ({
             options={options}
             placeholder=""
             onOptionSelect={(option) =>
-              handleOptionSelect(option, categoryId, taskIndex)
+              handleOptionSelect(option, categoryId, taskId)
             }
           />
         )}
       </div>
-      <div className={styles.dueDate}>
-        {task.dueDate}
-        {task.dueDate ? (
+      <div className={styles.due_date}>
+        {task.due_date}
+        {task.due_date ? (
           <IoIosClose
             className={styles.deleteIcon}
             size={20}
             onClick={() => {
-              handleClearDueDate(categoryId, taskIndex);
+              handleClearDueDate(taskId);
             }}
           />
         ) : (
@@ -82,14 +76,14 @@ export const TaskListItem = ({
           />
         )}
       </div>
-      <div className={styles.createdAt}>{task.createdAt}</div>
+      <div className={styles.createdAt}>{task.created_at.split('T')[0]}</div>
     </div>
     <MdOutlineDelete
       size={16}
       color="#121212"
       className={styles.deleteTaskIcon}
       onClick={() => {
-        handleDeleteTask(categoryId, taskIndex);
+        handleDeleteTask(taskId);
       }}
     />
   </div>

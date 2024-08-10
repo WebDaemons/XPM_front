@@ -8,7 +8,8 @@ import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@components/index';
 
 export const CategoryListItem = ({
-  categoryElement,
+  category,
+  tasks,
   index,
   rotatedState,
   handleArrowClick,
@@ -21,14 +22,10 @@ export const CategoryListItem = ({
   handleOptionSelect,
   options,
 }) => {
-  const filteredTasks = categoryElement.tasks.filter(
-    (task) => task.status === false,
-  );
-
   return (
     <div
       className={styles.categoryListItem}
-      key={categoryElement.id}
+      key={category.id}
     >
       <div className={styles.categoryHeader}>
         <PiDotsSixVertical
@@ -45,18 +42,18 @@ export const CategoryListItem = ({
           }}
           onClick={() => handleArrowClick(index)}
         />
-        <span className={styles.categoryName}>{categoryElement.name}</span>
-        <div className={styles.tasksCount}>{filteredTasks.length}</div>
+        <span className={styles.categoryName}>{category.name}</span>
+        <div className={styles.tasksCount}>{getTaskCount(category.id)}</div>
         <RxDotsVertical
           size={20}
           color="#121212"
           style={{ cursor: 'pointer' }}
-          onClick={() => handleDeleteCategory(categoryElement.id)}
+          onClick={() => handleDeleteCategory(category.id)}
         />
       </div>
       {rotatedState && (
         <div className={styles.taskList}>
-          {!!filteredTasks.length && (
+          {!!category.length && (
             <div className={styles.taskListHeader}>
               <span style={{ marginLeft: '25px', flexGrow: 1 }}>Task name</span>
               <div className={styles.taskHeaderInfoWrapper}>
@@ -67,20 +64,23 @@ export const CategoryListItem = ({
               <div style={{ width: '16px', height: '16px' }}></div>
             </div>
           )}
-          {filteredTasks.map((task, taskIndex) => (
-            <TaskListItem
-              key={task.id}
-              task={task}
-              categoryId={categoryElement.id}
-              taskIndex={taskIndex}
-              handleChecked={handleChecked}
-              handleClearPriority={handleClearPriority}
-              handleClearDueDate={handleClearDueDate}
-              handleDeleteTask={handleDeleteTask}
-              handleOptionSelect={handleOptionSelect}
-              options={options}
-            />
-          ))}
+          {tasks.map(
+            (task) =>
+              task.category === category.id && (
+                <TaskListItem
+                  key={task.id}
+                  task={task}
+                  categoryId={task.category}
+                  taskId={task.id}
+                  handleChecked={handleChecked}
+                  handleClearPriority={handleClearPriority}
+                  handleClearDueDate={handleClearDueDate}
+                  handleDeleteTask={handleDeleteTask}
+                  handleOptionSelect={handleOptionSelect}
+                  options={options}
+                />
+              ),
+          )}
         </div>
       )}
     </div>

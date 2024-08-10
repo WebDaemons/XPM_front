@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CategoryInfo } from './category.data';
 import styles from './category.module.css';
 import { Modal } from '@ui/index';
-import { CategoryListItem, TaskListItem } from '@components/index';
+import { CategoryListItem } from '@components/index';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchCategories,
+  addCategory,
+  removeCategory,
+  editCategory,
+} from '@slices/categorySlice';
+import {
+  fetchTasks,
+  fetchTask,
+  addTask,
+  removeTask,
+  editTask,
+} from '@slices/taskSlice';
 
 export const Category = () => {
-  const [rotatedStates, setRotatedStates] = useState(
-    CategoryInfo.map(() => false),
-  );
-
-  const [categoryElements, setCategoryElements] = useState(CategoryInfo);
-
   const [selectedOption, setSelectedOption] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [modalType, setModalType] = useState('');
+
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  const [categoryElements, setCategories] = useState('');
 
   const handleOpenModal = (type) => {
     setModalType(type);
@@ -25,22 +37,79 @@ export const Category = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const handleSave = (task) => {
-    modalType === 'task' ? addTask(task) : addCategory(task);
-    console.log('task save: ', task.title);
+    modalType === 'task' ? handleAddTask(task) : handleAddCategory(task);
   };
 
-  const addCategory = (task) => {
-    if (!task.title) return;
-    const newCategory = {
-      id:
-        categoryElements.length > 0
-          ? Math.max(...categoryElements.map((category) => category.id)) + 1
-          : 0,
-      name: task.title,
-      tasks: [],
+  // EXPERIMENTAL BLOCK
+
+  const dispatch = useDispatch();
+  const {
+    categories,
+    status: categoriesStatus,
+    error: categoriesError,
+  } = useSelector((state) => state.categories);
+
+  const {
+    tasks,
+    status: tasksStatus,
+    error: tasksError,
+  } = useSelector((state) => state.tasks);
+
+  useEffect(() => {
+    dispatch(fetchCategories(token));
+    dispatch(fetchTasks(token));
+  }, [dispatch]);
+
+  const [rotatedStates, setRotatedStates] = useState(
+    categories.map(() => false),
+  );
+
+  // console.log(rotatedStates);
+
+  // CATEGORY METHODS
+
+  const handleAddCategory = (data) => {
+    const categoryData = {
+      name: data.title,
     };
-    setCategoryElements([...categoryElements, newCategory]);
+    dispatch(addCategory({ token, categoryData }));
   };
+
+  const handleDeleteCategory = (categoryId) => {
+    dispatch(removeCategory({ token, categoryId }));
+  };
+
+  // TASK METHODS
+
+  const handleAddTask = (data) => {
+    const taskData = {
+      name: data.title,
+      category: data.category,
+    };
+    dispatch(addTask({ token, taskData }));
+  };
+
+  const handleDeleteTask = (taskId) => {
+    dispatch(removeTask({ token, taskId }));
+  };
+
+  const handleEditTask = (taskId, taskData) => {
+    console.log(taskData);
+    dispatch(editTask({ token, taskId, taskData }));
+  };
+
+  const handleClearPriority = (taskId) => {
+    console.log(taskId);
+    handleEditTask(taskId, { priority: null });
+  };
+  const handleClearDueDate = (taskId) => {
+    handleEditTask(taskId, { due_date: '' });
+  };
+
+  // console.log(JSON.stringify(categories, null, 2));
+  // console.log(JSON.stringify(tasks, null, 2));
+
+  // EXPERIMENTAL BLOCK
 
   const handleArrowClick = (index) => {
     const newRotatedStates = [...rotatedStates];
@@ -48,82 +117,30 @@ export const Category = () => {
     setRotatedStates(newRotatedStates);
   };
 
-  const clearField = (categoryId, taskId, fieldName) => {
-    setCategoryElements(
-      categoryElements.map((category) => {
-        if (category.id === categoryId) {
-          return {
-            ...category,
-            tasks: category.tasks.map((task) => {
-              return task.id === taskId ? { ...task, [fieldName]: '' } : task;
-            }),
-          };
-        }
-        return category;
-      }),
-    );
-  };
-
-  const handleDeleteTask = (categoryId, taskId) => {
-    setCategoryElements(
-      categoryElements.map((category) => {
-        if (category.id === categoryId) {
-          return {
-            ...category,
-            tasks: category.tasks.filter((_, index) => index !== taskId),
-          };
-        }
-        return category;
-      }),
-    );
-  };
-
-  const handleDeleteCategory = (categoryId) => {
-    setCategoryElements(
-      categoryElements.filter((category) => category.id !== categoryId),
-    );
-  };
+  // const clearField = (categoryId, taskId, fieldName) => {
+  //   setCategories(
+  //     categories.map((category) => {
+  //       if (category.id === categoryId) {
+  //         return {
+  //           ...category,
+  //           tasks: category.tasks.map((task) => {
+  //             return task.id === taskId ? { ...task, [fieldName]: '' } : task;
+  //           }),
+  //         };
+  //       }
+  //       return category;
+  //     }),
+  //   );
+  // };
 
   const getTaskCount = (categoryId) => {
-    const category = categoryElements.find((cat) => cat.id === categoryId);
-    return category ? category.tasks.length : '0';
-  };
-
-  const handleClearPriority = (categoryId, taskId) => {
-    clearField(categoryId, taskId, 'priority');
-  };
-
-  const handleClearDueDate = (categoryId, taskId) => {
-    clearField(categoryId, taskId, 'dueDate');
-  };
-
-  const addTask = (task) => {
-    setCategoryElements(
-      categoryElements.map((category) => {
-        if (category.id === Number(task.category)) {
-          const newTask = {
-            id: category.tasks.length
-              ? category.tasks[category.tasks.length - 1].id + 1
-              : 0,
-            title: task.title,
-            priority: '',
-            dueDate: task.date,
-            createdAt: new Date().toLocaleDateString(),
-          };
-          return {
-            ...category,
-            tasks: [...category.tasks, newTask],
-          };
-        }
-        return category;
-      }),
-    );
+    return tasks.filter((item) => item.category === categoryId).length;
   };
 
   const handleOptionSelect = (option, categoryId, taskId) => {
     setSelectedOption(option.value);
-    setCategoryElements(
-      categoryElements.map((category) => {
+    setCategories(
+      categories.map((category) => {
         if (category.id === categoryId) {
           return {
             ...category,
@@ -140,8 +157,8 @@ export const Category = () => {
   };
 
   const handleChecked = (categoryId, taskId) => {
-    setCategoryElements(
-      categoryElements.map((category) => {
+    setCategories(
+      categories.map((category) => {
         if (category.id === categoryId) {
           return {
             ...category,
@@ -161,20 +178,10 @@ export const Category = () => {
     { value: 'Low', label: 'Low', color: 'green' },
   ];
 
-  const categoryOptions = categoryElements.map((category) => ({
+  const categoryOptions = categories.map((category) => ({
     id: category.id,
     label: category.name,
   }));
-
-  const incompleteTasks = CategoryInfo.flatMap((category) =>
-    category.tasks
-      .filter((task) => task.status === false)
-      .map((task) => ({
-        ...task,
-        categoryId: category.id,
-        categoryName: category.name,
-      })),
-  );
 
   return (
     <div
@@ -192,10 +199,11 @@ export const Category = () => {
         </button>
       </div>
       <div className={styles.categoryList}>
-        {categoryElements.map((categoryElement, index) => (
+        {categories.map((category, index) => (
           <CategoryListItem
-            key={categoryElement.id}
-            categoryElement={categoryElement}
+            key={category.id}
+            category={category}
+            tasks={tasks}
             index={index}
             rotatedState={rotatedStates[index]}
             handleArrowClick={handleArrowClick}
@@ -208,28 +216,6 @@ export const Category = () => {
             handleOptionSelect={handleOptionSelect}
             options={options}
           />
-        ))}
-      </div>
-      <div>
-        <h2>Completed tasks</h2>
-        {incompleteTasks.map((task, taskIndex) => (
-          <div
-            key={task.id}
-            className="taskWrapper"
-          >
-            <h3>{task.categoryName}</h3>
-            <TaskListItem
-              task={task}
-              categoryId={task.categoryId}
-              taskIndex={taskIndex}
-              handleChecked={handleChecked}
-              handleClearPriority={handleClearPriority}
-              handleClearDueDate={handleClearDueDate}
-              handleDeleteTask={handleDeleteTask}
-              handleOptionSelect={handleOptionSelect}
-              options={options}
-            />
-          </div>
         ))}
       </div>
       <Modal
