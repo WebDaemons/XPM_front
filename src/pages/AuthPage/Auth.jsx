@@ -1,13 +1,12 @@
 import React from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import AuthForm from '@components/AuthForm/AuthForm';
 import SignInForm from '../../components/SignInForm/SignInForm';
 import ResetPassForm from '../../components/ResetPassFrom/ResetPassForm';
 import ResetPassConfirmForm from '../../components/ResetPassConfirmForm/ResetPassConfirmForm';
 
-function Auth() {
-
+export const Auth = () => {
   const location = useLocation();
   const [pageSelector, setPageSelector] = useState(null);
 
@@ -22,7 +21,7 @@ function Auth() {
     } else if (path === '/login/resetpassword/confirm') {
       setPageSelector('confirm');
     }
-    console.log(path)
+    console.log(path);
   }, [location.pathname]);
 
   const renderForm = () => {
@@ -52,6 +51,4 @@ function Auth() {
       {renderForm()}
     </div>
   );
-}
-
-export default Auth;
+};
