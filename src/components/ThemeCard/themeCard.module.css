@@ -1,0 +1,22 @@
+.wrapper {
+  border: 1.5px solid #e8f1ff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+header {
+  padding: 10px;
+  background-color: #e8f1ff;
+  border-radius: 10px 10px 0 0;
+}
+
+.img {
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  pointer-events: none;
+}
+
+.img img {
+  border: 1.5px solid #e8f1ff;
+  border-radius: 5px;
+}
