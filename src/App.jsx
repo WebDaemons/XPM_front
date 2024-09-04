@@ -8,12 +8,8 @@ import {
 } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 import { Sidebar } from '@components/Sidebar/Sidebar';
-import Auth from '@pages/AuthPage/Auth';
-import Todolist from '@pages/TodolistPage/Todolist';
-import Settings from '@pages/SettingsPage/Settings';
-import Home from '@pages/HomePage/Home';
-import NotFound from '@pages/NotFoundPage/NotFound';
-import Notes from './pages/NotesPage/Notes';
+
+import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -39,7 +35,7 @@ function App() {
         {
           path: 'resetpassword',
           element: <Auth />,
-          children:[
+          children: [
             {
               path: 'confirm',
               element: <Auth />,
