@@ -11,19 +11,13 @@
   align-items: center;
   padding: 10px 0;
   height: 100%;
-  /* border: 1px solid #ccc; */
   padding: 0 10px;
   cursor: pointer;
   background-color: transparent;
   z-index: 1;
 }
 
-/* .dropdownHeader:hover {
-  background-color: #f9f9f9;
-} */
-
 .arrow {
-  /* margin-left: 10px; */
   border: solid black;
   border-width: 0 2px 2px 0;
   display: inline-block;
