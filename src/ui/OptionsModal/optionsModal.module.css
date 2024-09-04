@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.menu {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  background-color: white;
+  border: 1px solid #e8f1ff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.01);
+  z-index: 1000;
+  width: 150px;
+  border-radius: 10px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.menuItem:last-child {
+  color: red;
+}
+
+.menuItem:hover {
+  background-color: #f4f8ff;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e8f1ff;
+}
