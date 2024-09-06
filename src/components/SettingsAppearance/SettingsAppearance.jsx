@@ -68,7 +68,10 @@ export const SettingsAppearance = () => {
           </div>
           <div className={styles.customColorWrapper}>
             <p>Custom color</p>
-            <input type="text" />
+            <input
+              type="text"
+              placeholder="#"
+            />
             <div className={styles.vertDelimiter}></div>
             <div className={styles.customColor}>
               <div></div>
