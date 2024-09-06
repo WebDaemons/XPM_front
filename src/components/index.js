@@ -15,8 +15,7 @@ export * from './TaskListItem/TaskListItem';
 // NOTES PAGE
 
 export * from './AddNoteButton/AddNoteButton';
-export * from './AddNoteModal/AddNoteModal';
-export * from './EditNoteModal/EditNoteModal';
+export * from './AddEditNote/AddEditNote';
 export * from './NoteItem/NoteItem';
 export * from './NotesList/NotesList';
 

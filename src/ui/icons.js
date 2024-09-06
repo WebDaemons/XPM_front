@@ -30,3 +30,4 @@ export { HiOutlineFlag, HiFlag } from 'react-icons/hi2';
 export { HiFlag as HiFlag2 } from 'react-icons/hi';
 export { GoListOrdered, GoListUnordered } from 'react-icons/go';
 export { TfiPinAlt } from 'react-icons/tfi';
+export { FcGoogle } from 'react-icons/fc';

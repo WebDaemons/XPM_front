@@ -1,7 +1,8 @@
-.signInForm{
+.signInForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  /* min-width: 300px; */
   width: 400px;
 }
 
@@ -11,7 +12,7 @@
   width: 100%;
   padding: 20px 0;
 }
-  
+
 .orDelimiter::before,
 .orDelimiter::after {
   content: '';
@@ -21,44 +22,44 @@
   width: 180px;
   background-color: #e7e7e9;
 }
-  
+
 .orDelimiter::before {
   left: 0;
 }
-  
+
 .orDelimiter::after {
   right: 0;
 }
 
-.formFooter{
+.formFooter {
   display: flex;
   justify-content: end;
 }
 
-.signInOptions{
+.signInOptions {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.formHeader{
+.formHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.headerName{
+.headerName {
   font-size: 32px;
 }
 
-.headerText{
+.headerText {
   font-size: 18px;
   color: #777777;
   margin-top: 15px;
   text-align: center;
 }
 
-.loginError{
+.loginError {
   text-align: center;
   color: red;
 }

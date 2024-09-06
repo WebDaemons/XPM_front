@@ -4,14 +4,11 @@ import styles from './signInForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Button, Input, ErrorMessage } from '@ui/index';
-import { MdOutlineMail } from 'react-icons/md';
-import { FiLock } from 'react-icons/fi';
+import { MdOutlineMail, FiLock, FcGoogle } from '@ui/icons';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-
 function SignInForm() {
-
   const {
     handleSubmit,
     control,
@@ -98,31 +95,40 @@ function SignInForm() {
           />
           Remember me
         </label>
-        <NavLink to='/login/resetpassword'>
-          <span style={{color:"#1B76FF"}}>
-            Forgot password?
-          </span>
+        <NavLink to="/login/resetpassword">
+          <span style={{ color: '#1B76FF' }}>Forgot password?</span>
         </NavLink>
       </div>
+
       <Button
-        label="Sign In"
         type="submit"
-        variant="mainButton"
-      />
+        variant="contained"
+        size="lg"
+      >
+        Sign In
+      </Button>
+
       <h3 className={styles.loginError}>{error}</h3>
       <div className={styles.orDelimiter}>
         <span>OR</span>
       </div>
+
       <Button
-        label="Sign in with Google"
-        variant="signByButton"
-      />
+        variant="outlined"
+        size="lg"
+        startIcon={FcGoogle}
+      >
+        Sign up with Google
+      </Button>
+
       <div className={styles.formFooter}>
-        <p>Don`t have an account? 
-          <NavLink to='/signup' key='Registration'>
-            <span style={{color:"#1B76FF"}}>
-              Sign Up
-            </span>
+        <p>
+          Don`t have an account?
+          <NavLink
+            to="/signup"
+            key="Registration"
+          >
+            <span style={{ color: '#1B76FF' }}>Sign Up</span>
           </NavLink>
         </p>
       </div>
