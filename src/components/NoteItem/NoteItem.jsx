@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
 import styles from './noteItem.module.css';
 import { BiDotsHorizontalRounded } from '@ui/icons';
-import { OptionsModal } from '@ui/index';
+// import { OptionsModal } from '@ui/index';
 
-export const NoteItem = ({ noteName, noteText, createdAt }) => {
+export const NoteItem = ({ name, value, createdAt, isPinned, tags }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // const openMenu = () => setIsMenuOpen(true);
@@ -38,15 +38,24 @@ export const NoteItem = ({ noteName, noteText, createdAt }) => {
         </div>
       </div>
       <div className={styles.noteBody}>
-        <h3 className={styles.noteName}>{noteName}</h3>
-        <p className={styles.noteText}>{noteText}</p>
+        <h3 className={styles.noteName}>{name}</h3>
+        <p className={styles.noteText}>{value}</p>
       </div>
-      {/* <div className={styles.tags}></div> */}
-      <OptionsModal
+      <div className={styles.tags}>
+        {tags.map((tag) => (
+          <div
+            key={tag}
+            className={styles.tag}
+          >
+            {tag}
+          </div>
+        ))}
+      </div>
+      {/* <OptionsModal
         isOpen={isMenuOpen}
         top={menuPosition.top}
         left={menuPosition.left}
-      />
+      /> */}
     </div>
   );
 };

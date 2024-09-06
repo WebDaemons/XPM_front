@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './notesList.module.css';
-import { NoteItem, AddNoteButton, AddNoteModal } from '@components/index';
+import { NoteItem, AddEditNote, AddNoteButton } from '@components/index';
 import { notesData } from './notes.data';
 
 export const NotesList = () => {
@@ -13,13 +13,14 @@ export const NotesList = () => {
       {notesData.map((note) => (
         <NoteItem
           key={note.id}
-          noteName={note.name}
-          noteText={note.text}
+          name={note.name}
+          value={note.value}
           createdAt={note.createdAt}
+          tags={note.tags}
         />
       ))}
       <AddNoteButton handleClick={openModal} />
-      <AddNoteModal
+      <AddEditNote
         isOpen={isModalOpen}
         onClose={closeModal}
       />
