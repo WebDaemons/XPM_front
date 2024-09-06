@@ -127,24 +127,3 @@
   gap: 10px;
   justify-content: end;
 }
-
-.cancelButton {
-  font-size: 14px;
-  background-color: #fff;
-  padding: 8px;
-  border: 1px solid #e8f1ff;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.saveButton {
-  font-size: 14px;
-  background-color: var(--primary-blue);
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: 400;
-  cursor: pointer;
-}

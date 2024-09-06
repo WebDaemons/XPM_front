@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
-import styles from './addNoteModal.module.css';
-import {
-  IoIosClose,
-  GoListOrdered,
-  GoListUnordered,
-  RxUnderline,
-  RxFontItalic,
-  RxFontBold,
-} from '@ui/icons';
+import styles from './addEditNote.module.css';
+import { IoIosClose } from '@ui/icons';
+import { Button } from '@ui/index';
 
-export const AddNoteModal = ({ isOpen, onClose }) => {
+export const AddEditNote = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -47,27 +41,16 @@ export const AddNoteModal = ({ isOpen, onClose }) => {
               className={styles.textEditor}
               placeholder="Enter text..."
             ></textarea>
-            {/* <div className={styles.textEditBar}>
-              <div className={styles.textOptions}>
-                <RxUnderline />
-                <RxFontItalic />
-                <RxFontBold />
-              </div>
-              <div className={styles.textOrdering}>
-                <GoListOrdered />
-                <GoListUnordered />
-              </div>
-            </div> */}
           </div>
         </div>
         <div className={styles.modalFooter}>
-          <button
-            className={styles.cancelButton}
+          <Button
+            variant="outlined"
             onClick={onClose}
           >
             Cancel
-          </button>
-          <button className={styles.saveButton}>Save</button>
+          </Button>
+          <Button>Save</Button>
         </div>
       </div>
     </div>
