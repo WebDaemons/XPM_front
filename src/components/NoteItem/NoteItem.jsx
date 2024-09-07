@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from './noteItem.module.css';
 import { BiDotsHorizontalRounded } from '@ui/icons';
-// import { OptionsModal } from '@ui/index';
+import { OptionsModal, Checkbox } from '@ui/index';
 
 export const NoteItem = ({ name, value, createdAt, isPinned, tags }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

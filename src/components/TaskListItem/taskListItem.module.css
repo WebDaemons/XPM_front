@@ -13,7 +13,7 @@
 }
 
 .taskName {
-  margin-left: 5px;
+  /* margin-left: 5px; */
   flex-grow: 1;
   white-space: nowrap;
 }

@@ -6,7 +6,7 @@ import {
   MdOutlineDelete,
 } from '@ui/icons';
 import styles from './taskListItem.module.css';
-import { DropDown } from '@ui/index';
+import { DropDown, Checkbox } from '@ui/index';
 
 const getPriorityLabel = (priority) => {
   switch (priority) {
@@ -24,7 +24,7 @@ const getPriorityLabel = (priority) => {
 export const TaskListItem = ({
   task,
   taskId,
-  handleChecked,
+  // handleChecked,
   handleClearPriority,
   handleClearDueDate,
   handleDeleteTask,
@@ -42,13 +42,9 @@ export const TaskListItem = ({
         color="#121212"
         className={styles.dragIcon}
       />
-      <input
-        type="checkbox"
-        style={{ margin: '0 7px' }}
-        onClick={() => {
-          handleChecked(taskId);
-        }}
-      />
+      <div style={{ margin: '0 7px' }}>
+        <Checkbox size="md" />
+      </div>
       <p className={styles.taskName}>{task.name}</p>
     </div>
     <div className={styles.taskDetails}>
