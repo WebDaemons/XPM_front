@@ -1,33 +1,39 @@
-import React from 'react';
-import { Controller } from 'react-hook-form';
+import React, { useState } from 'react';
 import styles from './checkbox.module.css';
+import { FaCheck } from '@ui/icons';
 
-export const Checkbox = ({ control, name, label, ...rest }) => {
+export const Checkbox = ({
+  label,
+  size = 'md',
+  initialChecked = false,
+  onChange,
+}) => {
+  const [checked, setChecked] = useState(initialChecked);
+
+  const handleCheckBoxChange = () => {
+    setChecked(!checked);
+    if (onChange) {
+      onChange(!checked);
+    }
+  };
+
+  // size: sm || md || lg
+  const iconSize = size === 'sm' ? 8 : size === 'md' ? 10 : 14;
+
   return (
-    <div className={styles.customCheckboxContainer}>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <>
-            <input
-              type="checkbox"
-              id={name}
-              checked={field.value}
-              onChange={(e) => field.onChange(e.target.checked)}
-              className={styles.checkbox}
-              {...rest}
-            />
-            <label
-              htmlFor={name}
-              className={styles.label}
-            >
-              <span className={styles.checkmark}></span>
-              {label}
-            </label>
-          </>
+    <label className={styles.checkboxLabel}>
+      <div
+        className={`${styles.checkbox} ${checked ? styles.checked : ''} ${styles[size]}`}
+        onClick={handleCheckBoxChange}
+      >
+        {checked && (
+          <FaCheck
+            className={styles.icon}
+            size={iconSize}
+          />
         )}
-      />
-    </div>
+      </div>
+      {label && <span className={styles.labelText}>{label}</span>}
+    </label>
   );
 };
