@@ -12,7 +12,7 @@
 
 .noteWrapper:hover {
   cursor: pointer;
-  background-color: #f4f8ff;
+  /* background-color: #f4f8ff; */
   transition: background-color 0.3s ease;
 }
 
@@ -26,7 +26,10 @@
   color: #787c99;
 }
 
-.optionsIcon {
+.icons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .optionsIcon:hover {
