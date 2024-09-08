@@ -32,3 +32,4 @@ export { GoListOrdered, GoListUnordered } from 'react-icons/go';
 export { TfiPinAlt } from 'react-icons/tfi';
 export { FcGoogle } from 'react-icons/fc';
 export { FaCheck } from 'react-icons/fa6';
+export { TbPinned, TbPinnedFilled } from 'react-icons/tb';

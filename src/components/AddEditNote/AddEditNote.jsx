@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './addEditNote.module.css';
-import { IoIosClose } from '@ui/icons';
+import { IoIosClose, TbPinnedFilled, MdOutlineDelete } from '@ui/icons';
 import { Button } from '@ui/index';
 
 export const AddEditNote = ({ isOpen, onClose }) => {
@@ -21,27 +21,29 @@ export const AddEditNote = ({ isOpen, onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <p>Add new note...</p>
           <IoIosClose
-            color="#121212"
-            className={styles.modalClose}
+            className={styles.navBtn}
             onClick={onClose}
           />
         </div>
         <div className={styles.modalBody}>
-          <div className={styles.noteNameWrapper}>
+          <div className={styles.titleWrapper}>
+            <label className={styles.label}>TITLE</label>
             <input
               type="text"
-              placeholder="Enter name..."
-              className={styles.noteName}
+              placeholder="Enter title..."
+              className={styles.title}
             />
           </div>
-          <div className={styles.noteTextWrapper}>
+          <div className={styles.contentWrapper}>
+            <label className={styles.label}>CONTENT</label>
             <textarea
-              className={styles.textEditor}
-              placeholder="Enter text..."
+              className={styles.content}
+              placeholder="Enter content..."
+              rows={10}
             ></textarea>
           </div>
+          <div className={styles.modalTags}></div>
         </div>
         <div className={styles.modalFooter}>
           <Button
