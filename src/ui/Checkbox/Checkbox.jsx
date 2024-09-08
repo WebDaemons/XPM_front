@@ -3,7 +3,7 @@ import styles from './checkbox.module.css';
 import { FaCheck } from '@ui/icons';
 
 export const Checkbox = ({
-  label,
+  children,
   size = 'md',
   initialChecked = false,
   onChange,
@@ -33,7 +33,7 @@ export const Checkbox = ({
           />
         )}
       </div>
-      {label && <span className={styles.labelText}>{label}</span>}
+      {children && <span className={styles.labelText}>{children}</span>}
     </label>
   );
 };
