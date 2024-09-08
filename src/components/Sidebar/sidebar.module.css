@@ -1,7 +1,16 @@
+@font-face {
+  font-family: 'LogoFont';
+  src: url('/src/assets/LogoFont.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .sidebarWrapper {
   transition: all 0.5s ease;
   background-color: #121212;
-  height: 100svh;
+  /* min-height: 100vh;
+  height: auto; */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,6 +52,7 @@
 .siteName {
   color: #fff;
   font-size: 28px;
+  font-family: 'LogoFont', sans-serif;
 }
 
 .sidebarHeader {
