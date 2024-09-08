@@ -1,8 +1,8 @@
 export const notesData = [
   {
     id: 0,
-    name: 'Home work',
-    value:
+    title: 'Home work',
+    content:
       'Для стилизации скроллбара в блоке можно использовать CSS-псевдоклассы\n-  ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, и другие (только для Webkit-браузеров, таких как Chrome и Safari):Для стилизации скроллбара в блоке можно использовать CSS-псевдоклассы ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, и другие (только для Webkit-браузеров, таких как Chrome и Safari):Для стилизации скроллбара в блоке можно использовать CSS-псевдоклассы ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, и другие (только для Webkit-браузеров, таких как Chrome и Safari):Для стилизации скроллбара в блоке можно использовать CSS-псевдоклассы ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, и другие (только для Webkit-браузеров, таких как Chrome и Safari):',
     createdAt: '12.04.2024',
     isPinned: false,
@@ -10,8 +10,8 @@ export const notesData = [
   },
   {
     id: 1,
-    name: 'Components to build',
-    value:
+    title: 'Components to build',
+    content:
       '\tnotelist\n, noteslist, component, header, footer, modal, calendar',
     createdAt: '13.05.2024',
     isPinned: false,
@@ -19,16 +19,16 @@ export const notesData = [
   },
   {
     id: 2,
-    name: 'Top autos',
-    value: 'lambo, mclaren',
+    title: 'Top autos',
+    content: 'lambo, mclaren',
     createdAt: '13.05.2024',
     isPinned: false,
     tags: ['cars'],
   },
   {
     id: 3,
-    name: 'animelist',
-    value:
+    title: 'animelist',
+    content:
       'kengan ashura, summertime, 40-летний мужик, dangandronpa, naruto, berserk, initial d',
     createdAt: '17.07.2024',
     isPinned: true,
@@ -36,8 +36,8 @@ export const notesData = [
   },
   {
     id: 4,
-    name: 'something',
-    value:
+    title: 'something',
+    content:
       'Для стилизации скроллбара в блоке можно использовать CSS-псевдоклассы ::-webkit-scrollbar, ::-webkit-scrollbar-thumb, и другие (только для Webkit-браузеров, таких как Chrome и Safari):',
     createdAt: '01.08.2024',
     isPinned: false,
@@ -45,8 +45,8 @@ export const notesData = [
   },
   {
     id: 5,
-    name: 'last animes watcghed',
-    value: 'gurren laggan, naruto, bleach, fairytail',
+    title: 'last animes watcghed',
+    content: 'gurren laggan, naruto, bleach, fairytail',
     createdAt: '11.08.2024',
     isPinned: false,
     tags: [],

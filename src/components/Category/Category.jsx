@@ -9,13 +9,7 @@ import {
   removeCategory,
   editCategory,
 } from '@slices/categorySlice';
-import {
-  fetchTasks,
-  fetchTask,
-  addTask,
-  removeTask,
-  editTask,
-} from '@slices/taskSlice';
+import { fetchTasks, addTask, removeTask, editTask } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export const Category = () => {
@@ -23,7 +17,6 @@ export const Category = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
-  const [categoryElements, setCategories] = useState('');
 
   const handleOpenModal = (type) => {
     setModalType(type);
