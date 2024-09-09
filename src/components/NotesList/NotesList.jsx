@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './notesList.module.css';
-import { NoteItem, AddEditNote, AddNoteButton } from '@components/index';
+import { NoteItem, AddEditNote } from '@components/index';
 import { notesData } from './notes.data';
 import { fetchNotes, addNote, removeNote, editNote } from '@slices/noteSlice';
 
@@ -61,7 +61,12 @@ export const NotesList = () => {
           isPinned={note.isPinned}
         />
       ))}
-      <AddNoteButton handleClick={openModal} />
+      <div
+        className={styles.addNoteButton}
+        onClick={openModal}
+      >
+        + Add Note
+      </div>
       <AddEditNote
         isOpen={isModalOpen}
         onClose={closeModal}
