@@ -91,7 +91,6 @@ export const Category = () => {
   };
 
   const handleOptionSelect = (taskId, taskData) => {
-    console.log(taskData.value); // Выводит правильное значение
     handleEditTask(taskId, { priority: taskData.value });
   };
 
@@ -105,11 +104,6 @@ export const Category = () => {
 
     handleEditTask(taskId, { category: newCategoryId });
   };
-
-  // console.log(JSON.stringify(categories, null, 2));
-  // console.log(JSON.stringify(tasks, null, 2));
-
-  // EXPERIMENTAL BLOCK
 
   const handleArrowClick = (index) => {
     const newRotatedStates = [...rotatedStates];
@@ -141,13 +135,6 @@ export const Category = () => {
         gap: '10px',
       }}
     >
-      <div className={styles.header}>
-        <button onClick={() => handleOpenModal('task')}>Add task</button>
-        <button onClick={() => handleOpenModal('category')}>
-          Add category
-        </button>
-      </div>
-
       <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.categoryList}>
           {categories.map((category, index) => (

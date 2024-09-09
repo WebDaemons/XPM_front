@@ -29,11 +29,6 @@ export const CategoryListItem = ({
       key={category.id}
     >
       <div className={styles.categoryHeader}>
-        <PiDotsSixVertical
-          size={24}
-          color="#121212"
-          className={styles.dragIcon}
-        />
         <MdKeyboardArrowDown
           size={24}
           color="#121212"

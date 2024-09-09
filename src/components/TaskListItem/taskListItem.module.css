@@ -62,8 +62,8 @@
   background: transparent;
 }
 
-.taskName {
-  padding: 10px;
+.dragIcon {
+  margin-left: 5px;
 }
 
 .dragIcon,
