@@ -22,6 +22,7 @@ export {
   FiSun,
   FiMoon,
   FiMonitor,
+  FiPlus,
 } from 'react-icons/fi';
 
 export { BiUser, BiDotsHorizontalRounded } from 'react-icons/bi';
@@ -33,3 +34,4 @@ export { TfiPinAlt } from 'react-icons/tfi';
 export { FcGoogle } from 'react-icons/fc';
 export { FaCheck } from 'react-icons/fa6';
 export { TbPinned, TbPinnedFilled } from 'react-icons/tb';
+export { BsSortUp } from 'react-icons/bs';

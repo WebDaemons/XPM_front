@@ -1,5 +1,6 @@
 export * from './Sidebar/Sidebar';
 export * from './TabsBar/TabsBar';
+export * from './Toolbar/Toolbar';
 
 // AUTH PAGE
 
@@ -14,7 +15,6 @@ export * from './TaskListItem/TaskListItem';
 
 // NOTES PAGE
 
-export * from './AddNoteButton/AddNoteButton';
 export * from './AddEditNote/AddEditNote';
 export * from './NoteItem/NoteItem';
 export * from './NotesList/NotesList';
