@@ -61,7 +61,7 @@ export const Sidebar = () => {
             }}
           />
         </div>
-        <div className={styles.searchElement}>
+        {/* <div className={styles.searchElement}>
           {isCollapsed ? (
             <IoSearch
               onClick={() => {
@@ -85,7 +85,7 @@ export const Sidebar = () => {
               }}
             />
           )}
-        </div>
+        </div> */}
         <nav className={styles.navLink}>
           {navElements.map((navElement) => (
             <NavLink
