@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './signInForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Button, Input, ErrorMessage } from '@ui/index';
+import { Button, Input, ErrorMessage, Checkbox } from '@ui/index';
 import { MdOutlineMail, FiLock, FcGoogle } from '@ui/icons';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -87,14 +87,7 @@ function SignInForm() {
         onValueChange={handlePasswordChange}
       />
       <div className={styles.signInOptions}>
-        <label>
-          <input
-            type="checkbox"
-            checked={checked}
-            onChange={handleCheckboxChange}
-          />
-          Remember me
-        </label>
+        <Checkbox>Remember me</Checkbox>
         <NavLink to="/login/resetpassword">
           <span style={{ color: '#1B76FF' }}>Forgot password?</span>
         </NavLink>
