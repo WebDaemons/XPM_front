@@ -7,6 +7,7 @@ export const Checkbox = ({
   size = 'md',
   initialChecked = false,
   onChange,
+  isChecked,
 }) => {
   const [checked, setChecked] = useState(initialChecked);
 
