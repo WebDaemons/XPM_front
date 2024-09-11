@@ -21,6 +21,7 @@ export default defineConfig({
       '@api': path.resolve(__dirname, 'src/store/api'),
       '@reducers': path.resolve(__dirname, 'src/store/reducers'),
       '@slices': path.resolve(__dirname, 'src/store/slices'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
     },
   },
 });

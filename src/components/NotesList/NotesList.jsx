@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './notesList.module.css';
 import { NoteItem, AddEditNote } from '@components/index';
 import { notesData } from './notes.data';
-import { fetchNotes, addNote, removeNote, editNote } from '@slices/noteSlice';
+import { fetchNotes } from '@slices/noteSlice';
+import { useNotes } from '@hooks/useNotes';
 
 export const NotesList = () => {
   const [token] = useState(localStorage.getItem('token'));
@@ -17,38 +18,21 @@ export const NotesList = () => {
 
   // WORK WITH API
 
-  const dispatch = useDispatch();
-  const {
-    notes,
-    status: notesStatus,
-    error: notesError,
-  } = useSelector((state) => state.notes);
+  // const dispatch = useDispatch();
+  // const {
+  //   notes,
+  //   status: notesStatus,
+  //   error: notesError,
+  // } = useSelector((state) => state.notes);
 
-  useEffect(() => {
-    dispatch(fetchNotes(token));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchNotes(token));
+  // }, [dispatch]);
 
-  const handleAddNote = (data) => {
-    const noteData = {
-      title: data.title,
-      value: data.value,
-      tags: data.tags,
-    };
-    dispatch(addNote({ token, noteData }));
-  };
-
-  const handleDeleteNote = (noteId) => {
-    dispatch(removeNote({ token, noteId }));
-  };
-
-  const handleEditNote = (noteData, noteId) => {
-    dispatch(editNote({ token, noteData, noteId }));
-  };
+  // const { handleAddNote, handleDeleteNote, handleEditNote } = useNotes(token);
 
   // WORK WITH API
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
   return (
     <div className={styles.notesListWrapper}>
       {sortedData.map((note) => (
@@ -63,13 +47,13 @@ export const NotesList = () => {
       ))}
       <div
         className={styles.addNoteButton}
-        onClick={openModal}
+        onClick={() => setIsModalOpen(!isModalOpen)}
       >
         + Add Note
       </div>
       <AddEditNote
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={() => setIsModalOpen(!isModalOpen)}
       />
     </div>
   );

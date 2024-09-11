@@ -16,39 +16,50 @@ export const CategoryListItem = ({
   handleArrowClick,
   getTaskCount,
   handleDeleteCategory,
-  handleChecked,
-  handleClearPriority,
-  handleClearDueDate,
   handleDeleteTask,
-  handleOptionSelect,
   options,
 }) => {
   return (
-    <div
-      className={styles.categoryListItem}
-      key={category.id}
-    >
-      <div className={styles.categoryHeader}>
-        <MdKeyboardArrowDown
-          size={24}
-          color="#121212"
-          className={`${styles.showTasksIcon} ${rotatedState ? 'rotated' : ''}`}
-          style={{
-            transform: rotatedState ? 'rotate(0)' : 'rotate(-90deg)',
-          }}
-          onClick={() => handleArrowClick(index)}
-        />
-        <span className={styles.categoryName}>{category.name}</span>
-        <div className={styles.tasksCount}>{getTaskCount(category.id)}</div>
-        <RxDotsVertical
-          size={20}
-          color="#121212"
-          style={{ cursor: 'pointer' }}
-          onClick={() => handleDeleteCategory(category.id)}
-        />
+    <div className={styles.categoryListItem}>
+      <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          <MdKeyboardArrowDown
+            size={24}
+            color="#121212"
+            className={`${styles.showTasksIcon} ${rotatedState ? 'rotated' : ''}`}
+            style={{
+              transform: rotatedState ? 'rotate(0)' : 'rotate(-90deg)',
+            }}
+            onClick={() => handleArrowClick(index)}
+          />
+          <span className={styles.categoryName}>{category.name}</span>
+          <div
+            className={`${styles.tasksCount} ${
+              getTaskCount(category.id) > 0
+                ? styles.tasksExist
+                : styles.tasksNotExist
+            }`}
+          >
+            {getTaskCount(category.id)}
+          </div>
+        </div>
+        <div className={styles.headerRight}>
+          <RxDotsVertical
+            size={20}
+            color="#121212"
+            style={{ cursor: 'pointer' }}
+            onClick={() => handleDeleteCategory(category.id)}
+          />
+        </div>
       </div>
       {rotatedState && (
         <div className={styles.taskList}>
+          <div className={styles.taskListHeader}>
+            <span className={styles.taskName}>Name</span>
+            <span className={styles.taskPriority}>Priority</span>
+            <span className={styles.taskDueDate}>Due date</span>
+            <span className={styles.taskCreatedAt}>Created at</span>
+          </div>
           {tasks
             .filter((task) => task.category === category.id)
             .map((task, index) => (
@@ -68,11 +79,7 @@ export const CategoryListItem = ({
                       task={task}
                       categoryId={task.category}
                       taskId={task.id}
-                      handleChecked={handleChecked}
-                      handleClearPriority={handleClearPriority}
-                      handleClearDueDate={handleClearDueDate}
                       handleDeleteTask={handleDeleteTask}
-                      handleOptionSelect={handleOptionSelect}
                       options={options}
                     />
                   </div>
@@ -81,28 +88,6 @@ export const CategoryListItem = ({
             ))}
         </div>
       )}
-      {/* {rotatedState && (
-        <div className={styles.taskList}>
-
-          {tasks.map(
-            (task) =>
-              task.category === category.id && (
-                <TaskListItem
-                  key={task.id}
-                  task={task}
-                  categoryId={task.category}
-                  taskId={task.id}
-                  handleChecked={handleChecked}
-                  handleClearPriority={handleClearPriority}
-                  handleClearDueDate={handleClearDueDate}
-                  handleDeleteTask={handleDeleteTask}
-                  handleOptionSelect={handleOptionSelect}
-                  options={options}
-                />
-              ),
-          )}
-        </div>
-      )} */}
     </div>
   );
 };

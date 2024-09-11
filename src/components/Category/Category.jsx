@@ -3,17 +3,13 @@ import styles from './category.module.css';
 import { Modal } from '@ui/index';
 import { CategoryListItem } from '@components/index';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchCategories,
-  addCategory,
-  removeCategory,
-  editCategory,
-} from '@slices/categorySlice';
-import { fetchTasks, addTask, removeTask, editTask } from '@slices/taskSlice';
+import { fetchCategories } from '@slices/categorySlice';
+import { fetchTasks } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { useForm } from 'react-hook-form';
+import { useTodolist } from '@hooks/useTodolist';
 
 export const Category = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
@@ -48,51 +44,21 @@ export const Category = () => {
     dispatch(fetchTasks(token));
   }, [dispatch]);
 
+  const checkedTasks = tasks.filter((task) => task.is_done);
+
   const [rotatedStates, setRotatedStates] = useState(
     categories.map(() => false),
   );
 
   // CATEGORY METHODS
 
-  const handleAddCategory = (data) => {
-    const categoryData = {
-      name: data.title,
-    };
-    dispatch(addCategory({ token, categoryData }));
-  };
-
-  const handleDeleteCategory = (categoryId) => {
-    dispatch(removeCategory({ token, categoryId }));
-  };
-
-  const handleAddTask = (data) => {
-    const taskData = {
-      name: data.title,
-      category: data.category,
-    };
-    dispatch(addTask({ token, taskData }));
-  };
-
-  const handleDeleteTask = (taskId) => {
-    dispatch(removeTask({ token, taskId }));
-  };
-
-  const handleEditTask = (taskId, taskData) => {
-    console.log(taskData.priority);
-    dispatch(editTask({ token, taskId, taskData }));
-  };
-
-  const handleClearPriority = (taskId) => {
-    console.log(taskId);
-    handleEditTask(taskId, { priority: null });
-  };
-  const handleClearDueDate = (taskId) => {
-    handleEditTask(taskId, { due_date: '' });
-  };
-
-  const handleOptionSelect = (taskId, taskData) => {
-    handleEditTask(taskId, { priority: taskData.value });
-  };
+  const {
+    handleAddTask,
+    handleDeleteTask,
+    handleEditTask,
+    handleAddCategory,
+    handleDeleteCategory,
+  } = useTodolist(token);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -126,6 +92,12 @@ export const Category = () => {
     label: category.name,
   }));
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   return (
     <div
       style={{
@@ -156,11 +128,7 @@ export const Category = () => {
                     handleArrowClick={handleArrowClick}
                     getTaskCount={getTaskCount}
                     handleDeleteCategory={handleDeleteCategory}
-                    // handleChecked={handleChecked}
-                    handleClearPriority={handleClearPriority}
-                    handleClearDueDate={handleClearDueDate}
                     handleDeleteTask={handleDeleteTask}
-                    handleOptionSelect={handleOptionSelect}
                     options={options}
                   />
                   {provided.placeholder}
@@ -168,6 +136,7 @@ export const Category = () => {
               )}
             </Droppable>
           ))}
+          {/* <CategoryListItem key="checked" /> */}
         </div>
       </DragDropContext>
 
@@ -178,6 +147,18 @@ export const Category = () => {
         modalType={modalType}
         categories={categoryOptions}
       />
+
+      {/* <form onSubmit={handleSubmit(handleAddCategory)}>
+        <input
+          {...register('title', { required: 'title is required' })}
+          type="text"
+          placeholder="title"
+        />
+        {errors.name && (
+          <div style={{ color: 'red' }}>{errors.name.message}</div>
+        )}
+        <button type="submit">submit</button>
+      </form> */}
     </div>
   );
 };
