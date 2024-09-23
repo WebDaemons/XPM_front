@@ -4,6 +4,7 @@ import {
   IoIosClose,
   PiCalendarDotsLight,
   MdOutlineDelete,
+  HiOutlineFlag,
 } from '@ui/icons';
 import styles from './taskListItem.module.css';
 import { DropDown, Checkbox } from '@ui/index';
@@ -14,23 +15,7 @@ export const TaskListItem = ({
   handleDeleteTask,
   handleOptionSelect,
   options,
-  icon,
 }) => (
-  // <div
-  //   className={styles.taskListItem}
-  //   key={task.id}
-  // >
-  //   <div className={styles.taskNameWrapper}>
-  //   </div>
-  //   <div className={styles.taskDetails}>
-  //     <div className={styles.priority}>
-  //       <DropDown
-  //         options={options}
-  //         icon={icon}
-  //       />
-  //     </div>
-  //   </div>
-  // </div>
   <div className={styles.taskListItem}>
     <div>
       <PiDotsSixVertical
@@ -40,11 +25,20 @@ export const TaskListItem = ({
     </div>
     <Checkbox />
     <div className={styles.name}>{task.name}</div>
-    <div className={styles.priority}>{task.priority}</div>
+    <div className={styles.priority}>
+      <DropDown options={options} />
+      <IoIosClose
+        size={20}
+        className={styles.clearIcon}
+      />
+      {/* <HiOutlineFlag
+        className={styles.setPriorityIcon}
+        color="#787c99"
+      /> */}
+    </div>
     <div className={styles.dueDate}></div>
     <div className={styles.createdAt}>{task.created_at.split('T')[0]}</div>
     <div>
-      {' '}
       <MdOutlineDelete
         size={16}
         className={styles.deleteIcon}

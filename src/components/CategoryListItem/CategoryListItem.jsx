@@ -54,12 +54,14 @@ export const CategoryListItem = ({
       </div>
       {rotatedState && (
         <div className={styles.taskList}>
-          <div className={styles.taskListHeader}>
-            <span className={styles.taskName}>Name</span>
-            <span className={styles.taskPriority}>Priority</span>
-            <span className={styles.taskDueDate}>Due date</span>
-            <span className={styles.taskCreatedAt}>Created at</span>
-          </div>
+          {getTaskCount(category.id) !== 0 && (
+            <div className={styles.taskListHeader}>
+              <span className={styles.taskName}>Name</span>
+              <span className={styles.taskPriority}>Priority</span>
+              <span className={styles.taskDueDate}>Due date</span>
+              <span className={styles.taskCreatedAt}>Created at</span>
+            </div>
+          )}
           {tasks
             .filter((task) => task.category === category.id)
             .map((task, index) => (

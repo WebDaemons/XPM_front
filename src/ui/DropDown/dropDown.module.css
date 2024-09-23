@@ -1,6 +1,6 @@
 .dropdown {
   position: relative;
-  width: 100%;
+  width: calc(100% - 20px);
   height: 100%;
   font-family: Jost, Poppins, sans-serif;
 }
@@ -9,28 +9,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   height: 100%;
-  padding: 0 10px;
+  padding-left: 5px;
   cursor: pointer;
   background-color: transparent;
   z-index: 1;
-}
-
-.arrow {
-  border: solid black;
-  border-width: 0 2px 2px 0;
-  display: inline-block;
-  padding: 3px;
-  transform: rotate(45deg);
-  transition: transform 0.3s;
-}
-
-.arrow.open {
-  transform: rotate(-135deg);
+  border: 1px solid red;
 }
 
 .dropdownMenu {
+  width: 150px;
   position: absolute;
   top: 100%;
   left: 0;
