@@ -71,10 +71,12 @@ function ResetPassForm() {
         <h3 className={styles.emailError}>{error}</h3>
       )}
       <Button
-        label="Send email"
         type="submit"
-        variant="mainButton"
-      />
+        variant="contained"
+        size="lg"
+      >
+        Send Email
+      </Button>
       <NavLink to='/login'>
         <h2 className={styles.returnButton}>&lt;-return</h2>
       </NavLink>
