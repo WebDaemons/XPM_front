@@ -10,9 +10,9 @@ export const getUser = async (token) => {
   return response;
 };
 
-export const updateUser = async (data, token) => {
-  const response = await axiosInstance.post(
-    '//localhost:5000/skills/post',
+export const updateUser = async (token, data) => {
+  const response = await axiosInstance.put(
+    '/core/user',
     data,
     {
       headers: {
