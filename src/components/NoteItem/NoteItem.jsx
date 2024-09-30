@@ -25,7 +25,7 @@ export const NoteItem = ({ title, content, createdAt, isPinned, tags }) => {
   return (
     <div className={styles.noteWrapper}>
       <div className={styles.header}>
-        <div className={styles.createdAt}>{createdAt}</div>
+        <div className={styles.createdAt}>{createdAt.split('T')[0]}</div>
         <div className={styles.icons}>
           {isPinned && (
             <TbPinnedFilled

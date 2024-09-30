@@ -1,9 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './addEditNote.module.css';
 import { IoIosClose, TbPinnedFilled, MdOutlineDelete } from '@ui/icons';
 import { Button } from '@ui/index';
+import { HexColorPicker } from 'react-colorful';
+import { useNotes } from '@hooks/useNotes';
+
+const YourComponent = () => {
+  const [color, setColor] = useState('#aabbcc');
+  return (
+    <HexColorPicker
+      color={color}
+      onChange={setColor}
+    />
+  );
+};
 
 export const AddEditNote = ({ isOpen, onClose }) => {
+  const [token] = useState(localStorage.getItem('token'));
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const { handleAddNote } = useNotes(token);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -16,6 +33,11 @@ export const AddEditNote = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   if (!isOpen) return null;
+
+  const handleSave = () => {
+    handleAddNote(title, content);
+    onClose();
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -33,6 +55,7 @@ export const AddEditNote = ({ isOpen, onClose }) => {
               type="text"
               placeholder="Enter title..."
               className={styles.title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className={styles.contentWrapper}>
@@ -41,9 +64,10 @@ export const AddEditNote = ({ isOpen, onClose }) => {
               className={styles.content}
               placeholder="Enter content..."
               rows={10}
+              onChange={(e) => setContent(e.target.value)}
             ></textarea>
           </div>
-          <div className={styles.modalTags}></div>
+          <div className={styles.modalTags}>{/* <YourComponent /> */}</div>
         </div>
         <div className={styles.modalFooter}>
           <Button
@@ -52,7 +76,7 @@ export const AddEditNote = ({ isOpen, onClose }) => {
           >
             Cancel
           </Button>
-          <Button>Save</Button>
+          <Button onClick={handleSave}>Save</Button>
         </div>
       </div>
     </div>
