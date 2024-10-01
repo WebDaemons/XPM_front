@@ -17,7 +17,7 @@
 }
 
 .inputWrapper h2 {
-  font-size: 24px;
+  font-size: 18px;
   color: #121212;
   font-weight: 500;
 }
@@ -27,5 +27,5 @@
   border-radius: 5px;
   padding: 10px;
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
 }
