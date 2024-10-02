@@ -86,10 +86,12 @@ function ResetPassConfirmForm() {
         <h3 className={styles.passError}>{error}</h3>
       )}
       <Button
-        label="Reset password"
         type="submit"
-        variant="mainButton"
-      />
+        variant="contained"
+        size="lg"
+      >
+        Reset password
+      </Button>
     </form>
   );
 }

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getUser } from '../api/userApi.js';
+import { getUser, updateUser } from '../api/userApi.js';
 
 const initialState = {
   email: null,
@@ -25,6 +25,20 @@ export const getUserAction = createAsyncThunk(
   },
 );
 
+export const updateUserAction = createAsyncThunk(
+  'user/updateUser',
+  async ({loginToken, data}, { rejectWithValue, getState }) => {
+    try {
+      const token = loginToken || selectToken(getState());
+      const response = await updateUser(token, data);
+      console.log(response)
+      return response.user;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -42,6 +56,21 @@ export const userSlice = createSlice({
         state.image = action.payload.image;
       })
       .addCase(getUserAction.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(updateUserAction.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updateUserAction.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.email = action.payload.email;
+        state.name = action.payload.name;
+        state.surname = action.payload.surname;
+        state.image = action.payload.image;
+      })
+      .addCase(updateUserAction.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });

@@ -11,6 +11,7 @@ import {
   FiUnlock,
   BiUser,
   RiProfileLine,
+  FcGoogle,
 } from '@ui/icons';
 import { registerUser } from '../../store/slices/authSlice';
 
@@ -89,9 +90,12 @@ function AuthForm() {
       <h1 className={styles.headerName}>Create an account</h1>
       <h2 className={styles.headerText}>Let`s get started</h2>
       <Button
-        label="Sign up with Google"
-        variant="signByButton"
-      />
+        variant="outlined"
+        size="lg"
+        startIcon={FcGoogle}
+      >
+        Sign up with Google
+      </Button>
       <div className={styles.orDelimiter}>
         <span>OR</span>
       </div>
@@ -155,10 +159,12 @@ function AuthForm() {
         <span style={{ color: '#1B76FF' }}>&thinsp; Privacy Policy</span>
       </label>
       <Button
-        label="Sign Up Now"
         type="submit"
-        variant="mainButton"
-      />
+        variant="contained"
+        size="lg"
+      >
+        Sign In
+      </Button>
       <h3 className={styles.registerError}>{authError}</h3>
       {passwordMatch && (
         <h3 className={styles.registerError}>Password don`t match</h3>
