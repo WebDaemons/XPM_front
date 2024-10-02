@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './addEditNote.module.css';
-import { IoIosClose, TbPinnedFilled, MdOutlineDelete, FiPlus } from '@ui/icons';
+import {
+  IoIosClose,
+  TbPinned,
+  TbPinnedFilled,
+  MdOutlineDelete,
+  FiPlus,
+} from '@ui/icons';
 import { Button } from '@ui/index';
 import { useNotes } from '@hooks/useNotes';
 import { ColorPicker } from '@components/index';
@@ -14,7 +20,7 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   const [selectedColor, setSelectedColor] = useState('#aabbcc');
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const [tagName, setTagName] = useState('');
-  const { handleAddNote, handleEditNote } = useNotes(token);
+  const { handleAddNote, handleEditNote, handleDeleteNote } = useNotes(token);
 
   useEffect(() => {
     if (note) {
@@ -77,7 +83,19 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
     setCurrentTags([...currentTags, newTag]);
   };
 
-  const handleDeleteTag = () => {};
+  const handleDelete = () => {
+    handleDeleteNote(note.id);
+    onClose();
+  };
+
+  const handlePinned = () => {
+    note.isPinned = !note.isPinned;
+  };
+
+  const handleCloseModal = () => {
+    setCurrentTags([]);
+    onClose();
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -86,10 +104,36 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
           <p
             className={styles.modalType}
           >{`${type === 'add' ? 'Add' : 'Edit'} note...`}</p>
-          <IoIosClose
-            className={styles.navBtn}
-            onClick={onClose}
-          />
+          <div className={styles.noteTools}>
+            {type === 'edit' ? (
+              <>
+                {note.isPinned ? (
+                  <TbPinnedFilled
+                    className={styles.navBtn}
+                    onClick={handlePinned}
+                  />
+                ) : (
+                  <TbPinned
+                    className={styles.navBtn}
+                    onClick={handlePinned}
+                  />
+                )}
+                <MdOutlineDelete
+                  className={styles.navBtn}
+                  onClick={handleDelete}
+                />
+                <IoIosClose
+                  className={styles.navBtn}
+                  onClick={handleCloseModal}
+                />
+              </>
+            ) : (
+              <IoIosClose
+                className={styles.navBtn}
+                onClick={handleCloseModal}
+              />
+            )}
+          </div>
         </div>
         <div className={styles.modalBody}>
           <div className={styles.titleWrapper}>
@@ -159,7 +203,7 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
         <div className={styles.modalFooter}>
           <Button
             variant="outlined"
-            onClick={onClose}
+            onClick={handleCloseModal}
           >
             Cancel
           </Button>

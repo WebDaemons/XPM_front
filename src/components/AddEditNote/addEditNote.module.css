@@ -37,10 +37,21 @@
   color: #787c99;
 }
 
+.noteTools {
+  display: flex;
+  gap: 5px;
+}
+
 .navBtn {
   cursor: pointer;
   font-size: 24px;
   color: #787c99;
+  border-radius: 5px;
+}
+
+.navBtn:hover {
+  background-color: #e8f1ff;
+  transition: 0.3s ease;
 }
 
 /* MODAL BODY */
