@@ -14,14 +14,14 @@ export const Notes = () => {
         gap: '20px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'end' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+          variant="outlined"
+          startIcon={BsSortUp}
+        >
+          Filter
+        </Button>
         <div style={{ display: 'flex', gap: '10px' }}>
-          <Button
-            variant="outlined"
-            startIcon={BsSortUp}
-          >
-            Filter
-          </Button>
           <Button startIcon={FiPlus}>Add Note</Button>
         </div>
       </div>

@@ -5,11 +5,19 @@ import { addNote, removeNote, editNote } from '@slices/noteSlice';
 export const useNotes = (token) => {
   const dispatch = useDispatch();
 
-  const handleAddNote = (data) => {
+  // const handleAddNote = (data) => {
+  //   const noteData = {
+  //     title: data.title,
+  //     value: data.value,
+  //     tags: data.tags,
+  //   };
+  //   dispatch(addNote({ token, noteData }));
+  // };
+  const handleAddNote = (title, content, tags) => {
     const noteData = {
-      title: data.title,
-      value: data.value,
-      tags: data.tags,
+      title,
+      content,
+      tags,
     };
     dispatch(addNote({ token, noteData }));
   };

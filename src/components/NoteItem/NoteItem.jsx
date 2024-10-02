@@ -2,8 +2,11 @@ import React, { useState, useRef } from 'react';
 import styles from './noteItem.module.css';
 import { BiDotsHorizontalRounded, TbPinned, TbPinnedFilled } from '@ui/icons';
 import { OptionsModal, Checkbox } from '@ui/index';
+import { adjustBrightness } from '@utils/adjustBrightness';
 
-export const NoteItem = ({ title, content, createdAt, isPinned, tags }) => {
+export const NoteItem = ({ note, onClick }) => {
+  const { title, content, createdAt, isPinned, tags } = note;
+  // console.log(note);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // const openMenu = () => setIsMenuOpen(true);
@@ -23,9 +26,12 @@ export const NoteItem = ({ title, content, createdAt, isPinned, tags }) => {
   };
 
   return (
-    <div className={styles.noteWrapper}>
+    <div
+      className={styles.noteWrapper}
+      onClick={onClick}
+    >
       <div className={styles.header}>
-        <div className={styles.createdAt}>{createdAt}</div>
+        <div className={styles.createdAt}>{createdAt.split('T')[0]}</div>
         <div className={styles.icons}>
           {isPinned && (
             <TbPinnedFilled
@@ -51,10 +57,14 @@ export const NoteItem = ({ title, content, createdAt, isPinned, tags }) => {
       <div className={styles.tags}>
         {tags.map((tag) => (
           <div
-            key={tag}
+            key={tag.id}
             className={styles.tag}
+            style={{
+              backgroundColor: `${tag.color}`,
+              color: adjustBrightness(tag.color, -50),
+            }}
           >
-            {tag}
+            {tag.name}
           </div>
         ))}
       </div>
