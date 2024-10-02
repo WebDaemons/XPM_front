@@ -8,6 +8,7 @@ import { useNotes } from '@hooks/useNotes';
 export const NotesList = () => {
   const [token] = useState(localStorage.getItem('token'));
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
 
   // WORK WITH API
 
@@ -24,6 +25,16 @@ export const NotesList = () => {
 
   const { handleAddNote, handleDeleteNote, handleEditNote } = useNotes(token);
 
+  const handleModalOpen = (note = null) => {
+    setSelectedNote(note);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setSelectedNote(null);
+    setIsModalOpen(false);
+  };
+
   // WORK WITH API
 
   const sortedData = [...notes].sort((a, b) => {
@@ -38,22 +49,21 @@ export const NotesList = () => {
       {sortedData.map((note) => (
         <NoteItem
           key={note.id}
-          title={note.title}
-          content={note.content}
-          createdAt={note.createdAt}
-          isPinned={note.isPinned}
-          tags={note.tags}
+          note={note}
+          onClick={() => handleModalOpen(note)}
         />
       ))}
       <div
         className={styles.addNoteButton}
-        onClick={() => setIsModalOpen(!isModalOpen)}
+        onClick={() => handleModalOpen()}
       >
         + Add Note
       </div>
       <AddEditNote
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(!isModalOpen)}
+        onClose={handleModalClose}
+        note={selectedNote}
+        type={selectedNote ? 'edit' : 'add'}
       />
     </div>
   );

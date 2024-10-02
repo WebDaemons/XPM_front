@@ -81,12 +81,12 @@
 .tags {
   display: flex;
   gap: 10px;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .tag {
-  color: rgb(38, 156, 67);
-  background-color: #a7f1c0;
+  /* color: rgb(38, 156, 67);
+  background-color: #a7f1c0; */
   font-size: 14px;
   border-radius: 5px;
   padding: 7px 10px;

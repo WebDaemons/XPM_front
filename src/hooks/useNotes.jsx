@@ -13,10 +13,11 @@ export const useNotes = (token) => {
   //   };
   //   dispatch(addNote({ token, noteData }));
   // };
-  const handleAddNote = (title, content) => {
+  const handleAddNote = (title, content, tags) => {
     const noteData = {
       title,
       content,
+      tags,
     };
     dispatch(addNote({ token, noteData }));
   };

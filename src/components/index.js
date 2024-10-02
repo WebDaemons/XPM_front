@@ -1,6 +1,7 @@
 export * from './Sidebar/Sidebar';
 export * from './TabsBar/TabsBar';
 export * from './Toolbar/Toolbar';
+export * from './ColorPicker/ColorPicker';
 
 // AUTH PAGE
 
