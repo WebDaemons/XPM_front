@@ -102,9 +102,9 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   };
 
   const handlePinned = () => {
-    const updatedNote = { ...note, isPinned: !note.isPinned };
+    const updatedNote = { ...note, isPinned: !isNotePinned };
     handleEditNote(updatedNote, note.id);
-    setIsNotePinned(!note.isPinned);
+    setIsNotePinned((prev) => !prev);
   };
 
   const handleCloseModal = () => {
