@@ -14,7 +14,7 @@ export const Notes = () => {
         gap: '20px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
           variant="outlined"
           startIcon={BsSortUp}
@@ -24,7 +24,7 @@ export const Notes = () => {
         <div style={{ display: 'flex', gap: '10px' }}>
           <Button startIcon={FiPlus}>Add Note</Button>
         </div>
-      </div>
+      </div> */}
       <NotesList />
     </div>
   );
