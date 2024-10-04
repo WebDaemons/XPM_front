@@ -17,6 +17,7 @@ export const CategoryListItem = ({
   getTaskCount,
   handleDeleteCategory,
   handleDeleteTask,
+  handleToggleTaskStatus,
   options,
 }) => {
   return (
@@ -82,6 +83,7 @@ export const CategoryListItem = ({
                       categoryId={task.category}
                       taskId={task.id}
                       handleDeleteTask={handleDeleteTask}
+                      handleToggleTaskStatus={handleToggleTaskStatus}
                       options={options}
                     />
                   </div>

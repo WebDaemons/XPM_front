@@ -8,6 +8,7 @@ import { fetchTasks } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
 import { useTodolist } from '@hooks/useTodolist';
+import { TodoTrashItem } from '../TodoTrashItem/TodoTrashItem';
 
 export const Category = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +45,8 @@ export const Category = () => {
     dispatch(fetchTasks(token));
   }, [dispatch]);
 
-  const checkedTasks = tasks.filter((task) => task.is_done);
+  const unDoneTasks = tasks.filter((task) => !task.is_done);
+  const doneTasks = tasks.filter((task) => task.is_done);
 
   const [rotatedStates, setRotatedStates] = useState(
     categories.map(() => false),
@@ -78,7 +80,8 @@ export const Category = () => {
   };
 
   const getTaskCount = (categoryId) => {
-    return tasks.filter((item) => item.category === categoryId).length;
+    return tasks.filter((item) => item.category === categoryId && !item.is_done)
+      .length;
   };
 
   const options = [
@@ -92,11 +95,17 @@ export const Category = () => {
     label: category.name,
   }));
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const handleToggleTaskStatus = (taskId) => {
+    const taskData = tasks.find((task) => task.id === taskId);
+
+    if (taskData) {
+      const updatedTaskData = {
+        ...taskData,
+        is_done: !taskData.is_done,
+      };
+      handleEditTask(taskId, updatedTaskData);
+    }
+  };
 
   return (
     <div
@@ -122,7 +131,7 @@ export const Category = () => {
                   <CategoryListItem
                     key={category.id}
                     category={category}
-                    tasks={tasks}
+                    tasks={unDoneTasks}
                     index={index}
                     rotatedState={rotatedStates[index]}
                     handleArrowClick={handleArrowClick}
@@ -130,15 +139,19 @@ export const Category = () => {
                     handleDeleteCategory={handleDeleteCategory}
                     handleDeleteTask={handleDeleteTask}
                     options={options}
+                    handleToggleTaskStatus={handleToggleTaskStatus}
                   />
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
           ))}
-          {/* <CategoryListItem key="checked" /> */}
         </div>
       </DragDropContext>
+      <TodoTrashItem
+        tasks={doneTasks}
+        handleToggleTaskStatus={handleToggleTaskStatus}
+      />
 
       <Modal
         isOpen={isModalOpen}
@@ -147,18 +160,6 @@ export const Category = () => {
         modalType={modalType}
         categories={categoryOptions}
       />
-
-      {/* <form onSubmit={handleSubmit(handleAddCategory)}>
-        <input
-          {...register('title', { required: 'title is required' })}
-          type="text"
-          placeholder="title"
-        />
-        {errors.name && (
-          <div style={{ color: 'red' }}>{errors.name.message}</div>
-        )}
-        <button type="submit">submit</button>
-      </form> */}
     </div>
   );
 };
