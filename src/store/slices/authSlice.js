@@ -46,7 +46,6 @@ export const authSlice = createSlice({
     checkTokenExpiration: (state) => {
       if (state.accessToken) {
         const decodedToken = jwtDecode(state.accessToken);
-        console.log(decodedToken)
         const currentTime = Date.now() / 1000;
 
         if (decodedToken.exp < currentTime) {
