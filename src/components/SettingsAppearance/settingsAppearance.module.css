@@ -96,3 +96,8 @@
   width: 5px;
   background-color: white;
 }
+
+.colorInput{
+  background-color: var(--input-color);
+  color: var(--text-color);
+}

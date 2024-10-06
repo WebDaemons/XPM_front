@@ -30,6 +30,7 @@ export const SettingsAppearance = () => {
           />
           <ThemeCard
             themeName="System"
+            onClick="system"
             img={systemImg}
             isActive={FiMonitor}
           />
@@ -73,6 +74,7 @@ export const SettingsAppearance = () => {
             <input
               type="text"
               placeholder="#"
+              className={styles.colorInput}
             />
             <div className={styles.vertDelimiter}></div>
             <div className={styles.customColor}>
