@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 import {
   createBrowserRouter,
@@ -8,11 +8,18 @@ import {
 } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 import { Sidebar } from '@components/Sidebar/Sidebar';
+import { checkTokenExpiration } from '@slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
 
 function App() {
   const { isAuthenticated } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkTokenExpiration());
+  }, [dispatch]);
 
   const Layout = () => {
     return (
