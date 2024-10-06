@@ -1,0 +1,18 @@
+.notePageWrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  width: 100%;
+  gap: 20px;
+  background-color: var(--background-color);
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.addButton{
+  display: flex;
+  gap: 10px;
+}

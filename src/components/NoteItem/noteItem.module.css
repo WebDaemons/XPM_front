@@ -6,13 +6,13 @@
   flex-direction: column;
   gap: 15px;
   border-radius: 10px;
-  border: 1.5px solid #e8f1ff;
-  background: #fff;
+  border: 1.5px solid var(--accent-color);
+  background: var(--background-color);
 }
 
 .noteWrapper:hover {
   cursor: pointer;
-  background-color: #f4f8ff;
+  background-color: var(--accent-color);
   transition: background-color 0.3s ease;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .createdAt {
-  color: #787c99;
+  color: var(--text-color);
 }
 
 .icons {
@@ -33,7 +33,7 @@
 }
 
 .optionsIcon:hover {
-  background-color: #f4f8ff;
+  background-color: var(--accent-color);
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -48,7 +48,7 @@
 .noteName {
   font-size: 24px;
   font-weight: 500;
-  color: #121212;
+  color: var(--primary-color);
 }
 
 .noteText {
@@ -57,7 +57,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 16px;
-  color: #787c99;
+  color: var(--text-color);
   font-size: 16px;
   line-height: 1.4;
   white-space: pre-wrap;

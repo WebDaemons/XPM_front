@@ -3,7 +3,7 @@ import styles from './settingsProfile.module.css';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@ui/index';
-import { updateUserAction } from '../../store/slices/userSlice';
+import { updateUserAction, getUserAction } from '../../store/slices/userSlice';
 
 export const SettingsProfile = () => {
   

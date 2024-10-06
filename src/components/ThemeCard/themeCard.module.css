@@ -1,12 +1,12 @@
 .wrapper {
-  border: 1.5px solid #e8f1ff;
+  border: 1.5px solid var(--accent-color);
   border-radius: 10px;
   cursor: pointer;
 }
 
 header {
   padding: 10px;
-  background-color: #e8f1ff;
+  background-color: var(--accent-color);
   border-radius: 10px 10px 0 0;
 }
 
@@ -17,6 +17,6 @@ header {
 }
 
 .img img {
-  border: 1.5px solid #e8f1ff;
+  border: 1.5px solid var(--accent-color);
   border-radius: 5px;
 }

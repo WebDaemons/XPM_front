@@ -42,7 +42,8 @@
 }
 
 .outlined {
-  background-color: #fff;
+  background-color: transparent;
   color: #121212;
   border: 1.5px solid #e8f1ff;
+  color: var(--text-color);
 }

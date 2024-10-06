@@ -7,7 +7,7 @@
 .divider {
   height: 1px;
   width: 100%;
-  background-color: #e8f1ff;
+  background-color: var(--accent-color);
 }
 
 .inputWrapper {
@@ -18,14 +18,16 @@
 
 .inputWrapper h2 {
   font-size: 18px;
-  color: #121212;
+  color: var(--primary-color);
   font-weight: 500;
 }
 
 .inputWrapper input {
-  border: 1.5px solid #e8f1ff;
+  border: 1.5px solid var(--accent-color);
   border-radius: 5px;
   padding: 10px;
   outline: none;
   font-size: 16px;
+  background-color: var(--input-color);
+  color: var(--text-color);
 }

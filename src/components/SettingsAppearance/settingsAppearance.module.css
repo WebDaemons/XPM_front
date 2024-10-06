@@ -18,12 +18,12 @@
 
 .description h2 {
   font-size: 18px;
-  color: #121212;
+  color: var(--primary-color);
   font-weight: 500;
 }
 
 .description p {
-  color: #787c99;
+  color: var(--text-color);
 }
 
 .themeCards {
@@ -36,7 +36,7 @@
 .divider {
   height: 1px;
   width: 100%;
-  background-color: #e8f1ff;
+  background-color: var(--accent-color);
 }
 
 .accentColorsWrapper {
@@ -65,11 +65,11 @@
 }
 
 .customColorWrapper p {
-  color: #787c99;
+  color: var(--text-color);
 }
 
 .customColorWrapper input {
-  border: 1.5px solid #e8f1ff;
+  border: 1.5px solid var(--accent-color);
   border-radius: 5px;
   padding: 10px;
   outline: none;
@@ -77,7 +77,7 @@
 
 .vertDelimiter {
   width: 1.5px;
-  background-color: #e8f1ff;
+  background-color: var(--accent-color);
   height: 100%;
 }
 
