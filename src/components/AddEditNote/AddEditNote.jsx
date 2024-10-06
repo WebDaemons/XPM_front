@@ -20,10 +20,13 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   const [selectedColor, setSelectedColor] = useState('#aabbcc');
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const [tagName, setTagName] = useState('');
+  const [isTagAddVisible, setIsAddTagVisible] = useState(false);
+  const [isNotePinned, setIsNotePinned] = useState(false);
   const { handleAddNote, handleEditNote, handleDeleteNote } = useNotes(token);
 
   useEffect(() => {
     if (note) {
+      setIsNotePinned(note.isPinned);
       setTitle(note.title || '');
       setContent(note.content || '');
       setCurrentTags(note.tags || []);
@@ -61,6 +64,8 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
       if (title === '' || content === '') return;
       handleAddNote(title, content, currentTags);
     }
+    setTitle('');
+    setContent('');
     setCurrentTags([]);
     onClose();
   };
@@ -83,18 +88,34 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
     setCurrentTags([...currentTags, newTag]);
   };
 
+  const handleDeleteTag = (name) => {
+    const updatedTags = currentTags.filter((tag) => tag.name !== name);
+    setCurrentTags(updatedTags);
+  };
+
   const handleDelete = () => {
     handleDeleteNote(note.id);
+    setCurrentTags([]);
+    setTitle('');
+    setContent('');
     onClose();
   };
 
   const handlePinned = () => {
-    note.isPinned = !note.isPinned;
+    const updatedNote = { ...note, isPinned: !isNotePinned };
+    handleEditNote(updatedNote, note.id);
+    setIsNotePinned((prev) => !prev);
   };
 
   const handleCloseModal = () => {
+    setIsNotePinned(false);
     setCurrentTags([]);
+    setIsAddTagVisible(false);
     onClose();
+  };
+
+  const handleAddTagVisibility = () => {
+    setIsAddTagVisible(!isTagAddVisible);
   };
 
   return (
@@ -107,7 +128,7 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
           <div className={styles.noteTools}>
             {type === 'edit' ? (
               <>
-                {note.isPinned ? (
+                {isNotePinned ? (
                   <TbPinnedFilled
                     className={styles.navBtn}
                     onClick={handlePinned}
@@ -159,6 +180,13 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
           <div className={styles.tagsWrapper}>
             <label className={styles.label}>TAGS</label>
             <div className={styles.tags}>
+              <button
+                className={styles.addTagButton}
+                type="button"
+                onClick={handleAddTagVisibility}
+              >
+                {isTagAddVisible ? <IoIosClose /> : <FiPlus />}
+              </button>
               {currentTags?.map((tag) => (
                 <div
                   key={tag.id}
@@ -169,35 +197,42 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
                   }}
                 >
                   {tag.name}
-                  <IoIosClose className={styles.clearTag} />
+                  <IoIosClose
+                    className={styles.clearTag}
+                    onClick={() => handleDeleteTag(tag.name)}
+                  />
                 </div>
               ))}
             </div>
-            <div className={styles.addTagWrapper}>
-              <input
-                type="text"
-                className={styles.inputTag}
-                placeholder="Enter tag name..."
-                onChange={(e) => setTagName(e.target.value)}
-              />
-              <div
-                className={styles.choosenColor}
-                style={{ backgroundColor: selectedColor }}
-                onClick={handleOpenColorPicker}
-              ></div>
-              <button
-                className={styles.addTagButton}
-                type="button"
-                onClick={handleAddTag}
-              >
-                <FiPlus />
-              </button>
-              {isColorPickerVisible && (
-                <div className={styles.colorPicker}>
-                  <ColorPicker onColorChange={handleColorChange} />
-                </div>
-              )}
-            </div>
+            {isTagAddVisible ? (
+              <div className={styles.addTagWrapper}>
+                <input
+                  type="text"
+                  className={styles.inputTag}
+                  placeholder="Enter tag name..."
+                  onChange={(e) => setTagName(e.target.value)}
+                />
+                <div
+                  className={styles.choosenColor}
+                  style={{ backgroundColor: selectedColor }}
+                  onClick={handleOpenColorPicker}
+                ></div>
+                <button
+                  className={styles.addTagButton}
+                  type="button"
+                  onClick={handleAddTag}
+                >
+                  <FiPlus />
+                </button>
+                {isColorPickerVisible && (
+                  <div className={styles.colorPicker}>
+                    <ColorPicker onColorChange={handleColorChange} />
+                  </div>
+                )}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
         <div className={styles.modalFooter}>

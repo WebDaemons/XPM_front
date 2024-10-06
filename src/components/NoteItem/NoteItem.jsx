@@ -43,10 +43,10 @@ export const NoteItem = ({ note, onClick }) => {
             ref={buttonRef}
             onClick={handleButtonClick}
           >
-            <BiDotsHorizontalRounded
+            {/* <BiDotsHorizontalRounded
               size={24}
               color="#787c99"
-            />
+            /> */}
           </div>
         </div>
       </div>
