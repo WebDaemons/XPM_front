@@ -6,7 +6,7 @@ import {
   SettingsAppearance,
 } from '@components/index';
 import { tabs } from './tab.data';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate  } from 'react-router-dom';
 import styles from './settings.module.css';
 
 export const Settings = () => {
@@ -18,6 +18,10 @@ export const Settings = () => {
     // '/settings/notifications': <SettingsNotifications />,
     '/settings/appearance': <SettingsAppearance />,
   };
+
+  if (location.pathname === '/settings') {
+    return <Navigate to="/settings/profile" />; // Редирект на профиль
+  }
 
   return (
     <div
