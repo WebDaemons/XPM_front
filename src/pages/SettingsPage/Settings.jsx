@@ -7,7 +7,6 @@ import {
 } from '@components/index';
 import { tabs } from './tab.data';
 import { useLocation } from 'react-router-dom';
-import { useTheme } from "@context/ThemeContext.jsx";
 import styles from './settings.module.css';
 
 export const Settings = () => {
@@ -19,12 +18,6 @@ export const Settings = () => {
     // '/settings/notifications': <SettingsNotifications />,
     '/settings/appearance': <SettingsAppearance />,
   };
-
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    document.body.className = theme + "-theme";
-  }, [theme]);
 
   return (
     <div
