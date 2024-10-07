@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './dropDown.module.css';
-import { HiOutlineFlag, HiFlag } from '@ui/icons';
 
-export const DropDown = ({ options, onOptionSelect, placeholder }) => {
+export const DropDown = ({
+  icon: Icon,
+  options,
+  onOptionSelect,
+  placeholder,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const dropdownRef = useRef(null);
@@ -39,6 +43,11 @@ export const DropDown = ({ options, onOptionSelect, placeholder }) => {
         className={styles.dropdownHeader}
         onClick={toggleDropdown}
       >
+        {Icon && selectedOption ? (
+          <Icon color={selectedOption.color} />
+        ) : (
+          Icon && <Icon color="black" />
+        )}
         {selectedOption ? selectedOption.label : placeholder}
       </div>
       {isOpen && (
@@ -48,9 +57,8 @@ export const DropDown = ({ options, onOptionSelect, placeholder }) => {
               key={index}
               className={styles.dropdownMenuItem}
               onClick={() => handleOptionClick(option)}
-              style={{ color: options.color }}
             >
-              <HiFlag color={option.color} />
+              {Icon && <Icon color={option.color} />}
               {option.label}
             </li>
           ))}

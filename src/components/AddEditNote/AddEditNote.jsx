@@ -52,13 +52,11 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   const handleSave = () => {
     if (type === 'edit') {
       if (title === '' || content === '') return;
-      console.log(currentTags);
       const data = {
         title,
         content,
         tags: currentTags,
       };
-      console.log(data, note.id);
       handleEditNote(data, note.id);
     } else {
       if (title === '' || content === '') return;

@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-// import styles from './datePick.module.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import styles from './datePick.module.css';
 
-export const DatePick = () => {
+export const DatePick = ({ onDateChange }) => {
   const [startDate, setStartDate] = useState(new Date());
+
+  const handleDateChange = (date) => {
+    setStartDate(date);
+    onDateChange(date);
+  };
+
   return (
     <DatePicker
       selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      onChange={handleDateChange}
+      className={styles.customDatepicker}
+      calendarClassName={styles.customCalendar}
     />
   );
 };

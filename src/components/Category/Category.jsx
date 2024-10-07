@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './category.module.css';
-import { Modal } from '@ui/index';
+import { Modal, Button } from '@ui/index';
 import { CategoryListItem } from '@components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '@slices/categorySlice';
 import { fetchTasks } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useForm } from 'react-hook-form';
 import { useTodolist } from '@hooks/useTodolist';
 import { TodoTrashItem } from '../TodoTrashItem/TodoTrashItem';
+import { FiPlus, BsSortUp } from '@ui/icons';
 
 export const Category = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,11 +85,11 @@ export const Category = () => {
   };
 
   const options = [
+    { value: 'N', label: 'Select priority', color: 'black' },
     { value: 'H', label: 'High', color: 'red' },
     { value: 'M', label: 'Medium', color: 'orange' },
     { value: 'L', label: 'Low', color: 'green' },
   ];
-
   const categoryOptions = categories.map((category) => ({
     id: category.id,
     label: category.name,
@@ -116,6 +116,23 @@ export const Category = () => {
         gap: '10px',
       }}
     >
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+          variant="outlined"
+          startIcon={BsSortUp}
+        >
+          Filter
+        </Button>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            variant="outlined"
+            startIcon={FiPlus}
+          >
+            Add Category
+          </Button>
+          <Button startIcon={FiPlus}>Add Task</Button>
+        </div>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.categoryList}>
           {categories.map((category, index) => (
@@ -140,6 +157,7 @@ export const Category = () => {
                     handleDeleteTask={handleDeleteTask}
                     options={options}
                     handleToggleTaskStatus={handleToggleTaskStatus}
+                    categoryOptions={categoryOptions}
                   />
                   {provided.placeholder}
                 </div>

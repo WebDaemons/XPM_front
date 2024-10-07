@@ -15,6 +15,7 @@ export * from './Category/Category';
 export * from './CategoryListItem/CategoryListItem';
 export * from './TodoTrashItem/TodoTrashItem';
 export * from './TaskListItem/TaskListItem';
+export * from './AddEditTodo/AddEditTodo';
 
 // NOTES PAGE
 
