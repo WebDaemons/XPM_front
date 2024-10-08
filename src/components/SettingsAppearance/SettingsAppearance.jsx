@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './settingsAppearance.module.css';
 import { ThemeCard } from '@components/index';
 import lightImg from '@assets/lightTheme.png';
@@ -7,6 +7,7 @@ import systemImg from '@assets/systemTheme.png';
 import { FiSun, FiMoon, FiMonitor } from '@ui/icons';
 
 export const SettingsAppearance = () => {
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.themeWrapper}>
@@ -16,18 +17,19 @@ export const SettingsAppearance = () => {
         </div>
         <div className={styles.themeCards}>
           <ThemeCard
-            theme="Light"
+            themeName="Light"
             img={lightImg}
-            isActive={false}
+            onClick="light"
             icon={FiSun}
           />
           <ThemeCard
-            theme="Dark"
+            themeName="Dark"
+            onClick="dark"
             img={darkImg}
             isActive={FiMoon}
           />
           <ThemeCard
-            theme="System"
+            themeName="System"
             img={systemImg}
             isActive={FiMonitor}
           />

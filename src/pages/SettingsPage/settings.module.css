@@ -1,0 +1,9 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  gap: 25px;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

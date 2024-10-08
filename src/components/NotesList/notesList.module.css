@@ -12,15 +12,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  border: 1.5px dashed #e8f1ff;
-  background: #fff;
+  border: 1.5px dashed var(--accent-color);
+  background: var(--background-color);
   font-size: 30px;
   font-weight: 300;
-  color: #787c99;
+  color: var(--text-color);
 }
 
 .addNoteButton:hover {
   cursor: pointer;
-  background-color: #f4f8ff;
+  background-color: var(--accent-color);
   transition: background-color 0.3s ease;
 }

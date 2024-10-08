@@ -3,6 +3,12 @@
 
 :root {
   --primary-blue: #1b76ff;
+  --background-color: white;
+  --primary-color: #121212;
+  --secondary-color: #121212;
+  --text-color: #787c99;
+  --accent-color: #e8f1ff;
+  --input-color: white;
 }
 
 * {
@@ -11,6 +17,26 @@
 
 body {
   font-family: 'Jost', sans-serif;
+}
+
+/* Темная тема */
+.dark-theme {
+  --background-color: #020817;
+  --primary-color: #0D47A1;
+  --secondary-color: #01050D;
+  --text-color: #8FA9C9;
+  --accent-color: #B0D4FF;
+  --input-color: #020817  ;
+}
+
+/* Светлая тема */
+.light-theme {
+  --background-color: white;
+  --primary-color: #121212;
+  --secondary-color: #121212;
+  --text-color: #787c99;
+  --accent-color: #e8f1ff;
+  --input-color: white;
 }
 
 /* :root {

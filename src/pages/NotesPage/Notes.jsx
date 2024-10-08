@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './note.module.css';
 import { NotesList, Toolbar } from '@components/index';
 import { Button } from '@ui/index';
 import { FiPlus, BsSortUp } from '@ui/icons';
@@ -21,10 +22,11 @@ export const Notes = () => {
         >
           Filter
         </Button>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div className={styles.addButton}>
           <Button startIcon={FiPlus}>Add Note</Button>
         </div>
-      </div> */}
+      </div>{' '}
+      */}
       <NotesList />
     </div>
   );
