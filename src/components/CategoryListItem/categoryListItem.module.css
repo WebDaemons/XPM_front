@@ -48,8 +48,13 @@
   border-radius: 5px;
 }
 
-.categoryListItem:hover .deleteCategoryIcon {
+.deleteCategoryIcon {
+  color: #777;
+}
+
+.categoryListItem .deleteCategoryIcon:hover {
   cursor: pointer;
+  transition: all 0.3s ease;
   color: red;
 }
 
@@ -85,7 +90,7 @@
 }
 
 .taskPriority {
-  width: 110px;
+  width: 150px;
 }
 
 .taskDueDate {

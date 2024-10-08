@@ -28,10 +28,17 @@ export const TaskListItem = ({
   };
 
   const handlePrioritySelect = (option) => {
-    console.log(option);
     const updatedTask = {
       ...task,
       priority: option.value,
+    };
+    handleEditTask(task.id, updatedTask);
+  };
+
+  const handleDateChange = (date) => {
+    const updatedTask = {
+      ...task,
+      due_date: date,
     };
     handleEditTask(task.id, updatedTask);
   };
@@ -65,11 +72,15 @@ export const TaskListItem = ({
           options={options}
           onOptionSelect={handlePrioritySelect}
           placeholder={getPriorityLabel(task.priority)}
+          selectedValue={task.priority}
           icon={HiFlag}
         />
       </div>
       <div className={styles.dueDate}>
-        <DatePick />
+        <DatePick
+          onDateChange={handleDateChange}
+          defaultDate={task.due_date}
+        />
       </div>
       <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
       <div>

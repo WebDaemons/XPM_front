@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import styles from './category.module.css';
-import { Modal, Button } from '@ui/index';
-import { CategoryListItem } from '@components/index';
+import { Button } from '@ui/index';
+import {
+  CategoryListItem,
+  TodoTrashItem,
+  AddEditTodo,
+  AddCategory,
+} from '@components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '@slices/categorySlice';
 import { fetchTasks } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTodolist } from '@hooks/useTodolist';
-import { TodoTrashItem } from '../TodoTrashItem/TodoTrashItem';
 import { FiPlus, BsSortUp } from '@ui/icons';
 
 export const Category = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
 
-  const handleOpenModal = (type) => {
+  const handleOpenTaskModal = (type) => {
     setModalType(type);
-    setIsModalOpen(true);
+    setIsTaskModalOpen(true);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeTaskModal = () => setIsTaskModalOpen(false);
 
   const handleSave = (task) => {
     if (!task.title) return;
@@ -95,6 +100,18 @@ export const Category = () => {
     label: category.name,
   }));
 
+  const handleModalOpen = () => {
+    setIsTaskModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsTaskModalOpen(false);
+  };
+
+  const handleCategoryOpen = () => {
+    setIsCategoryModalOpen((prev) => !prev);
+  };
+
   const handleToggleTaskStatus = (taskId) => {
     const taskData = tasks.find((task) => task.id === taskId);
 
@@ -117,20 +134,27 @@ export const Category = () => {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button
+        <div></div>
+        {/* <Button
           variant="outlined"
           startIcon={BsSortUp}
         >
           Filter
-        </Button>
+        </Button> */}
         <div style={{ display: 'flex', gap: '10px' }}>
           <Button
             variant="outlined"
             startIcon={FiPlus}
+            onClick={() => handleCategoryOpen()}
           >
             Add Category
           </Button>
-          <Button startIcon={FiPlus}>Add Task</Button>
+          <Button
+            startIcon={FiPlus}
+            onClick={() => handleModalOpen()}
+          >
+            Add Task
+          </Button>
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -169,14 +193,17 @@ export const Category = () => {
       <TodoTrashItem
         tasks={doneTasks}
         handleToggleTaskStatus={handleToggleTaskStatus}
+        options={options}
       />
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onSave={handleSave}
-        modalType={modalType}
-        categories={categoryOptions}
+      <AddEditTodo
+        isOpen={isTaskModalOpen}
+        onClose={handleModalClose}
+        type="add"
+        categoryOptions={categoryOptions}
+      />
+      <AddCategory
+        isOpen={isCategoryModalOpen}
+        onClose={handleCategoryOpen}
       />
     </div>
   );

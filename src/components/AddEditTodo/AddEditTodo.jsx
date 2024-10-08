@@ -32,13 +32,13 @@ export const AddEditTodo = ({
     if (task) {
       setName(task.name || '');
       setCategory(task.category || '');
-      setDueDate(task.due_date || '');
-      setPriority(getPriorityLabel(task.priority) || '');
+      setDueDate(task?.due_date || new Date());
+      setPriority(task?.priority || 'N');
     } else {
       setName('');
       setCategory('');
       setDueDate('');
-      setPriority('');
+      setPriority('N');
     }
   }, [task]);
 
@@ -60,15 +60,20 @@ export const AddEditTodo = ({
       if (name === '') return;
       const data = {
         name,
-        // due_date: dueDate,
+        due_date: dueDate,
         priority,
         category,
       };
-      console.log(task.id, data);
       handleEditTask(task.id, data);
     } else {
       if (name === '') return;
-      handleAddTask(name);
+      const data = {
+        name,
+        due_date: dueDate,
+        priority,
+        category,
+      };
+      handleAddTask(data);
     }
     setName('');
     onClose();
@@ -93,8 +98,8 @@ export const AddEditTodo = ({
   };
 
   const handleDateChange = (date) => {
-    setDueDate(formatDate(date));
-    console.log(formatDate(date));
+    console.log(date);
+    setDueDate(date);
   };
 
   const getPriorityLabel = (value) => {
@@ -104,7 +109,7 @@ export const AddEditTodo = ({
 
   const getCategoryName = (value) => {
     const option = categoryOptions.find((opt) => opt.id === value);
-    return option ? option.label : '';
+    return option ? option.label : 'Select category';
   };
 
   return (
@@ -151,7 +156,9 @@ export const AddEditTodo = ({
               <DropDown
                 options={categoryOptions}
                 onOptionSelect={handleCategorySelect}
-                placeholder={getCategoryName(task.category)}
+                placeholder={
+                  task ? getCategoryName(task.category) : 'Select category'
+                }
               />
             </div>
           </div>
@@ -159,17 +166,24 @@ export const AddEditTodo = ({
             <div className={styles.dateWrapper}>
               <label className={styles.label}>DUE DATE</label>
               <div className={styles.dueDate}>
-                <DatePick onDateChange={handleDateChange} />
+                <DatePick
+                  onDateChange={handleDateChange}
+                  defaultDate={task?.due_date}
+                />
               </div>
             </div>
             <div className={styles.priorityWrapper}>
               <label className={styles.label}>PRIORITY</label>
               <div className={styles.priority}>
-                {' '}
                 <DropDown
                   options={options}
                   onOptionSelect={handlePrioritySelect}
-                  placeholder={getPriorityLabel(task.priority)}
+                  selectedValue={task?.priority || 'N'}
+                  placeholder={
+                    task
+                      ? getPriorityLabel(task.priority)
+                      : getPriorityLabel('N')
+                  }
                   icon={HiFlag}
                 />
               </div>

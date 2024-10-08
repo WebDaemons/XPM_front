@@ -6,10 +6,18 @@ export const DropDown = ({
   options,
   onOptionSelect,
   placeholder,
+  selectedValue,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedValue) {
+      const option = options.find((opt) => opt.value === selectedValue);
+      setSelectedOption(option);
+    }
+  }, [selectedValue]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 

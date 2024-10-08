@@ -62,7 +62,7 @@ export const CategoryListItem = ({
         <div className={styles.headerRight}>
           <MdOutlineDelete
             size={20}
-            color="#121212"
+            // color="#121212"
             className={styles.deleteCategoryIcon}
             onClick={() => handleDeleteCategory(category.id)}
           />
