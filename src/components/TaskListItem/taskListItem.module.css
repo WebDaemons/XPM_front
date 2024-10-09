@@ -22,18 +22,23 @@
   margin-left: 5px;
 }
 
-.priority,
 .dueDate,
 .createdAt {
-  width: 150px;
+  width: 115px;
   padding: 10px 5px;
+  border-left: 1.5px solid #e8f1ff;
+}
+
+.priority {
+  padding: 0 10px;
+  width: 150px;
   border-left: 1.5px solid #e8f1ff;
 }
 
 .dragIcon,
 .deleteIcon {
   visibility: hidden;
-  color: #121212;
+  color: #777;
 }
 
 .taskListItem:hover .dragIcon,

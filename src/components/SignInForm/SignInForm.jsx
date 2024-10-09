@@ -33,12 +33,12 @@ function SignInForm() {
   const error = useSelector((state) => state.auth.error);
 
   const handleEmailChange = (value) => {
-    console.log('Input value:', value);
+    // console.log('Input value:', value);
     setEmail(value);
   };
 
   const handlePasswordChange = (value) => {
-    console.log('Input value:', value);
+    // console.log('Input value:', value);
     setPassword(value);
   };
 

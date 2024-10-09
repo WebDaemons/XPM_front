@@ -48,16 +48,6 @@
   border-radius: 5px;
 }
 
-.deleteCategoryIcon {
-  color: #777;
-}
-
-.categoryListItem .deleteCategoryIcon:hover {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: red;
-}
-
 /* colors if category has tasks or not */
 .tasksExist {
   color: var(--primary-blue);

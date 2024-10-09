@@ -1,32 +1,30 @@
 .dropdown {
   position: relative;
-  width: calc(100% - 20px);
   height: 100%;
+  width: 100%;
   font-family: Jost, Poppins, sans-serif;
 }
 
 .dropdownHeader {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
   align-items: center;
-  /* padding: 10px 0; */
   height: 100%;
-  padding-left: 5px;
   cursor: pointer;
   background-color: transparent;
   z-index: 1;
-  border: 1px solid red;
+  border-radius: 10px;
 }
 
 .dropdownMenu {
-  width: 150px;
+  width: 100%;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   border: 1px solid #e8f1ff;
-  border-top: none;
   background-color: #fff;
+  border-radius: 10px;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './checkbox.module.css';
 import { FaCheck } from '@ui/icons';
 
-export const Checkbox = ({
-  children,
-  size = 'md',
-  initialChecked = false,
-  onChange,
-  isChecked,
-}) => {
-  const [checked, setChecked] = useState(initialChecked);
+export const Checkbox = ({ children, size = 'md', onChange, isChecked }) => {
+  const [checked, setChecked] = useState(isChecked);
+
+  useEffect(() => {
+    setChecked(isChecked);
+  }, [isChecked]);
 
   const handleCheckBoxChange = () => {
     setChecked(!checked);
@@ -27,11 +25,13 @@ export const Checkbox = ({
         className={`${styles.checkbox} ${checked ? styles.checked : ''} ${styles[size]}`}
         onClick={handleCheckBoxChange}
       >
-        {checked && (
+        {checked ? (
           <FaCheck
             className={styles.icon}
             size={iconSize}
           />
+        ) : (
+          ''
         )}
       </div>
       {children && <span className={styles.labelText}>{children}</span>}

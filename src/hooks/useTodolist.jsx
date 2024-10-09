@@ -1,19 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask, removeTask, editTask } from '@slices/taskSlice';
-import {
-  addCategory,
-  removeCategory,
-  editCategory,
-} from '@slices/categorySlice';
+import { addCategory, removeCategory } from '@slices/categorySlice';
 
 export const useTodolist = (token) => {
   const dispatch = useDispatch();
 
   const handleAddTask = (data) => {
     const taskData = {
-      name: data.title,
+      name: data.name,
       category: data.category,
+      priority: data.priority,
     };
     dispatch(addTask({ token, taskData }));
   };
@@ -28,7 +25,7 @@ export const useTodolist = (token) => {
 
   const handleAddCategory = (data) => {
     const categoryData = {
-      name: data.title,
+      name: data.name,
     };
     dispatch(addCategory({ token, categoryData }));
   };

@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import styles from './category.module.css';
-import { Modal } from '@ui/index';
-import { CategoryListItem } from '@components/index';
+import { Button } from '@ui/index';
+import {
+  CategoryListItem,
+  TodoTrashItem,
+  AddEditTodo,
+  AddCategory,
+} from '@components/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '@slices/categorySlice';
 import { fetchTasks } from '@slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useForm } from 'react-hook-form';
 import { useTodolist } from '@hooks/useTodolist';
+import { FiPlus, BsSortUp } from '@ui/icons';
 
 export const Category = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
 
-  const handleOpenModal = (type) => {
+  const handleOpenTaskModal = (type) => {
     setModalType(type);
-    setIsModalOpen(true);
+    setIsTaskModalOpen(true);
   };
 
-  const closeModal = () => setIsModalOpen(false);
+  const closeTaskModal = () => setIsTaskModalOpen(false);
 
   const handleSave = (task) => {
     if (!task.title) return;
@@ -44,7 +50,8 @@ export const Category = () => {
     dispatch(fetchTasks(token));
   }, [dispatch]);
 
-  const checkedTasks = tasks.filter((task) => task.is_done);
+  const unDoneTasks = tasks.filter((task) => !task.is_done);
+  const doneTasks = tasks.filter((task) => task.is_done);
 
   const [rotatedStates, setRotatedStates] = useState(
     categories.map(() => false),
@@ -78,25 +85,44 @@ export const Category = () => {
   };
 
   const getTaskCount = (categoryId) => {
-    return tasks.filter((item) => item.category === categoryId).length;
+    return tasks.filter((item) => item.category === categoryId && !item.is_done)
+      .length;
   };
 
   const options = [
+    { value: 'N', label: 'Select priority', color: 'black' },
     { value: 'H', label: 'High', color: 'red' },
     { value: 'M', label: 'Medium', color: 'orange' },
     { value: 'L', label: 'Low', color: 'green' },
   ];
-
   const categoryOptions = categories.map((category) => ({
     id: category.id,
     label: category.name,
   }));
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const handleModalOpen = () => {
+    setIsTaskModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsTaskModalOpen(false);
+  };
+
+  const handleCategoryOpen = () => {
+    setIsCategoryModalOpen((prev) => !prev);
+  };
+
+  const handleToggleTaskStatus = (taskId) => {
+    const taskData = tasks.find((task) => task.id === taskId);
+
+    if (taskData) {
+      const updatedTaskData = {
+        ...taskData,
+        is_done: !taskData.is_done,
+      };
+      handleEditTask(taskId, updatedTaskData);
+    }
+  };
 
   return (
     <div
@@ -107,6 +133,30 @@ export const Category = () => {
         gap: '10px',
       }}
     >
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div></div>
+        {/* <Button
+          variant="outlined"
+          startIcon={BsSortUp}
+        >
+          Filter
+        </Button> */}
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <Button
+            variant="outlined"
+            startIcon={FiPlus}
+            onClick={() => handleCategoryOpen()}
+          >
+            Add Category
+          </Button>
+          <Button
+            startIcon={FiPlus}
+            onClick={() => handleModalOpen()}
+          >
+            Add Task
+          </Button>
+        </div>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.categoryList}>
           {categories.map((category, index) => (
@@ -122,7 +172,7 @@ export const Category = () => {
                   <CategoryListItem
                     key={category.id}
                     category={category}
-                    tasks={tasks}
+                    tasks={unDoneTasks}
                     index={index}
                     rotatedState={rotatedStates[index]}
                     handleArrowClick={handleArrowClick}
@@ -130,35 +180,31 @@ export const Category = () => {
                     handleDeleteCategory={handleDeleteCategory}
                     handleDeleteTask={handleDeleteTask}
                     options={options}
+                    handleToggleTaskStatus={handleToggleTaskStatus}
+                    categoryOptions={categoryOptions}
                   />
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
           ))}
-          {/* <CategoryListItem key="checked" /> */}
         </div>
       </DragDropContext>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onSave={handleSave}
-        modalType={modalType}
-        categories={categoryOptions}
+      <TodoTrashItem
+        tasks={doneTasks}
+        handleToggleTaskStatus={handleToggleTaskStatus}
+        options={options}
       />
-
-      {/* <form onSubmit={handleSubmit(handleAddCategory)}>
-        <input
-          {...register('title', { required: 'title is required' })}
-          type="text"
-          placeholder="title"
-        />
-        {errors.name && (
-          <div style={{ color: 'red' }}>{errors.name.message}</div>
-        )}
-        <button type="submit">submit</button>
-      </form> */}
+      <AddEditTodo
+        isOpen={isTaskModalOpen}
+        onClose={handleModalClose}
+        type="add"
+        categoryOptions={categoryOptions}
+      />
+      <AddCategory
+        isOpen={isCategoryModalOpen}
+        onClose={handleCategoryOpen}
+      />
     </div>
   );
 };

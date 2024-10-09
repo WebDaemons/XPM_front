@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   PiDotsSixVertical,
   MdKeyboardArrowDown,
   RxDotsVertical,
+  MdOutlineDelete,
 } from '@ui/icons';
 import styles from './categoryListItem.module.css';
-import { TaskListItem } from '@components/index';
+import { TaskListItem, AddEditTodo } from '@components/index';
 import { Draggable } from 'react-beautiful-dnd';
 
 export const CategoryListItem = ({
@@ -17,8 +18,23 @@ export const CategoryListItem = ({
   getTaskCount,
   handleDeleteCategory,
   handleDeleteTask,
+  handleToggleTaskStatus,
   options,
+  categoryOptions,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  const handleModalOpen = (task = null) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setSelectedTask(null);
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.categoryListItem}>
       <div className={styles.header}>
@@ -44,10 +60,10 @@ export const CategoryListItem = ({
           </div>
         </div>
         <div className={styles.headerRight}>
-          <RxDotsVertical
+          <MdOutlineDelete
             size={20}
-            color="#121212"
-            style={{ cursor: 'pointer' }}
+            // color="#121212"
+            className={styles.deleteCategoryIcon}
             onClick={() => handleDeleteCategory(category.id)}
           />
         </div>
@@ -79,10 +95,11 @@ export const CategoryListItem = ({
                     <TaskListItem
                       key={task.id}
                       task={task}
-                      categoryId={task.category}
                       taskId={task.id}
                       handleDeleteTask={handleDeleteTask}
+                      handleToggleTaskStatus={handleToggleTaskStatus}
                       options={options}
+                      onClick={() => handleModalOpen(task)}
                     />
                   </div>
                 )}
@@ -90,6 +107,13 @@ export const CategoryListItem = ({
             ))}
         </div>
       )}
+      <AddEditTodo
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        task={selectedTask}
+        type={selectedTask ? 'edit' : 'add'}
+        categoryOptions={categoryOptions}
+      />
     </div>
   );
 };
