@@ -165,14 +165,19 @@ function AuthForm() {
       >
         Sign In
       </Button>
-      <h3 className={styles.registerError}>{authError}</h3>
+      {authError && (
+        <h3 className={styles.registerError}>{authError.email}</h3>
+      )}
+      {authError && (
+        <h3 className={styles.registerError}>{authError.password}</h3>
+      )}
       {passwordMatch && (
         <h3 className={styles.registerError}>Password don`t match</h3>
       )}
       <div className={styles.formFooter}>
         <p>
           Already have an account?
-          <NavLink
+          <NavLink           
             to="/login"
             key="Login"
           >

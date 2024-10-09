@@ -29,9 +29,8 @@ export const ThemeProvider = ({ children }) => {
       }
     };
 
-    mediaQuery.addEventListener("change", handleChange);
-    console.log(mediaQuery)
-
+    mediaQuery.addEventListener("change", handleChange);                         
+           
     if (theme === "system") {
       setTheme(getSystemTheme());
     }

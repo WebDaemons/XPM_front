@@ -13,21 +13,30 @@ const initialState = {
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async (credentials, { dispatch }) => {
-    const response = await login(credentials);
-    dispatch(getUserAction(response.data.user.token));
-    return response.data.user;
+  async (credentials, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await login(credentials);
+      dispatch(getUserAction(response.data.user.token));
+      return response.data.user;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (data, { dispatch }) => {
-    const response = await register(data);
-    dispatch(getUserAction(response.data.user.token));
-    return response.data.user;
+  async (data, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await register(data);
+      dispatch(getUserAction(response.data.user.token));
+      return response.data.user;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || error.message);
+    }
   }
 );
+
 
 export const logOut = createAsyncThunk('auth/logOut', async () => {
   return null;
@@ -71,7 +80,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload;
         console.log(action)
       })
       .addCase(registerUser.pending, (state) => {
@@ -87,7 +96,8 @@ export const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload.errors;
+        console.log(action.payload.errors)
       });
   }
 });
