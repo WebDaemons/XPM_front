@@ -3,12 +3,12 @@
   align-items: stretch;
   font-size: 16px;
   padding: 0 10px;
-  border-bottom: 1.5px solid #e8f1ff;
+  border-bottom: 1.5px solid var(--accent-color);
 }
 
 .taskListItem:hover {
   cursor: pointer;
-  background-color: #f9fafd;
+  background-color: var(--accent-color);
   transition: background 0.2s ease;
 }
 
@@ -20,19 +20,22 @@
 .name {
   flex: 1;
   margin-left: 5px;
+  color: var(--text-color);
 }
 
 .dueDate,
 .createdAt {
   width: 115px;
   padding: 10px 5px;
-  border-left: 1.5px solid #e8f1ff;
+  border-left: 1.5px solid var(--accent-color);
+  color: var(--text-color);
 }
 
 .priority {
   padding: 0 10px;
   width: 150px;
-  border-left: 1.5px solid #e8f1ff;
+  border-left: 1.5px solid var(--accent-color);
+  color: var(--text-color);
 }
 
 .dragIcon,

@@ -41,7 +41,7 @@ export const CategoryListItem = ({
         <div className={styles.headerLeft}>
           <MdKeyboardArrowDown
             size={24}
-            color="#121212"
+            color="var(--primary-color)"
             className={`${styles.showTasksIcon} ${rotatedState ? 'rotated' : ''}`}
             style={{
               transform: rotatedState ? 'rotate(0)' : 'rotate(-90deg)',

@@ -7,13 +7,7 @@ import { FiPlus, BsSortUp } from '@ui/icons';
 export const Notes = () => {
   return (
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '25px',
-        width: '100%',
-        gap: '20px',
-      }}
+      className={styles.notePageWrapper}
     >
       {/* <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button

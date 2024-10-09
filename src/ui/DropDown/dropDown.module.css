@@ -22,8 +22,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  border: 1px solid #e8f1ff;
-  background-color: #fff;
+  border: 1px solid var(--accent-color)f;
+  background-color: var(--background-color);
   border-radius: 10px;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -38,5 +38,5 @@
 }
 
 .dropdownMenuItem:hover {
-  background-color: #f4f8ff;
+  background-color: var(--accent-color);
 }

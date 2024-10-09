@@ -26,7 +26,7 @@ export const TodoTrashItem = ({
         <div className={styles.headerLeft}>
           <MdKeyboardArrowDown
             size={24}
-            color="#121212"
+            color="var(--primamy-color)"
             className={`${styles.showTasksIcon} ${rotatedState ? 'rotated' : ''}`}
             style={{
               transform: isCollapsed ? 'rotate(0)' : 'rotate(-90deg)',

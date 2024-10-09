@@ -12,6 +12,7 @@ export const Todolist = () => {
         padding: '25px',
         width: '100%',
         gap: '20px',
+        backgroundColor: 'var(--background-color)',
       }}
     >
       <Category />
