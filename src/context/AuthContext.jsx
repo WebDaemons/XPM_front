@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const login = (credentials) => {
-    console.log(isAuthenticated)
     dispatch(loginUser(credentials));
   };
 
