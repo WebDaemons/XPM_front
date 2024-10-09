@@ -100,8 +100,9 @@ function SignInForm() {
       >
         Sign In
       </Button>
-
-      <h3 className={styles.loginError}>{error}</h3>
+      {error && (
+        <h3 className={styles.loginError}>Incorrect Login or Password</h3>
+      )}
       <div className={styles.orDelimiter}>
         <span>OR</span>
       </div>
