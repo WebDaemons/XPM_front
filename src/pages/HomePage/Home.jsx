@@ -33,13 +33,16 @@ export const Home = () => {
           <div className={styles.homeInfo}>
             <p style={{ fontWeight: '700' }}>What we did</p>
             <p>Basic user settings</p>
+            <p>Basic theme swich</p>
             <p>To-do list</p>
+            <p>Notes</p>
           </div>
           <div className={styles.homeInfo}>
-            <p style={{ fontWeight: '700' }}>What were going to do</p>
-            <p>Theme swich</p>
-            <p>Notes</p>
+            <p style={{ fontWeight: '700' }}>What were going to do</p>  
             <p>Share your to-do`s and notes</p>
+            <p>Responsive mobile design</p>
+            <p>Custom theme</p>
+            <p>Kanban board</p>
           </div>
         </div>
       </div>
