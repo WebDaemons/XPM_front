@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   TabsBar,
   SettingsProfile,
@@ -6,7 +6,7 @@ import {
   SettingsAppearance,
 } from '@components/index';
 import { tabs } from './tab.data';
-import { useLocation, Navigate  } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import styles from './settings.module.css';
 
 export const Settings = () => {
@@ -24,9 +24,7 @@ export const Settings = () => {
   }
 
   return (
-    <div
-      className={styles.wrapper}
-    >
+    <div className={styles.wrapper}>
       <TabsBar tabs={tabs} />
       {settingsMap[location.pathname]}
     </div>

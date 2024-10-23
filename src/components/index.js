@@ -1,32 +1,34 @@
+export * from './ColorPicker/ColorPicker';
+export * from './DatePick/DatePick.jsx';
 export * from './Sidebar/Sidebar';
 export * from './TabsBar/TabsBar';
 export * from './Toolbar/Toolbar';
-export * from './ColorPicker/ColorPicker';
-export * from './DatePick/DatePick.jsx';
 
 // AUTH PAGE
 
-export * from './AuthForm/AuthForm';
-export * from './SignInForm/SignInForm';
+export * from './PageAuth/ResetPassConfirmForm/ResetPassConfirmForm';
+export * from './PageAuth/ResetPassForm/ResetPassForm';
+export * from './PageAuth/SignInForm/SignInForm';
+export * from './PageAuth/SignUpForm/SignUpForm';
 
 // TODOLIST PAGE
 
-export * from './Category/Category';
-export * from './CategoryListItem/CategoryListItem';
-export * from './TodoTrashItem/TodoTrashItem';
-export * from './TaskListItem/TaskListItem';
-export * from './AddEditTodo/AddEditTodo';
-export * from './AddCategory/AddCategory';
+export * from './PageTodolist/AddCategory/AddCategory';
+export * from './PageTodolist/AddEditTodo/AddEditTodo';
+export * from './PageTodolist/Category/Category';
+export * from './PageTodolist/CategoryListItem/CategoryListItem';
+export * from './PageTodolist/TaskListItem/TaskListItem';
+export * from './PageTodolist/TodoTrashItem/TodoTrashItem';
 
 // NOTES PAGE
 
-export * from './AddEditNote/AddEditNote';
-export * from './NoteItem/NoteItem';
-export * from './NotesList/NotesList';
+export * from './PageNotes/AddEditNote/AddEditNote';
+export * from './PageNotes/NoteItem/NoteItem';
+export * from './PageNotes/NotesList/NotesList';
 
 // SETTINGS PAGE
 
-export * from './SettingsAppearance/SettingsAppearance';
-export * from './SettingsPassword/SettingsPassword.jsx';
-export * from './SettingsProfile/SettingsProfile';
-export * from './ThemeCard/ThemeCard';
+export * from './PageSettings/SettingsAppearance/SettingsAppearance';
+export * from './PageSettings/SettingsPassword/SettingsPassword.jsx';
+export * from './PageSettings/SettingsProfile/SettingsProfile';
+export * from './PageSettings/ThemeCard/ThemeCard';

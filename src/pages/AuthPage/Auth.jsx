@@ -1,10 +1,11 @@
-import React from 'react';
-import { useLocation, NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import AuthForm from '@components/AuthForm/AuthForm';
-import SignInForm from '../../components/SignInForm/SignInForm';
-import ResetPassForm from '../../components/ResetPassFrom/ResetPassForm';
-import ResetPassConfirmForm from '../../components/ResetPassConfirmForm/ResetPassConfirmForm';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import {
+  SignInForm,
+  SignUpForm,
+  ResetPassForm,
+  ResetPassConfirmForm,
+} from '@components/index';
 
 export const Auth = () => {
   const location = useLocation();
@@ -27,7 +28,7 @@ export const Auth = () => {
   const renderForm = () => {
     switch (pageSelector) {
       case 'signup':
-        return <AuthForm />;
+        return <SignUpForm />;
       case 'login':
         return <SignInForm />;
       case 'resetpassword':

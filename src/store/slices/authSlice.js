@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { login, register } from '@api/authApi';
 import { getUserAction } from '@slices/userSlice';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
 const initialState = {
   user: null,
@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
-  }
+  },
 );
 
 export const registerUser = createAsyncThunk(
@@ -34,9 +34,8 @@ export const registerUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
-  }
+  },
 );
-
 
 export const logOut = createAsyncThunk('auth/logOut', async () => {
   return null;
@@ -63,7 +62,7 @@ export const authSlice = createSlice({
           localStorage.removeItem('token');
         }
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -81,7 +80,7 @@ export const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        console.log(action)
+        console.log(action);
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -97,9 +96,9 @@ export const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.errors;
-        console.log(action.payload.errors)
+        console.log(action.payload.errors);
       });
-  }
+  },
 });
 
 export const { logout, checkTokenExpiration } = authSlice.actions;

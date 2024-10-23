@@ -1,7 +1,5 @@
 import React from 'react';
-import { Category, Toolbar, AddEditTodo } from '@components/index';
-import { Button } from '@ui/index';
-import { FiPlus, BsSortUp, TbLayoutDashboard, FiList } from '@ui/icons';
+import { Category } from '@components/index';
 
 export const Todolist = () => {
   return (

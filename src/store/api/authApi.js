@@ -16,6 +16,9 @@ export const resetPassword = async (data) => {
 };
 
 export const resetPasswordConfirm = async (data) => {
-  const response = await axiosInstance.post('/core/user/password_reset/confirm/', data);
+  const response = await axiosInstance.post(
+    '/core/user/password_reset/confirm/',
+    data,
+  );
   return response;
 };

@@ -7,10 +7,10 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
-import { Sidebar } from '@components/Sidebar/Sidebar';
+import { Sidebar } from '@components/index';
 import { checkTokenExpiration } from '@slices/authSlice';
 import { useDispatch } from 'react-redux';
-import { useTheme } from "@context/ThemeContext.jsx";
+import { useTheme } from '@context/ThemeContext.jsx';
 
 import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
 
@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkTokenExpiration());
-    document.body.className = theme + "-theme";
+    document.body.className = theme + '-theme';
   }, [dispatch, theme]);
 
   const Layout = () => {
