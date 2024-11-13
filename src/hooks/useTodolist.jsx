@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask, removeTask, editTask } from '@slices/taskSlice';
 import { addCategory, removeCategory } from '@slices/categorySlice';
