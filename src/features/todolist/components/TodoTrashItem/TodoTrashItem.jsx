@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from '@ui/icons';
 import styles from './todoTrashItem.module.css';
-import { TaskListItem } from '@components/index';
+import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 
 export const TodoTrashItem = ({
   tasks,

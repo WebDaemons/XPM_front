@@ -3,7 +3,7 @@ import styles from './addEditTodo.module.css';
 import { IoIosClose, MdOutlineDelete, HiFlag } from '@ui/icons';
 import { Button, DropDown } from '@ui/index';
 import { DatePick } from '@components/index';
-import { useTodolist } from '@hooks/useTodolist';
+import { useTodolist } from '@features/todolist/hooks/useTodolist';
 
 export const AddEditTodo = ({
   isOpen,

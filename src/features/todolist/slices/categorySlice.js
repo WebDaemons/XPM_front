@@ -4,7 +4,7 @@ import {
   createCategory,
   deleteCategory,
   updateCategory,
-} from '@store/api/categoryApi';
+} from '@features/todolist/api/categoryApi';
 
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',

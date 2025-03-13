@@ -11,15 +11,6 @@ export * from './PageAuth/ResetPassForm/ResetPassForm';
 export * from './PageAuth/SignInForm/SignInForm';
 export * from './PageAuth/SignUpForm/SignUpForm';
 
-// TODOLIST PAGE
-
-export * from './PageTodolist/AddCategory/AddCategory';
-export * from './PageTodolist/AddEditTodo/AddEditTodo';
-export * from './PageTodolist/Category/Category';
-export * from './PageTodolist/CategoryListItem/CategoryListItem';
-export * from './PageTodolist/TaskListItem/TaskListItem';
-export * from './PageTodolist/TodoTrashItem/TodoTrashItem';
-
 // SETTINGS PAGE
 
 export * from './PageSettings/SettingsAppearance/SettingsAppearance';

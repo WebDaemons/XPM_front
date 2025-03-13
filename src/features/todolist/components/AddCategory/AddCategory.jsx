@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './addCategory.module.css';
 import { IoIosClose } from '@ui/icons';
 import { Button } from '@ui/index';
-import { useTodolist } from '@hooks/useTodolist';
+import { useTodolist } from '@features/todolist/hooks/useTodolist';
 
 export const AddCategory = ({ isOpen, onClose }) => {
   const [token] = useState(localStorage.getItem('token'));

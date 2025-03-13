@@ -4,7 +4,7 @@ import styles from './taskListItem.module.css';
 import { DropDown, Checkbox } from '@ui/index';
 import { DatePick } from '@components/index';
 import { formatDate } from '@utils/formatDate';
-import { useTodolist } from '@hooks/useTodolist';
+import { useTodolist } from '@features/todolist/hooks/useTodolist';
 
 export const TaskListItem = ({
   task,

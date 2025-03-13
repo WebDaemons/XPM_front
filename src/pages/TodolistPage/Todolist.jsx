@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from '@components/index';
+import { Category } from '@features/todolist/components/Category/Category';
 
 export default function Todolist() {
   return (

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown, MdOutlineDelete } from '@ui/icons';
 import styles from './categoryListItem.module.css';
-import { TaskListItem, AddEditTodo } from '@components/index';
+import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
+import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { Draggable } from 'react-beautiful-dnd';
 
 export const CategoryListItem = ({

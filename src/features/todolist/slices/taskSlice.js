@@ -5,7 +5,7 @@ import {
   deleteTask,
   createTask,
   updateTask,
-} from '@store/api/taskApi';
+} from '@features/todolist/api/taskApi';
 
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchTasks',

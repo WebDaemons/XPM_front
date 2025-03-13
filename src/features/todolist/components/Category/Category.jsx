@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories } from '@store/slices/categorySlice';
-import { fetchTasks } from '@store/slices/taskSlice';
+import { fetchCategories } from '@features/todolist/slices/categorySlice';
+import { fetchTasks } from '@features/todolist/slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useTodolist } from '@hooks/useTodolist';
+import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import styles from './category.module.css';
-import {
-  CategoryListItem,
-  TodoTrashItem,
-  AddEditTodo,
-  AddCategory,
-} from '@components/index';
+import { CategoryListItem } from '@features/todolist/components/CategoryListItem/CategoryListItem';
+import { TodoTrashItem } from '@features/todolist/components/TodoTrashItem/TodoTrashItem';
+import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
+import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 
