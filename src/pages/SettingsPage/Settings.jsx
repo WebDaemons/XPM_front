@@ -9,7 +9,7 @@ import { tabs } from './tab.data';
 import { useLocation, Navigate } from 'react-router-dom';
 import styles from './settings.module.css';
 
-export const Settings = () => {
+export default function Settings() {
   const location = useLocation();
 
   const settingsMap = {
@@ -29,4 +29,4 @@ export const Settings = () => {
       {settingsMap[location.pathname]}
     </div>
   );
-};
+}

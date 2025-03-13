@@ -3,7 +3,7 @@ import styles from './home.module.css';
 import { CgArrowLongRight } from 'react-icons/cg';
 import { NavLink } from 'react-router-dom';
 
-export const Home = () => {
+export default function Home() {
   return (
     <div className={styles.homeWrapper}>
       <div className={styles.homeHeader}>
@@ -38,7 +38,7 @@ export const Home = () => {
             <p>Notes</p>
           </div>
           <div className={styles.homeInfo}>
-            <p style={{ fontWeight: '700' }}>What were going to do</p>  
+            <p style={{ fontWeight: '700' }}>What were going to do</p>
             <p>Share your to-do`s and notes</p>
             <p>Responsive mobile design</p>
             <p>Custom theme</p>
@@ -48,4 +48,4 @@ export const Home = () => {
       </div>
     </div>
   );
-};
+}

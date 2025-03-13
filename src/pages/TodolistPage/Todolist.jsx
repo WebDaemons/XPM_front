@@ -1,7 +1,7 @@
 import React from 'react';
 import { Category } from '@components/index';
 
-export const Todolist = () => {
+export default function Todolist() {
   return (
     <div
       style={{
@@ -16,4 +16,4 @@ export const Todolist = () => {
       <Category />
     </div>
   );
-};
+}

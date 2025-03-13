@@ -7,7 +7,7 @@ import {
   ResetPassConfirmForm,
 } from '@components/index';
 
-export const Auth = () => {
+export default function Auth() {
   const location = useLocation();
   const [pageSelector, setPageSelector] = useState(null);
 
@@ -52,4 +52,4 @@ export const Auth = () => {
       {renderForm()}
     </div>
   );
-};
+}

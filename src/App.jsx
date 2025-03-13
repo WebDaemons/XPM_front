@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import './index.css';
 import {
   createBrowserRouter,
@@ -12,7 +12,21 @@ import { checkTokenExpiration } from '@slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@context/ThemeContext.jsx';
 
-import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
+const Auth = lazy(() => import('./pages/AuthPage/Auth'));
+const Home = lazy(() => import('./pages/HomePage/Home'));
+const Todolist = lazy(() => import('./pages/TodolistPage/Todolist'));
+const Settings = lazy(() => import('./pages/SettingsPage/Settings'));
+const NotFound = lazy(() => import('./pages/NotFoundPage/NotFound'));
+const Notes = lazy(() => import('./pages/NotesPage/Notes'));
+
+// import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
+
+// import Home from './pages/HomePage/Home';
+// import Auth from './pages/AuthPage/Auth';
+// import Todolist from './pages/TodolistPage/Todolist';
+// import Settings from './pages/SettingsPage/Settings';
+// import NotFound from './pages/NotFoundPage/NotFound';
+// import Notes from './pages/NotesPage/Notes';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -28,7 +42,10 @@ function App() {
     return (
       <div style={{ display: 'flex', transition: 'all 0.5s ease' }}>
         <Sidebar />
-        <Outlet />
+        {/* <Outlet /> */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     );
   };
