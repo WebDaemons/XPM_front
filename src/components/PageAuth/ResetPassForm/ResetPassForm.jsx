@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { MdOutlineMail } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
-import { resetPassword } from '@api/authApi';
+import { resetPassword } from '@store/api/authApi';
 import styles from './resetPassForm.module.css';
 import { Button, Input, ErrorMessage } from '@ui/index';
 

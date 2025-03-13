@@ -1,5 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { addNote, removeNote, editNote } from '@slices/noteSlice';
+import {
+  addNote,
+  removeNote,
+  editNote,
+} from '@features/notes/slices/noteSlice';
 
 export const useNotes = (token) => {
   const dispatch = useDispatch();

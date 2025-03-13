@@ -20,12 +20,6 @@ export * from './PageTodolist/CategoryListItem/CategoryListItem';
 export * from './PageTodolist/TaskListItem/TaskListItem';
 export * from './PageTodolist/TodoTrashItem/TodoTrashItem';
 
-// NOTES PAGE
-
-export * from './PageNotes/AddEditNote/AddEditNote';
-export * from './PageNotes/NoteItem/NoteItem';
-export * from './PageNotes/NotesList/NotesList';
-
 // SETTINGS PAGE
 
 export * from './PageSettings/SettingsAppearance/SettingsAppearance';

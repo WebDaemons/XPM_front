@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getNotes, deleteNote, createNote, updateNote } from '@api/noteApi';
+import {
+  getNotes,
+  deleteNote,
+  createNote,
+  updateNote,
+} from '@features/notes/api/noteApi';
 
 export const fetchNotes = createAsyncThunk(
   'notes/fetchNotes',

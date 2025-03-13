@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 import { Sidebar } from '@components/index';
-import { checkTokenExpiration } from '@slices/authSlice';
+import { checkTokenExpiration } from '@store/slices//authSlice';
 import { useDispatch } from 'react-redux';
 import { useTheme } from '@context/ThemeContext.jsx';
 
@@ -18,15 +18,6 @@ const Todolist = lazy(() => import('./pages/TodolistPage/Todolist'));
 const Settings = lazy(() => import('./pages/SettingsPage/Settings'));
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFound'));
 const Notes = lazy(() => import('./pages/NotesPage/Notes'));
-
-// import { Auth, Todolist, Settings, Home, NotFound, Notes } from '@pages/index';
-
-// import Home from './pages/HomePage/Home';
-// import Auth from './pages/AuthPage/Auth';
-// import Todolist from './pages/TodolistPage/Todolist';
-// import Settings from './pages/SettingsPage/Settings';
-// import NotFound from './pages/NotFoundPage/NotFound';
-// import Notes from './pages/NotesPage/Notes';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -42,7 +33,6 @@ function App() {
     return (
       <div style={{ display: 'flex', transition: 'all 0.5s ease' }}>
         <Sidebar />
-        {/* <Outlet /> */}
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>

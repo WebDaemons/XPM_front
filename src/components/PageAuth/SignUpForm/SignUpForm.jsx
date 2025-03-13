@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '@slices/authSlice';
+import { registerUser } from '@store/slices/authSlice';
 import styles from './signUpForm.module.css';
 import { Button, Input, ErrorMessage } from '@ui/index';
 import {

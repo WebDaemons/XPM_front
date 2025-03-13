@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NoteItem, AddEditNote } from '@components/index';
-import { fetchNotes } from '@slices/noteSlice';
-import { useNotes } from '@hooks/useNotes';
+import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
+import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
+import { fetchNotes } from '@features/notes/slices/noteSlice';
+import { useNotes } from '@features/notes/hooks/useNotes';
 import styles from './notesList.module.css';
 
 export const NotesList = () => {

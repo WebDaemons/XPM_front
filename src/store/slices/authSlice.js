@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { login, register } from '@api/authApi';
-import { getUserAction } from '@slices/userSlice';
+import { login, register } from '@store/api/authApi';
+import { getUserAction } from '@store/slices//userSlice';
 import { jwtDecode } from 'jwt-decode';
 
 const initialState = {

@@ -8,7 +8,7 @@ import {
   FiPlus,
 } from '@ui/icons';
 import { Button } from '@ui/index';
-import { useNotes } from '@hooks/useNotes';
+import { useNotes } from '@features/notes/hooks/useNotes';
 import { ColorPicker } from '@components/index';
 import { adjustBrightness } from '@utils/adjustBrightness';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './note.module.css';
-import { NotesList } from '@components/index';
+import { NotesList } from '@features/notes/components/NotesList/NotesList';
 
 export default function Notes() {
   return (

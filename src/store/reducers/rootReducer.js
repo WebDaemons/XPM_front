@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
-import authReducer from '@slices/authSlice';
-import userReducer from '@slices/userSlice';
-import taskReducer from '@slices/taskSlice';
-import categoryReducer from '@slices/categorySlice';
-import noteReducer from '@slices/noteSlice';
-
+import authReducer from '@store/slices//authSlice';
+import userReducer from '@store/slices//userSlice';
+import taskReducer from '@store/slices//taskSlice';
+import categoryReducer from '@store/slices//categorySlice';
+import noteReducer from '@features/notes/slices/noteSlice';
 const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { addTask, removeTask, editTask } from '@slices/taskSlice';
-import { addCategory, removeCategory } from '@slices/categorySlice';
+import { addTask, removeTask, editTask } from '@store/slices/taskSlice';
+import { addCategory, removeCategory } from '@store/slices/categorySlice';
 
 export const useTodolist = (token) => {
   const dispatch = useDispatch();

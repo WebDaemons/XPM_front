@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategories } from '@slices/categorySlice';
-import { fetchTasks } from '@slices/taskSlice';
+import { fetchCategories } from '@store/slices/categorySlice';
+import { fetchTasks } from '@store/slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTodolist } from '@hooks/useTodolist';
 import styles from './category.module.css';

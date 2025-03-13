@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './settingsPassword.module.css';
 import { Button } from '@ui/index';
-import { updateUserAction } from '@slices/userSlice';
+import { updateUserAction } from '@store/slices/userSlice';
 
 export const SettingsPassword = () => {
   const dispatch = useDispatch();

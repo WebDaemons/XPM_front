@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from '@store/api/axiosInstance';
 
 export const getNotes = async (token) => {
   try {

@@ -4,7 +4,7 @@ import {
   createCategory,
   deleteCategory,
   updateCategory,
-} from '@api/categoryApi';
+} from '@store/api/categoryApi';
 
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',

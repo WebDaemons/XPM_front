@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, ErrorMessage } from '@ui/index';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { resetPasswordConfirm } from '@api/authApi';
+import { resetPasswordConfirm } from '@store/api/authApi';
 import { FiLock, FiUnlock } from 'react-icons/fi';
 import styles from './resetPassConfirmForm.module.css';
 
