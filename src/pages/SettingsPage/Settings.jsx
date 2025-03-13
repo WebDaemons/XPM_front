@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  TabsBar,
-  SettingsProfile,
-  SettingsPassword,
-  SettingsAppearance,
-} from '@components/index';
+import { TabsBar } from '@components/index';
+import { SettingsProfile } from '@features/settings/components/SettingsProfile/SettingsProfile';
+import { SettingsAppearance } from '@features/settings/components/SettingsAppearance/SettingsAppearance';
+import { SettingsPassword } from '@features/settings/components/SettingsPassword/SettingsPassword';
 import { tabs } from './tab.data';
 import { useLocation, Navigate } from 'react-router-dom';
 import styles from './settings.module.css';

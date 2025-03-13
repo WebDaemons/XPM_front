@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './settingsAppearance.module.css';
-import { ThemeCard } from '@components/index';
+import { ThemeCard } from '@features/settings/components/ThemeCard/ThemeCard';
 import lightImg from '@assets/lightTheme.png';
 import darkImg from '@assets/darkTheme.png';
 import systemImg from '@assets/systemTheme.png';
