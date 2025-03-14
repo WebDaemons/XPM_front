@@ -1,42 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useNotes } from '@features/notes/hooks/useNotes';
+import { useModal } from '@hooks/useModal';
+
+import styles from './notesList.module.css';
+
 import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
 import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
-import { fetchNotes } from '@features/notes/slices/noteSlice';
-import { useNotes } from '@features/notes/hooks/useNotes';
-import styles from './notesList.module.css';
 
 export const NotesList = () => {
   const [token] = useState(localStorage.getItem('token'));
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedNote, setSelectedNote] = useState(null);
-
-  // WORK WITH API
-
-  const dispatch = useDispatch();
+  const { notes } = useNotes(token);
   const {
-    notes,
-    status: notesStatus,
-    error: notesError,
-  } = useSelector((state) => state.notes);
-
-  useEffect(() => {
-    dispatch(fetchNotes(token));
-  }, [dispatch]);
-
-  const { handleAddNote, handleDeleteNote, handleEditNote } = useNotes(token);
-
-  const handleModalOpen = (note = null) => {
-    setSelectedNote(note);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setSelectedNote(null);
-    setIsModalOpen(false);
-  };
-
-  // WORK WITH API
+    isModalOpen,
+    selectedItem: selectedNote,
+    handleModalOpen,
+    handleModalClose,
+  } = useModal();
 
   const sortedData = [...notes].sort((a, b) => {
     if (a.isPinned === b.isPinned) {

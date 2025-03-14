@@ -27,9 +27,9 @@ export const createNote = async (token, data) => {
     throw error;
   }
 };
-export const deleteNote = async (token, noteId) => {
+export const deleteNote = async (token, id) => {
   try {
-    const response = await axiosInstance.delete(`/notes/delete/${noteId}`, {
+    const response = await axiosInstance.delete(`/notes/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -40,9 +40,9 @@ export const deleteNote = async (token, noteId) => {
     throw error;
   }
 };
-export const updateNote = async (token, data, noteId) => {
+export const updateNote = async (token, data, id) => {
   try {
-    const response = await axiosInstance.put(`/notes/update/${noteId}`, data, {
+    const response = await axiosInstance.put(`/notes/update/${id}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

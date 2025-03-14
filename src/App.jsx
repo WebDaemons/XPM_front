@@ -33,9 +33,7 @@ function App() {
     return (
       <div style={{ display: 'flex', transition: 'all 0.5s ease' }}>
         <Sidebar />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </div>
     );
   };
@@ -75,7 +73,11 @@ function App() {
         },
         {
           path: 'notes',
-          element: <Notes />,
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Notes />
+            </Suspense>
+          ),
         },
         {
           path: 'settings',

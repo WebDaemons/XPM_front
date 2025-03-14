@@ -10,8 +10,7 @@ export const fetchNotes = createAsyncThunk(
   'notes/fetchNotes',
   async (token, { rejectWithValue }) => {
     try {
-      const data = await getNotes(token);
-      return data;
+      return await getNotes(token);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -19,10 +18,9 @@ export const fetchNotes = createAsyncThunk(
 );
 export const addNote = createAsyncThunk(
   'notes/addNote',
-  async ({ token, noteData }, { rejectWithValue }) => {
+  async ({ token, data }, { rejectWithValue }) => {
     try {
-      const data = await createNote(token, noteData);
-      return data;
+      return await createNote(token, data);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -30,10 +28,9 @@ export const addNote = createAsyncThunk(
 );
 export const removeNote = createAsyncThunk(
   'notes/removeNote',
-  async ({ token, noteId }, { rejectWithValue }) => {
+  async ({ token, id }, { rejectWithValue }) => {
     try {
-      await deleteNote(token, noteId);
-      return noteId;
+      return await deleteNote(token, id);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -42,10 +39,9 @@ export const removeNote = createAsyncThunk(
 
 export const editNote = createAsyncThunk(
   'notes/editNote',
-  async ({ token, noteData, noteId }, { rejectWithValue }) => {
+  async ({ token, data, id }, { rejectWithValue }) => {
     try {
-      const data = await updateNote(token, noteData, noteId);
-      return data;
+      return await updateNote(token, data, id);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }

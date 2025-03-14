@@ -1,5 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  fetchNotes,
   addNote,
   removeNote,
   editNote,
@@ -7,24 +9,28 @@ import {
 
 export const useNotes = (token) => {
   const dispatch = useDispatch();
-  const handleAddNote = (title, content, tags) => {
-    const noteData = {
-      title,
-      content,
-      tags,
-    };
-    dispatch(addNote({ token, noteData }));
+  const { notes, status, error } = useSelector((state) => state.notes);
+
+  useEffect(() => {
+    dispatch(fetchNotes(token));
+  }, [dispatch, token]);
+
+  const handleAddNote = (data) => {
+    dispatch(addNote({ token, data }));
   };
 
-  const handleDeleteNote = (noteId) => {
-    dispatch(removeNote({ token, noteId }));
+  const handleDeleteNote = (id) => {
+    dispatch(removeNote({ token, id }));
   };
 
-  const handleEditNote = (noteData, noteId) => {
-    dispatch(editNote({ token, noteData, noteId }));
+  const handleEditNote = (data, id) => {
+    dispatch(editNote({ token, data, id }));
   };
 
   return {
+    notes,
+    status,
+    error,
     handleAddNote,
     handleDeleteNote,
     handleEditNote,
