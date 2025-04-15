@@ -1,0 +1,15 @@
+.notesToolBarWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notesToolBarWrapper h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.notesToolBar {
+  display: flex;
+  gap: 10px;
+}

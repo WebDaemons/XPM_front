@@ -16,8 +16,9 @@
   background-color: var(--background-color);
   border-radius: 10px;
   position: relative;
-  min-width: 300px;
-  max-width: 400px;
+  max-width: 50%;
+  /* min-width: 300px; */
+  /* max-width: 400px; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -208,19 +209,19 @@
   padding: 0 15px 15px 0;
 }
 
-.modalOverlay input{
+.modalOverlay input {
   background-color: var(--background-color);
   color: var(--primary-color);
 }
-.modalOverlay input::placeholder{
+.modalOverlay input::placeholder {
   color: var(--text-color);
 }
 
-.modalOverlay textarea{
+.modalOverlay textarea {
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-.modalOverlay textarea::placeholder{
+.modalOverlay textarea::placeholder {
   color: var(--text-color);
 }

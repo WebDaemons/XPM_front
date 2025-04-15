@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useNotes } from '@features/notes/hooks/useNotes';
 import { useModal } from '@hooks/useModal';
 
 import styles from './notesList.module.css';
@@ -7,9 +5,7 @@ import styles from './notesList.module.css';
 import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
 import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
 
-export const NotesList = () => {
-  const [token] = useState(localStorage.getItem('token'));
-  const { notes } = useNotes(token);
+export const NotesList = ({ notes }) => {
   const {
     isModalOpen,
     selectedItem: selectedNote,

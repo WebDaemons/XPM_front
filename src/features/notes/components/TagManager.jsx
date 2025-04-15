@@ -14,6 +14,7 @@ export const TagManager = ({
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
 
   const handleAddTag = () => {
+    console.log('smth');
     if (!tagName) return;
     setCurrentTags([...currentTags, { name: tagName, color: selectedColor }]);
     setTagName('');
@@ -32,8 +33,9 @@ export const TagManager = ({
             key={tag.name}
             className={styles.tag}
             style={{
-              backgroundColor: tag.color,
-              color: adjustBrightness(tag.color, -40),
+              backgroundColor: 'transparent',
+              color: tag.color,
+              border: `1px solid ${tag.color}`,
             }}
           >
             {tag.name}

@@ -1,4 +1,5 @@
 .notesListWrapper {
+  /* background-color: #fdfdfd; */
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -7,7 +8,8 @@
 
 .addNoteButton {
   min-width: 300px;
-  height: 250px;
+  min-height: 214px;
+  /* height: 250px; */
   display: flex;
   justify-content: center;
   align-items: center;

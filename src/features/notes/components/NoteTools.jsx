@@ -1,4 +1,4 @@
-import { X, Pin, PinOff, Trash } from 'lucide-react';
+import { X, Pin, PinOff, Trash, Star } from 'lucide-react';
 import styles from './AddEditNote/addEditNote.module.css';
 
 export const NoteTools = ({
@@ -12,15 +12,27 @@ export const NoteTools = ({
     {type === 'edit' ? (
       <>
         {isNotePinned ? (
-          <PinOff
-            className={styles.navBtn}
+          <Star
+            // className={styles.navBtn}
+            color="#ffbf00"
+            fill="#ffbf00"
             onClick={handlePinned}
           />
         ) : (
-          <Pin
-            className={styles.navBtn}
+          <Star
+            // className={styles.navBtn}
             onClick={handlePinned}
+            color="var(--text-color)"
           />
+          //   <PinOff
+          //     className={styles.navBtn}
+          //     onClick={handlePinned}
+          //   />
+          // ) : (
+          //   <Pin
+          //     className={styles.navBtn}
+          //     onClick={handlePinned}
+          //   />
         )}
         <Trash
           className={styles.navBtn}
