@@ -26,18 +26,16 @@
 
 .navLinkItem {
   position: relative;
-  display: flex;
-  justify-content: center;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 35px;
   color: #fff;
   cursor: pointer;
-  padding: 15px;
+  padding: 15px 15px 15px 40px;
 }
 
-.navLinkItem::before {
+.navLinkItem.active::before {
   content: '';
   position: absolute;
   top: 0;

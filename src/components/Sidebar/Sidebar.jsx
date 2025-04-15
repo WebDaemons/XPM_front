@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './sidebar.module.css';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { navElements } from './nav.data';
 import { useAuth } from '../../context/AuthContext';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,8 @@ import { getUserAction } from '../../store/slices/userSlice';
 import { CiMenuFries, IoSearch, MdLogout } from '@ui/icons';
 
 export const Sidebar = () => {
+  const location = useLocation();
+  console.log(location.pathname);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const searchRef = useRef(null);
 
@@ -91,7 +93,7 @@ export const Sidebar = () => {
             <NavLink
               to={navElement.link}
               key={navElement.title}
-              className={styles.navLinkItem}
+              className={`${styles.navLinkItem} ${location.pathname === navElement.link ? styles.active : ''}`}
             >
               {navElement.icon}
               {!isCollapsed && <span>{navElement.title}</span>}

@@ -18,6 +18,7 @@ const Todolist = lazy(() => import('./pages/TodolistPage/Todolist'));
 const Settings = lazy(() => import('./pages/SettingsPage/Settings'));
 const NotFound = lazy(() => import('./pages/NotFoundPage/NotFound'));
 const Notes = lazy(() => import('./pages/NotesPage/Notes'));
+const Lists = lazy(() => import('./pages/LIstsPage/Lists'));
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -70,6 +71,10 @@ function App() {
         {
           path: 'todo',
           element: <Todolist />,
+        },
+        {
+          path: 'lists',
+          element: <Lists />,
         },
         {
           path: 'notes',
