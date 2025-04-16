@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /root/projects/XPM_front
-            git pull origin main
+            git pull origin master
             npm install
             npm run build
             sudo rm -rf /var/www/html/dist
