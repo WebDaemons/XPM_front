@@ -21,6 +21,7 @@ jobs:
             git pull origin master
             npm install
             npm run build
-            sudo rm -rf /var/www/html/dist
-            sudo cp -r dist /var/www/html/dist
+            cd
+            sudo rm -rf ~/var/www/html/dist
+            sudo cp -r /root/projects/XPM_front/dist ~/var/www/html/dist
             sudo systemctl reload nginx
