@@ -25,7 +25,7 @@ jobs:
             if [ -d /root/projects/XPM_front/dist ]; then
                 cd
                 sudo rm -rf /var/www/html/dist
-                sudo cp -r /root/projects/XPM_front/dist /var/www/html/
+                sudo mv -r /root/projects/XPM_front/dist /var/www/html/
             else
                 echo "Build directory does not exist, skipping copy"
                 exit 1
