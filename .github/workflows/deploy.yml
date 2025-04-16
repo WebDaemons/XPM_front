@@ -22,6 +22,6 @@ jobs:
             npm install
             npm run build
             cd
-            sudo rm -rf ~/var/www/html/dist
-            sudo cp -r /root/projects/XPM_front/dist ~/var/www/html/dist
+            sudo rm -rf /var/www/html/dist
+            sudo cp -r /root/projects/XPM_front/dist /var/www/html/
             sudo systemctl reload nginx
