@@ -17,6 +17,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            set -ex
             cd /root/projects/XPM_front
             git pull origin master
             npm install
