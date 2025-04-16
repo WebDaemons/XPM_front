@@ -25,6 +25,6 @@ jobs:
 
             sleep 30
 
-            sudo rm -rf /var/www/html/dist
-            sudo cp -r /root/projects/XPM_front/dist /var/www/html/
+            sudo rm -rf /var/www/dist
+            sudo cp -r /root/projects/XPM_front/dist /var/www/
             sudo systemctl restart nginx
