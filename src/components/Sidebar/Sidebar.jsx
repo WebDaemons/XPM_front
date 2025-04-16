@@ -49,7 +49,7 @@ export const Sidebar = () => {
         >
           {!isCollapsed && (
             <h1 className={styles.siteName}>
-              <span style={{ color: '#1B76FF' }}>XP</span>
+              <span style={{ color: '#1B76FF' }}>XP</span>Azakana
             </h1>
           )}
           <CiMenuFries
