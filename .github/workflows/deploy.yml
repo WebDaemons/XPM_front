@@ -1,9 +1,9 @@
-name: Deploy React App (Remote Build)
+name: Deploy React App
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
