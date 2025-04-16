@@ -18,7 +18,7 @@ export default function Home() {
         </NavLink>
       </div>
       <div className={styles.homeContent}>
-        <p className={styles.homeGreatings}>Greetings User</p>
+        <p className={styles.homeGreatings}>Greetings Human</p>
         <div className={styles.homeRegisterHint}>
           <div className={styles.homeHint}>if you are new here, start here</div>
           <CgArrowLongRight size={50} />
