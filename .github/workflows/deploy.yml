@@ -22,12 +22,9 @@ jobs:
             git pull origin master
             npm install
             npm run build
-            if [ -d /root/projects/XPM_front/dist ]; then
-                cd
-                sudo rm -rf /var/www/html/dist
-                sudo mv /root/projects/XPM_front/dist /var/www/html/
-            else
-                echo "Build directory does not exist, skipping copy"
-                exit 1
-            fi
-            sudo systemctl reload nginx
+
+            sleep 30
+
+            sudo rm -rf /var/www/html/dist
+            sudo cp -r /root/projects/XPM_front/dist /var/www/html/
+            sudo systemctl restart nginx
