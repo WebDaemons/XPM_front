@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserAction } from '../../store/slices/userSlice';
 import { CiMenuFries, IoSearch, MdLogout } from '@ui/icons';
 
-export const Sidebar = () => {
+export const Sidebar = ({ onToggle }) => {
   const location = useLocation();
   console.log(location.pathname);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -23,6 +23,11 @@ export const Sidebar = () => {
   const error = useSelector((state) => state.user.error);
 
   const { logout } = useAuth();
+
+  const handleToggle = () => {
+    setIsCollapsed(!isCollapsed);
+    onToggle(!isCollapsed); 
+  };
 
   useEffect(() => {
     if (!isCollapsed && searchRef.current) {
@@ -53,9 +58,7 @@ export const Sidebar = () => {
             </h1>
           )}
           <CiMenuFries
-            onClick={() => {
-              setIsCollapsed(!isCollapsed);
-            }}
+            onClick={handleToggle}
             size={32}
             color="#fff"
             style={{
