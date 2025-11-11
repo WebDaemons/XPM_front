@@ -91,9 +91,7 @@ function App() {
         {
           path: 'notes',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Notes />
-            </Suspense>
+            <Notes />
           ),
         },
         {
@@ -126,7 +124,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }
 
 export default App;
