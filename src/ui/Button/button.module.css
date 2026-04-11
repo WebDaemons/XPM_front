@@ -11,7 +11,6 @@
 
 .button:hover {
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
 }
 
 /* SIZES */
@@ -41,9 +40,19 @@
   color: #fff;
 }
 
+.contained:hover {
+  background-color: #005ae1;
+  transition: background-color 0.2s ease;
+}
+
 .outlined {
   background-color: transparent;
   color: #121212;
   border: 1.5px solid #e8f1ff;
   color: var(--text-color);
+}
+
+.outlined:hover {
+  background-color: #e8f1ff;
+  transition: background-color 0.2s ease;
 }
