@@ -1,48 +1,55 @@
-import React, { useRef, useEffect } from 'react';
-import styles from './sidebar.module.css';
-import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { navElements } from './nav.data';
-import { useAuth } from '../../context/AuthContext';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserAction } from '../../store/slices/userSlice';
-import { CiMenuFries, IoSearch, MdLogout } from '@ui/icons';
+import { NavLink, useLocation } from 'react-router-dom';
+
+import { useAuth } from '@context/AuthContext';
+import { getUserAction } from '@store/slices/userSlice';
+
+import { navElements } from './nav.data';
+
+import styles from './sidebar.module.css';
+import { CiMenuFries, MdLogout } from '@ui/icons';
 
 export const Sidebar = ({ onToggle }) => {
-  const location = useLocation();
-  console.log(location.pathname);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const searchRef = useRef(null);
+  const [showUserInfo, setShowUserInfo] = useState(!isCollapsed);
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const email = useSelector((state) => state.user.email);
   const name = useSelector((state) => state.user.name);
   const surname = useSelector((state) => state.user.surname);
-  const image = useSelector((state) => state.user.image);
   const status = useSelector((state) => state.user.status);
-  const error = useSelector((state) => state.user.error);
+  // const image = useSelector((state) => state.user.image);
+  // const error = useSelector((state) => state.user.error);
 
   const { logout } = useAuth();
 
   const handleToggle = () => {
     setIsCollapsed(!isCollapsed);
-    onToggle(!isCollapsed); 
+    onToggle(!isCollapsed);
   };
 
   useEffect(() => {
-    if (!isCollapsed && searchRef.current) {
-      searchRef.current.focus();
+    if (!isCollapsed) {
+      const t = setTimeout(() => setShowUserInfo(true), 200);
+      return () => clearTimeout(t);
+    } else {
+      setShowUserInfo(false);
     }
+  }, [isCollapsed]);
+
+  useEffect(() => {
     if (status === 'idle') {
       dispatch(getUserAction());
     }
-  }, [dispatch, status, isCollapsed]);
+  }, [dispatch, status]);
 
   return (
     <div
       className={styles.sidebarWrapper}
       style={{
-        width: isCollapsed ? '70px' : '250px',
+        width: isCollapsed ? '70px' : '270px',
       }}
     >
       <div className={styles.sidebarTop}>
@@ -54,87 +61,71 @@ export const Sidebar = ({ onToggle }) => {
         >
           {!isCollapsed && (
             <h1 className={styles.siteName}>
-              <span style={{ color: '#1B76FF' }}>XP</span>Manager
+              <NavLink to="/todo">
+                <span style={{ color: '#1B76FF' }}>XP</span>Manager
+              </NavLink>
             </h1>
           )}
           <CiMenuFries
             onClick={handleToggle}
-            size={32}
+            size={30}
             color="#fff"
             style={{
               cursor: 'pointer',
             }}
           />
         </div>
-        {/* <div className={styles.searchElement}>
-          {isCollapsed ? (
-            <IoSearch
-              onClick={() => {
-                setIsCollapsed(!isCollapsed);
-              }}
-              className={styles.inputIcon}
-              color="#fff"
-              size={32}
-              style={{
-                cursor: 'pointer',
-              }}
-            />
-          ) : (
-            <input
-              ref={searchRef}
-              className={styles.searchInput}
-              type="text"
-              placeholder="Search..."
-              style={{
-                width: isCollapsed ? '70px' : '225px',
-              }}
-            />
-          )}
-        </div> */}
         <nav className={styles.navLink}>
-          {navElements.map((navElement) => (
-            <NavLink
-              to={navElement.link}
-              key={navElement.title}
-              className={`${styles.navLinkItem} ${location.pathname === navElement.link ? styles.active : ''}`}
-            >
-              {navElement.icon}
-              {!isCollapsed && <span>{navElement.title}</span>}
-            </NavLink>
-          ))}
+          {navElements.map((navElement) => {
+            const Icon = navElement.icon;
+
+            return (
+              <NavLink
+                to={navElement.link}
+                key={navElement.link}
+                className={`${styles.navLinkItem} ${
+                  location.pathname === navElement.link ? styles.active : ''
+                }`}
+              >
+                <Icon
+                  size={30}
+                  color="#ffffff"
+                />
+                <span className={isCollapsed ? styles.hidden : ''}>
+                  {navElement.title}
+                </span>
+              </NavLink>
+            );
+          })}
         </nav>
       </div>
       <div
         className={styles.sidebarBottom}
         style={{
           justifyContent: isCollapsed ? 'center' : 'space-between',
+          flexDirection: isCollapsed ? 'column' : 'row',
+          gap: isCollapsed ? '20px' : '0px',
         }}
       >
-        {!isCollapsed && (
-          <div className={styles.userInfo}>
-            <p
-              style={{
-                fontSize: '20px',
-                color: '#fff',
-              }}
-            >
-              {name + ' ' + surname}
-            </p>
-            <p
-              style={{
-                fontSize: '16px',
-                color: '#1B76FF',
-              }}
-            >
-              {email}
-            </p>
-          </div>
-        )}
+        <div className={styles.userIcon}>
+          <img src="/src/assets/pfp.jpeg" />
+        </div>
+        <div
+          className={`${styles.userInfo} ${!showUserInfo ? styles.hiddenInfo : ''}`}
+          style={{
+            display: isCollapsed ? 'none' : '',
+          }}
+        >
+          <p>{name + ' ' + surname}</p>
+          <p>{email}</p>
+        </div>
         <MdLogout
+          className={styles.logoutBtn}
           color="#fff"
-          size={32}
+          size={30}
           style={{
             cursor: 'pointer',
+            marginLeft: '5px',
           }}
           onClick={logout}
         />

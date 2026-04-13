@@ -31,18 +31,17 @@ function App() {
   }, [dispatch, theme]);
 
   const Layout = () => {
-
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
       <div style={{ display: 'flex', transition: 'all 0.5s ease' }}>
-        <Sidebar onToggle={setIsCollapsed}/>
+        <Sidebar onToggle={setIsCollapsed} />
         <div
           style={{
             flexGrow: 1,
             transition: 'margin-left 0.5s ease, width 0.5s ease',
-            marginLeft: isCollapsed ? '70px' : '250px',
-            width: `calc(100% - ${isCollapsed ? '70px' : '250px'})`,
+            marginLeft: isCollapsed ? '70px' : '270px',
+            width: `calc(100% - ${isCollapsed ? '70px' : '270px'})`,
           }}
         >
           <Outlet />
@@ -90,9 +89,7 @@ function App() {
         },
         {
           path: 'notes',
-          element: (
-            <Notes />
-          ),
+          element: <Notes />,
         },
         {
           path: 'settings',
