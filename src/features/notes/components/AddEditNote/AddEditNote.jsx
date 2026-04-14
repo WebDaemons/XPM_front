@@ -1,9 +1,10 @@
-import React from 'react';
-import styles from './addEditNote.module.css';
-import { Button } from '@ui/index';
 import { useNoteForm } from '@features/notes/hooks/useNoteForm';
+
 import { TagManager } from '../TagManager';
 import { NoteTools } from '../NoteTools';
+
+import { Button } from '@ui/index';
+import styles from './addEditNote.module.css';
 
 export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   const {
@@ -27,26 +28,30 @@ export const AddEditNote = ({ isOpen, onClose, type, note }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <div className={styles.modalHeader}>
+        {/* <div className={styles.modalHeader}>
           <p
             className={styles.modalType}
           >{`${type === 'add' ? 'Add' : 'Edit'} note...`}</p>
-          <NoteTools
-            type={type}
-            isNotePinned={isNotePinned}
-            handlePinned={handlePinned}
-            handleDelete={handleDelete}
-            handleClose={resetForm}
-          />
-        </div>
+
+        </div> */}
         <div className={styles.modalBody}>
-          <input
-            type="text"
-            placeholder="Enter title..."
-            className={styles.title}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
+          <div className={styles.modalHeader}>
+            <input
+              type="text"
+              placeholder="Enter title..."
+              className={styles.title}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <NoteTools
+              type={type}
+              isNotePinned={isNotePinned}
+              handlePinned={handlePinned}
+              handleDelete={handleDelete}
+              handleClose={resetForm}
+            />
+          </div>
+
           <textarea
             className={styles.content}
             placeholder="Enter content..."
