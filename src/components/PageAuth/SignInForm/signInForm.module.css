@@ -4,6 +4,7 @@
   gap: 15px;
   /* min-width: 300px; */
   width: 400px;
+  max-width: 90%;
 }
 
 .orDelimiter {

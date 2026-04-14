@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 15px;
   width: 400px;
+  max-width: 90%;
 }
 
 .fullName {
@@ -37,23 +38,23 @@
   right: 0;
 }
 
-.formFooter{
+.formFooter {
   display: flex;
   justify-content: end;
 }
 
-.headerName{
+.headerName {
   font-size: 32px;
   text-align: center;
 }
 
-.headerText{
+.headerText {
   font-size: 18px;
   color: #777777;
   text-align: center;
 }
 
-.registerError{
+.registerError {
   text-align: center;
   color: red;
 }

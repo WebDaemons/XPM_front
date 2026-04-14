@@ -65,16 +65,21 @@ export const ResetPassForm = () => {
         <h3 className={styles.emailSuccess}>Email has been sent</h3>
       )}
       {error && <h3 className={styles.emailError}>{error}</h3>}
-      <Button
-        type="submit"
-        variant="contained"
-        size="lg"
-      >
-        Send Email
-      </Button>
-      <NavLink to="/login">
-        <h2 className={styles.returnButton}>&lt;-return</h2>
-      </NavLink>
+      <div className={styles.actionBtns}>
+        <Button
+          type="submit"
+          variant="contained"
+          size="lg"
+        >
+          Send Email
+        </Button>
+        <Button
+          variant="outlined"
+          size="lg"
+        >
+          <NavLink to="/login">Cancel</NavLink>
+        </Button>
+      </div>
     </form>
   );
 };

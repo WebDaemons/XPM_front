@@ -1,33 +1,34 @@
-.resetPassForm{
+.resetPassForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 400px;
+  max-width: 90%;
 }
 
-.headerName{
+.headerName {
   font-size: 32px;
   text-align: center;
 }
-  
-.headerText{
+
+.headerText {
   font-size: 18px;
   color: #777777;
   text-align: center;
 }
 
-.returnButton{
-  font-size: 18px;
-  color: #1B76FF;
-  text-align: end;
+.actionBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.emailError{
+.emailError {
   text-align: center;
   color: red;
 }
 
-.emailSuccess{
+.emailSuccess {
   text-align: center;
   color: green;
 }
