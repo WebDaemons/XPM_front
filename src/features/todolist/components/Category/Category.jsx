@@ -6,6 +6,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import styles from './category.module.css';
 import { CategoryListItem } from '@features/todolist/components/CategoryListItem/CategoryListItem';
+import { CategoryBoardItem } from '@features/todolist/components/CategoryBoardItem/CategoryBoardItem';
 import { TodoTrashItem } from '@features/todolist/components/TodoTrashItem/TodoTrashItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
@@ -18,6 +19,7 @@ export const Category = () => {
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
+  const [dataView, setDataView] = useState('list');
 
   const handleOpenTaskModal = (type) => {
     setModalType(type);
@@ -165,7 +167,7 @@ export const Category = () => {
           </Button>
         </div>
       </div>
-      <DragDropContext onDragEnd={onDragEnd}>
+      {/* <DragDropContext onDragEnd={onDragEnd}>
         <div className={styles.categoryList}>
           {categories.map((category, index) => (
             <Droppable
@@ -202,7 +204,23 @@ export const Category = () => {
         tasks={doneTasks}
         handleToggleTaskStatus={handleToggleTaskStatus}
         options={options}
-      />
+      /> */}
+      <div className={styles.categoryBoard}>
+        {categories.map((category, index) => (
+          <CategoryBoardItem
+            key={category.id}
+            category={category}
+            tasks={unDoneTasks}
+            index={index}
+            getTaskCount={getTaskCount}
+            handleDeleteCategory={handleDeleteCategory}
+            handleDeleteTask={handleDeleteTask}
+            options={options}
+            handleToggleTaskStatus={handleToggleTaskStatus}
+            categoryOptions={categoryOptions}
+          />
+        ))}
+      </div>
       <AddEditTodo
         isOpen={isTaskModalOpen}
         onClose={handleModalClose}
