@@ -11,6 +11,7 @@ import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTo
 import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
+import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
 
 export const Category = () => {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
@@ -132,13 +133,22 @@ export const Category = () => {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div></div>
-        {/* <Button
-          variant="outlined"
-          startIcon={BsSortUp}
-        >
-          Filter
-        </Button> */}
+        <div style={{ display: 'flex', gap: '5px' }}>
+          <Button
+            variant="outlined"
+            size="lg"
+            startIcon={LuSquareKanban}
+          >
+            Board
+          </Button>
+          <Button
+            variant="outlined"
+            size="lg"
+            startIcon={LuListChecks}
+          >
+            List
+          </Button>
+        </div>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Button
             variant="outlined"
