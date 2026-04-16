@@ -1,0 +1,55 @@
+.categoryBoardItem {
+  min-width: 250px;
+}
+
+.categoryHeader {
+  /* display: flex;
+  justify-content: space-between; */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.categoryHeader::after {
+  position: absolute;
+  content: '';
+  height: 1.5px;
+  width: 100%;
+  background-color: var(--primary-blue);
+}
+
+.headerCategoryInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tasksCount {
+  color: var(--primary-blue);
+}
+
+.taskBoard {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addTaskBoard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px dashed var(--accent-color);
+  border-radius: 5px;
+  font-size: 24px;
+  padding: 6px;
+}
+
+.addTaskBoard:hover {
+  background-color: var(--accent-color);
+  transition: 0.2s background-color ease;
+  cursor: pointer;
+}

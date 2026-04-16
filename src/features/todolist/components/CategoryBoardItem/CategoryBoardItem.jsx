@@ -30,8 +30,8 @@ export const CategoryBoardItem = ({
 
   return (
     <div className={styles.categoryBoardItem}>
-      <div className={styles.header}>
-        <div className={styles.headerLeft}>
+      <div className={styles.categoryHeader}>
+        <div className={styles.headerCategoryInfo}>
           <span className={styles.categoryName}>{category.name}</span>
           <div
             className={`${styles.tasksCount} ${
@@ -43,16 +43,9 @@ export const CategoryBoardItem = ({
             {getTaskCount(category.id)}
           </div>
         </div>
-        <div className={styles.headerRight}>
-          <MdOutlineDelete
-            size={20}
-            // color="#121212"
-            className={styles.deleteCategoryIcon}
-            onClick={() => handleDeleteCategory(category.id)}
-          />
-        </div>
       </div>
-      <div className={styles.taskList}>
+      <div className={styles.taskBoard}>
+        <div className={styles.addTaskBoard}>+</div>
         {tasks
           .filter((task) => task.category === category.id)
           .map((task, index) => (

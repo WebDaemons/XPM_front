@@ -40,7 +40,7 @@ export const TaskBoardItem = ({
 
   return (
     <div
-      className={styles.taskListItem}
+      className={styles.taskBoardItem}
       style={{
         color: task.is_done ? 'gray' : 'black',
       }}
@@ -62,7 +62,7 @@ export const TaskBoardItem = ({
       >
         {task.name}
       </div>
-      <div className={styles.priority}>
+      {/* <div className={styles.priority}>
         <DropDown
           options={options}
           onOptionSelect={handlePrioritySelect}
@@ -70,8 +70,8 @@ export const TaskBoardItem = ({
           selectedValue={task.priority}
           icon={HiFlag}
         />
-      </div>
-      <div className={styles.dueDate}>
+      </div> */}
+      {/* <div className={styles.dueDate}>
         <DatePick
           onDateChange={handleDateChange}
           defaultDate={task.due_date}
@@ -86,7 +86,7 @@ export const TaskBoardItem = ({
             handleDeleteTask(taskId);
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

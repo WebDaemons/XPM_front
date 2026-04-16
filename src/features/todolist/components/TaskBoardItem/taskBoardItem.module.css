@@ -1,0 +1,4 @@
+.taskBoardItem {
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+}
