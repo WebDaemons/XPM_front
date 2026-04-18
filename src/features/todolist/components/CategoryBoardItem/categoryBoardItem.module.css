@@ -3,17 +3,19 @@
 }
 
 .categoryHeader {
-  /* display: flex;
-  justify-content: space-between; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 5px;
   margin-bottom: 10px;
-  position: relative;
 }
 
 .categoryHeader::after {
   position: absolute;
   content: '';
   height: 1.5px;
+  top: 100%;
   width: 100%;
   background-color: var(--primary-blue);
 }
@@ -29,6 +31,34 @@
 
 .tasksCount {
   color: var(--primary-blue);
+}
+
+.categoryOptionsBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.categoryOptionsBtn:hover {
+  background-color: var(--accent-color);
+  transition: 0.2s background-color ease;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.iconWrapper svg {
+  height: 20px;
+  width: 20px;
 }
 
 .taskBoard {

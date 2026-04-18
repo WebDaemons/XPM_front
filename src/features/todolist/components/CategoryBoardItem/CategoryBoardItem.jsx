@@ -3,6 +3,7 @@ import { MdOutlineDelete } from '@ui/icons';
 import styles from './categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 
 export const CategoryBoardItem = ({
   category,
@@ -43,6 +44,11 @@ export const CategoryBoardItem = ({
             {getTaskCount(category.id)}
           </div>
         </div>
+        <button className={styles.categoryOptionsBtn}>
+          <span className={styles.iconWrapper}>
+            <HiOutlineDotsHorizontal />
+          </span>
+        </button>
       </div>
       <div className={styles.taskBoard}>
         <div className={styles.addTaskBoard}>+</div>
