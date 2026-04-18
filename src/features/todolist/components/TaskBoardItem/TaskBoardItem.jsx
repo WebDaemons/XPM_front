@@ -45,40 +45,44 @@ export const TaskBoardItem = ({
         color: task.is_done ? 'gray' : 'black',
       }}
     >
-      <div>
-        <PiDotsSixVertical
-          size={16}
-          className={styles.dragIcon}
+      <div className={styles.checkboxWrapper}>
+        <Checkbox
+          isChecked={task.is_done}
+          onChange={() => handleToggleTaskStatus(task.id)}
         />
       </div>
-      <Checkbox
-        isChecked={task.is_done}
-        onChange={() => handleToggleTaskStatus(task.id)}
-      />
-      <div
-        className={styles.name}
-        style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
-        onClick={onClick}
-      >
-        {task.name}
+      <div className={styles.taskBody}>
+        <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
+        <div
+          className={styles.name}
+          style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
+          onClick={onClick}
+        >
+          {task.name}
+        </div>
+        <div className={styles.taskInfo}>
+          <div className={styles.priority}>
+            <span>Priority</span>
+            {/* <DropDown
+            options={options}
+            onOptionSelect={handlePrioritySelect}
+            placeholder={getPriorityLabel(task.priority)}
+            selectedValue={task.priority}
+            icon={HiFlag}
+          /> */}
+            <span>{task.priority}</span>
+          </div>
+          <div className={styles.dueDate}>
+            <span>Due date</span>
+            {/* <DatePick
+            onDateChange={handleDateChange}
+            defaultDate={task.due_date}
+          /> */}
+            <span>{formatDate(task.due_date)}</span>
+          </div>
+        </div>
       </div>
-      {/* <div className={styles.priority}>
-        <DropDown
-          options={options}
-          onOptionSelect={handlePrioritySelect}
-          placeholder={getPriorityLabel(task.priority)}
-          selectedValue={task.priority}
-          icon={HiFlag}
-        />
-      </div> */}
-      {/* <div className={styles.dueDate}>
-        <DatePick
-          onDateChange={handleDateChange}
-          defaultDate={task.due_date}
-        />
-      </div>
-      <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
-      <div>
+      {/* <div>
         <MdOutlineDelete
           size={16}
           className={styles.deleteIcon}
