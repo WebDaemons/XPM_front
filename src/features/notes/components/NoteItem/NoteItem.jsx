@@ -53,7 +53,7 @@ export const NoteItem = ({ note, onClick }) => {
             style={{
               backgroundColor: 'transparent',
               color: adjustBrightness(tag.color, -10),
-              border: `1px solid ${tag.color}`,
+              border: '1px solid',
             }}
           >
             {tag.name}
