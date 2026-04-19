@@ -66,14 +66,18 @@ export const Sidebar = ({ onToggle }) => {
               </NavLink>
             </h1>
           )}
-          <CiMenuFries
-            onClick={handleToggle}
-            size={30}
-            color="#fff"
+          <button
+            className={styles.friesBtn}
             style={{
-              cursor: 'pointer',
+              padding: isCollapsed ? '20px' : '15px',
+              maxHeight: isCollapsed ? '70px' : '60px',
             }}
-          />
+            onClick={handleToggle}
+          >
+            <span className={styles.friesBtnWrapper}>
+              <CiMenuFries />
+            </span>
+          </button>
         </div>
         <nav className={styles.navLink}>
           {navElements.map((navElement) => {
@@ -119,16 +123,14 @@ export const Sidebar = ({ onToggle }) => {
           <p>{name + ' ' + surname}</p>
           <p>{email}</p>
         </div>
-        <MdLogout
+        <button
           className={styles.logoutBtn}
-          color="#fff"
-          size={30}
-          style={{
-            cursor: 'pointer',
-            marginLeft: '5px',
-          }}
           onClick={logout}
-        />
+        >
+          <span className={styles.logoutBtnWrapper}>
+            <MdLogout />
+          </span>
+        </button>
       </div>
     </div>
   );
