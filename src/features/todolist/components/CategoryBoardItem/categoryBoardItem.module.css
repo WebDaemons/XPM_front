@@ -68,7 +68,8 @@
   gap: 10px;
 }
 
-.addTaskBoard {
+.addTaskBtn {
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +80,7 @@
   padding: 6px;
 }
 
-.addTaskBoard:hover {
+.addTaskBtn:hover {
   background-color: var(--accent-color);
   transition: 0.2s background-color ease;
   cursor: pointer;
