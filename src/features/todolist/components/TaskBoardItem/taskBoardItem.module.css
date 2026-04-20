@@ -55,12 +55,17 @@
 .priority,
 .dueDate {
   display: flex;
-  flex-direction: column;
   gap: 5px;
 }
 
-.priority span:first-child,
+.priority {
+  /* border: 1px solid; */
+  padding: 5px 7px;
+  border-radius: 5px;
+}
+
+/* .priority span:first-child,
 .dueDate span:first-child {
   color: var(--text-color);
   font-size: 14px;
-}
+} */

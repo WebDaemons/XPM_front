@@ -91,10 +91,30 @@ export const Category = () => {
   };
 
   const options = [
-    { value: 'N', label: 'Select priority', color: 'black' },
-    { value: 'H', label: 'High', color: 'red' },
-    { value: 'M', label: 'Medium', color: 'orange' },
-    { value: 'L', label: 'Low', color: 'green' },
+    {
+      value: 'N',
+      label: 'Select priority',
+      color: 'black',
+      rgba: 'rgba(137, 137, 137, 0.1)',
+    },
+    {
+      value: 'H',
+      label: 'High',
+      color: 'red',
+      rgba: 'rgba(254, 137, 137, 0.25)',
+    },
+    {
+      value: 'M',
+      label: 'Medium',
+      color: 'orange',
+      rgba: 'rgba(233, 220, 120, 0.25)',
+    },
+    {
+      value: 'L',
+      label: 'Low',
+      color: 'green',
+      rgba: 'rgba(80, 204, 109, 0.25)',
+    },
   ];
   const categoryOptions = categories.map((category) => ({
     id: category.id,

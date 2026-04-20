@@ -5,6 +5,8 @@ import { DropDown, Checkbox } from '@ui/index';
 import { DatePick } from '@components/index';
 import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
+import { LuFlag } from 'react-icons/lu';
+import { adjustBrightness } from '@utils/adjustBrightness';
 
 export const TaskBoardItem = ({
   task,
@@ -45,12 +47,12 @@ export const TaskBoardItem = ({
         color: task.is_done ? 'gray' : 'black',
       }}
     >
-      <div className={styles.checkboxWrapper}>
+      {/* <div className={styles.checkboxWrapper}>
         <Checkbox
           isChecked={task.is_done}
           onChange={() => handleToggleTaskStatus(task.id)}
         />
-      </div>
+      </div> */}
       <div className={styles.taskBody}>
         <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
         <div
@@ -61,25 +63,39 @@ export const TaskBoardItem = ({
           {task.name}
         </div>
         <div className={styles.taskInfo}>
-          <div className={styles.priority}>
+          <div
+            className={styles.priority}
+            style={{
+              color: options.find((flag) => flag.value == task.priority).color,
+              backgroundColor: options.find(
+                (flag) => flag.value == task.priority,
+              ).rgba,
+            }}
+            // style={{ backgroundColor: adjustBrightness('#ff0000', 50) }}
+          >
+            <LuFlag />
+            {/* {task.priority} */}
+            {options.find((flag) => flag.value == task.priority).label}
+          </div>
+          {/* <div className={styles.priority}>
             <span>Priority</span>
-            {/* <DropDown
+            <DropDown
             options={options}
             onOptionSelect={handlePrioritySelect}
             placeholder={getPriorityLabel(task.priority)}
             selectedValue={task.priority}
             icon={HiFlag}
-          /> */}
+          />
             <span>{task.priority}</span>
           </div>
           <div className={styles.dueDate}>
             <span>Due date</span>
-            {/* <DatePick
+            <DatePick
             onDateChange={handleDateChange}
             defaultDate={task.due_date}
-          /> */}
+          />
             <span>{formatDate(task.due_date)}</span>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <div>
