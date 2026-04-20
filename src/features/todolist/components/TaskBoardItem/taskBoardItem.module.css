@@ -49,23 +49,19 @@
 
 .taskInfo {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
 }
 
 .priority,
 .dueDate {
   display: flex;
+  align-items: center;
   gap: 5px;
-}
-
-.priority {
-  /* border: 1px solid; */
   padding: 5px 7px;
   border-radius: 5px;
 }
 
-/* .priority span:first-child,
-.dueDate span:first-child {
-  color: var(--text-color);
-  font-size: 14px;
-} */
+.dueDate {
+  background-color: rgba(203, 203, 203, 0.25);
+}

@@ -7,6 +7,7 @@ import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { LuFlag } from 'react-icons/lu';
 import { adjustBrightness } from '@utils/adjustBrightness';
+import { BsCalendar2Check } from 'react-icons/bs';
 
 export const TaskBoardItem = ({
   task,
@@ -76,6 +77,10 @@ export const TaskBoardItem = ({
             <LuFlag />
             {/* {task.priority} */}
             {options.find((flag) => flag.value == task.priority).label}
+          </div>
+          <div className={styles.dueDate}>
+            <BsCalendar2Check />
+            <span>{formatDate(task.due_date, 'shortView')}</span>
           </div>
           {/* <div className={styles.priority}>
             <span>Priority</span>
