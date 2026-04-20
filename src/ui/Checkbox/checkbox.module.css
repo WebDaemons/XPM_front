@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  margin-right: 8px;
+  /* margin-right: 8px; */
 }
 
 .checked {
