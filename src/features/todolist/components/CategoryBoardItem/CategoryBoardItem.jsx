@@ -4,6 +4,7 @@ import styles from './categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { IoMdAdd } from 'react-icons/io';
 
 export const CategoryBoardItem = ({
   category,
@@ -44,14 +45,21 @@ export const CategoryBoardItem = ({
             {getTaskCount(category.id)}
           </div>
         </div>
-        <button className={styles.categoryOptionsBtn}>
-          <span className={styles.iconWrapper}>
-            <HiOutlineDotsHorizontal />
-          </span>
-        </button>
+        <div className={styles.categoryBtns}>
+          <button className={styles.categoryOptionsBtn}>
+            <span className={styles.iconWrapper}>
+              <IoMdAdd />
+            </span>
+          </button>
+          <button className={styles.categoryOptionsBtn}>
+            <span className={styles.iconWrapper}>
+              <HiOutlineDotsHorizontal />
+            </span>
+          </button>
+        </div>
       </div>
       <div className={styles.taskBoard}>
-        <button className={styles.addTaskBtn}>+</button>
+        {/* <button className={styles.addTaskBtn}>+</button> */}
         {tasks
           .filter((task) => task.category === category.id)
           .map((task, index) => (

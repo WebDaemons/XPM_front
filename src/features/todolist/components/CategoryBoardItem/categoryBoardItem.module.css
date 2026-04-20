@@ -33,6 +33,11 @@
   color: var(--primary-blue);
 }
 
+.categoryBtns {
+  display: flex;
+  align-items: center;
+}
+
 .categoryOptionsBtn {
   display: flex;
   justify-content: center;
@@ -62,7 +67,6 @@
 }
 
 .taskBoard {
-  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   gap: 10px;
