@@ -64,24 +64,29 @@ export const TaskBoardItem = ({
           {task.name}
         </div>
         <div className={styles.taskInfo}>
-          <div
-            className={styles.priority}
-            style={{
-              color: options.find((flag) => flag.value == task.priority).color,
-              backgroundColor: options.find(
-                (flag) => flag.value == task.priority,
-              ).rgba,
-            }}
-            // style={{ backgroundColor: adjustBrightness('#ff0000', 50) }}
-          >
-            <LuFlag />
-            {/* {task.priority} */}
-            {options.find((flag) => flag.value == task.priority).label}
-          </div>
-          <div className={styles.dueDate}>
-            <BsCalendar2Check />
-            <span>{formatDate(task.due_date, 'shortView')}</span>
-          </div>
+          {task.priority != 'N' && (
+            <div
+              className={styles.priority}
+              style={{
+                color: options.find((flag) => flag.value == task.priority)
+                  .color,
+                backgroundColor: options.find(
+                  (flag) => flag.value == task.priority,
+                ).rgba,
+              }}
+            >
+              <LuFlag />
+              {options.find((flag) => flag.value == task.priority).label}
+            </div>
+          )}
+
+          {task.due_date && (
+            <div className={styles.dueDate}>
+              <BsCalendar2Check />
+              <span>{formatDate(task.due_date, 'shortView')}</span>
+            </div>
+          )}
+
           {/* <div className={styles.priority}>
             <span>Priority</span>
             <DropDown
