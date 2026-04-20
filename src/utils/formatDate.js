@@ -1,8 +1,15 @@
-export function formatDate(dateInput) {
+export function formatDate(dateInput, view = 'fullView') {
   const date = new Date(dateInput);
+
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
 
-  return `${day}.${month}.${year}`;
+  const shortView = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+  });
+  const fullView = `${day}.${month}.${year}`;
+
+  return view == 'fullView' ? fullView : shortView;
 }
