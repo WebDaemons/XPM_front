@@ -48,12 +48,12 @@ export const TaskBoardItem = ({
         color: task.is_done ? 'gray' : 'black',
       }}
     >
-      {/* <div className={styles.checkboxWrapper}>
+      <div className={styles.checkboxWrapper}>
         <Checkbox
           isChecked={task.is_done}
           onChange={() => handleToggleTaskStatus(task.id)}
         />
-      </div> */}
+      </div>
       <div className={styles.taskBody}>
         <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
         <div

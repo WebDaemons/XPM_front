@@ -1,30 +1,57 @@
 .taskBoardItem {
   padding: 10px;
   display: flex;
-  /* flex-direction: column; */
   gap: 10px;
-  border: 1px solid var(--accent-color);
+  border: 1.5px solid var(--accent-color);
   border-radius: 5px;
 }
 
 .taskBoardItem:hover {
+  cursor: pointer;
   background-color: var(--accent-color);
   transition: 0.3s background-color ease;
 }
 
 .checkboxWrapper {
   display: flex;
+  opacity: 0;
+  transition: 0.2s opacity ease;
 }
+
+/* .checkboxWrapper {
+  display: flex;
+  opacity: 0;
+  width: 0;
+  margin-left: -10px;
+} */
+
+/* .taskBoardItem:hover .checkboxWrapper {
+  opacity: 1;
+  width: 16px;
+  margin-left: 0;
+  transition: 0.5s opacity ease;
+  transition: 0.5s width ease;
+} */
 
 /* .taskBoardItem:hover .checkboxWrapper {
   display: flex;
 } */
 
 .taskBody {
+  margin-left: -26px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: 0.2s margin-left ease;
+}
+
+.taskBoardItem:hover .taskBody {
+  margin-left: 0;
+}
+
+.taskBoardItem:hover .checkboxWrapper {
+  opacity: 1;
 }
 
 .createdAt {
@@ -32,10 +59,6 @@
   font-size: 14px;
   color: var(--text-color);
 }
-
-/* .taskText {
-  display: flex;
-} */
 
 .name {
   text-align: justify;
