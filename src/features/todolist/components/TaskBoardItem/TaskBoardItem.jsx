@@ -8,6 +8,7 @@ import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { LuFlag } from 'react-icons/lu';
 import { adjustBrightness } from '@utils/adjustBrightness';
 import { BsCalendar2Check } from 'react-icons/bs';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 
 export const TaskBoardItem = ({
   task,
@@ -55,7 +56,15 @@ export const TaskBoardItem = ({
         />
       </div>
       <div className={styles.taskBody}>
-        <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
+        <div className={styles.taskBodyHeader}>
+          <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
+          <button className={styles.optionTaskBtn}>
+            <span className={styles.optionIconWrapper}>
+              <HiOutlineDotsHorizontal />
+            </span>
+          </button>
+        </div>
+
         <div
           className={styles.name}
           style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
@@ -108,15 +117,16 @@ export const TaskBoardItem = ({
           </div> */}
         </div>
       </div>
-      {/* <div>
-        <MdOutlineDelete
-          size={16}
-          className={styles.deleteIcon}
-          onClick={() => {
-            handleDeleteTask(taskId);
-          }}
-        />
-      </div> */}
+      {/* <button
+        onClick={() => {
+          handleDeleteTask(taskId);
+        }}
+        className={styles.deleteBtn}
+      >
+        <span className={styles.deleteIconWrapper}>
+          <MdOutlineDelete />
+        </span>
+      </button> */}
     </div>
   );
 };

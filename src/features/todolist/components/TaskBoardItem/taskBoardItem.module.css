@@ -4,13 +4,14 @@
   gap: 10px;
   border: 1.5px solid var(--accent-color);
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.taskBoardItem:hover {
+/* .taskBoardItem:hover {
   cursor: pointer;
   background-color: var(--accent-color);
   transition: 0.3s background-color ease;
-}
+} */
 
 .checkboxWrapper {
   display: flex;
@@ -18,46 +19,61 @@
   transition: 0.2s opacity ease;
 }
 
-/* .checkboxWrapper {
-  display: flex;
-  opacity: 0;
-  width: 0;
-  margin-left: -10px;
-} */
-
-/* .taskBoardItem:hover .checkboxWrapper {
-  opacity: 1;
-  width: 16px;
-  margin-left: 0;
-  transition: 0.5s opacity ease;
-  transition: 0.5s width ease;
-} */
-
-/* .taskBoardItem:hover .checkboxWrapper {
-  display: flex;
-} */
-
 .taskBody {
   margin-left: -26px;
+  /* margin-right: -26px; */
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   transition: 0.2s margin-left ease;
+  /* transition: 0.2s margin-right ease; */
 }
 
 .taskBoardItem:hover .taskBody {
   margin-left: 0;
+  /* margin-right: 0; */
 }
 
 .taskBoardItem:hover .checkboxWrapper {
   opacity: 1;
 }
 
-.createdAt {
+.taskBodyHeader {
+  display: flex;
+  align-items: center;
   margin-left: auto;
+  gap: 10px;
+}
+
+.createdAt {
   font-size: 14px;
   color: var(--text-color);
+}
+
+.optionTaskBtn {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.2s background-color ease;
+}
+
+.optionTaskBtn:hover {
+  background-color: var(--accent-color);
+}
+
+.optionIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.optionIconWrapper svg {
+  height: 16px;
+  width: 16px;
 }
 
 .name {
@@ -88,3 +104,38 @@
 .dueDate {
   background-color: rgba(203, 203, 203, 0.25);
 }
+
+/*
+.deleteBtn {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  transition: 0.2s opacity ease;
+}
+
+.deleteBtn:hover svg {
+  color: red;
+  transition: 0.2s color ease;
+}
+
+.deleteIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteIconWrapper svg {
+  height: 20px;
+  width: 20px;
+}
+
+.taskBoardItem:hover .taskBody {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.taskBoardItem:hover .deleteBtn {
+  opacity: 1;
+} */
