@@ -7,6 +7,7 @@ import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import styles from './category.module.css';
 import { CategoryListItem } from '@features/todolist/components/CategoryListItem/CategoryListItem';
 import { CategoryBoardItem } from '@features/todolist/components/CategoryBoardItem/CategoryBoardItem';
+import { CompletedBoardItem } from '@features/todolist/components/CompletedBoardItem/CompletedBoardItem';
 import { TodoTrashItem } from '@features/todolist/components/TodoTrashItem/TodoTrashItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
@@ -240,6 +241,11 @@ export const Category = () => {
             categoryOptions={categoryOptions}
           />
         ))}
+        <CompletedBoardItem
+          tasks={doneTasks}
+          handleToggleTaskStatus={handleToggleTaskStatus}
+          options={options}
+        />
       </div>
       <AddEditTodo
         isOpen={isTaskModalOpen}

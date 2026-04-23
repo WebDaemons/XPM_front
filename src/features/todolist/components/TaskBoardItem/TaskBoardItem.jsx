@@ -48,6 +48,7 @@ export const TaskBoardItem = ({
       style={{
         color: task.is_done ? 'gray' : 'black',
       }}
+      onClick={onClick}
     >
       <div className={styles.checkboxWrapper}>
         <Checkbox
@@ -68,7 +69,6 @@ export const TaskBoardItem = ({
         <div
           className={styles.name}
           style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
-          onClick={onClick}
         >
           {task.name}
         </div>
