@@ -59,7 +59,6 @@ export const CategoryBoardItem = ({
         </div>
       </div>
       <div className={styles.taskBoard}>
-        {/* <button className={styles.addTaskBtn}>+</button> */}
         {tasks
           .filter((task) => task.category === category.id)
           .map((task, index) => (

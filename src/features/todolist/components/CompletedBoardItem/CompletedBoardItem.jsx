@@ -1,6 +1,6 @@
-// import styles from './completedBoardItem.module.css';
-import styles from './../CategoryListItem/categoryListItem.module.css';
+import styles from './../CategoryBoardItem/categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 
 export const CompletedBoardItem = ({
   tasks,
@@ -8,27 +8,32 @@ export const CompletedBoardItem = ({
   options,
 }) => {
   return (
-    <div className={styles.categoryListItem}>
-      <div className={styles.header}>
-        <div className={styles.headerLeft}>
+    <div className={styles.categoryBoardItem}>
+      <div className={styles.categoryHeader}>
+        <div className={styles.headerCategoryInfo}>
           <span className={styles.categoryName}>Completed</span>
+          <div
+            style={{
+              color:
+                tasks.length > 0 ? 'var(--primary-blue)' : 'var(--text-color)',
+            }}
+          >
+            {tasks.length}
+          </div>
+        </div>
+        <div className={styles.categoryBtns}>
+          <button className={styles.categoryOptionsBtn}>
+            <span className={styles.iconWrapper}>
+              <HiOutlineDotsHorizontal />
+            </span>
+          </button>
         </div>
       </div>
-
-      <div className={styles.taskList}>
-        {tasks.length !== 0 && (
-          <div className={styles.taskListHeader}>
-            <span className={styles.taskName}>Name</span>
-            <span className={styles.taskPriority}>Priority</span>
-            <span className={styles.taskDueDate}>Due date</span>
-            <span className={styles.taskCreatedAt}>Created at</span>
-          </div>
-        )}
-        {tasks.map((task) => (
+      <div className={styles.taskBoard}>
+        {tasks.map((task, index) => (
           <TaskBoardItem
             key={task.id}
             task={task}
-            categoryId={task.category}
             taskId={task.id}
             handleToggleTaskStatus={handleToggleTaskStatus}
             options={options}
