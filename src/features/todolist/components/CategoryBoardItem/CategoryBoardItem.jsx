@@ -58,7 +58,7 @@ export const CategoryBoardItem = ({
           </button>
         </div>
       </div>
-      <div className={styles.taskBoard}>
+      <ul className={styles.taskBoard}>
         {tasks
           .filter((task) => task.category === category.id)
           .map((task, index) => (
@@ -72,7 +72,7 @@ export const CategoryBoardItem = ({
               onClick={() => handleModalOpen(task)}
             />
           ))}
-      </div>
+      </ul>
       <AddEditTodo
         isOpen={isModalOpen}
         onClose={handleModalClose}

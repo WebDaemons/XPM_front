@@ -43,7 +43,7 @@ export const TaskBoardItem = ({
   };
 
   return (
-    <div
+    <li
       className={styles.taskBoardItem}
       style={{
         color: task.is_done ? 'gray' : 'black',
@@ -127,6 +127,6 @@ export const TaskBoardItem = ({
           <MdOutlineDelete />
         </span>
       </button> */}
-    </div>
+    </li>
   );
 };
