@@ -42,6 +42,8 @@ function App() {
             transition: 'margin-left 0.5s ease, width 0.5s ease',
             marginLeft: isCollapsed ? '70px' : '270px',
             width: `calc(100% - ${isCollapsed ? '70px' : '270px'})`,
+            height: '100vh',
+            overflowX: 'scroll',
           }}
         >
           <Outlet />

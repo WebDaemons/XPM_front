@@ -1,5 +1,6 @@
 .categoryBoardItem {
   min-width: 250px;
+  user-select: none;
 }
 
 .categoryHeader {
