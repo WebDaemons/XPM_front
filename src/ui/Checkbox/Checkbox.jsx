@@ -23,7 +23,10 @@ export const Checkbox = ({ children, size = 'md', onChange, isChecked }) => {
     <label className={styles.checkboxLabel}>
       <div
         className={`${styles.checkbox} ${checked ? styles.checked : ''} ${styles[size]}`}
-        onClick={handleCheckBoxChange}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleCheckBoxChange();
+        }}
       >
         {checked ? (
           <FaCheck

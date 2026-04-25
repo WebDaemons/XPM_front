@@ -59,7 +59,10 @@ export const TaskBoardItem = ({
       <div className={styles.taskBody}>
         <div className={styles.taskBodyHeader}>
           <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
-          <button className={styles.optionTaskBtn}>
+          <button
+            className={styles.optionTaskBtn}
+            onClick={(e) => e.stopPropagation()}
+          >
             <span className={styles.optionIconWrapper}>
               <HiOutlineDotsHorizontal />
             </span>
