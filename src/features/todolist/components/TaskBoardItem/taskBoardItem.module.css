@@ -5,6 +5,11 @@
   border: 1.5px solid var(--accent-color);
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s transform ease;
+}
+
+.taskBoardItem:hover {
+  transform: scale(1.03);
 }
 
 .checkboxWrapper {
