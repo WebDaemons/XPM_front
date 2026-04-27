@@ -191,71 +191,65 @@ export const Category = () => {
         </div>
       </div>
       {viewType == 'list' ? (
-        <div>
-          {' '}
-          <DragDropContext onDragEnd={onDragEnd}>
-            <div className={styles.categoryList}>
-              {categories.map((category, index) => (
-                <Droppable
-                  droppableId={String(category.id)}
-                  key={category.id}
-                >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                    >
-                      <CategoryListItem
-                        key={category.id}
-                        category={category}
-                        tasks={unDoneTasks}
-                        index={index}
-                        rotatedState={rotatedStates[index]}
-                        handleArrowClick={handleArrowClick}
-                        getTaskCount={getTaskCount}
-                        handleDeleteCategory={handleDeleteCategory}
-                        handleDeleteTask={handleDeleteTask}
-                        options={options}
-                        handleToggleTaskStatus={handleToggleTaskStatus}
-                        categoryOptions={categoryOptions}
-                      />
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              ))}
-            </div>
-          </DragDropContext>
-          <TodoTrashItem
-            tasks={doneTasks}
-            handleToggleTaskStatus={handleToggleTaskStatus}
-            options={options}
-          />
-        </div>
-      ) : (
-        <div>
-          {' '}
-          <div className={styles.categoryBoard}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className={styles.categoryList}>
             {categories.map((category, index) => (
-              <CategoryBoardItem
+              <Droppable
+                droppableId={String(category.id)}
                 key={category.id}
-                category={category}
-                tasks={unDoneTasks}
-                index={index}
-                getTaskCount={getTaskCount}
-                handleDeleteCategory={handleDeleteCategory}
-                handleDeleteTask={handleDeleteTask}
-                options={options}
-                handleToggleTaskStatus={handleToggleTaskStatus}
-                categoryOptions={categoryOptions}
-              />
+              >
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    <CategoryListItem
+                      key={category.id}
+                      category={category}
+                      tasks={unDoneTasks}
+                      index={index}
+                      rotatedState={rotatedStates[index]}
+                      handleArrowClick={handleArrowClick}
+                      getTaskCount={getTaskCount}
+                      handleDeleteCategory={handleDeleteCategory}
+                      handleDeleteTask={handleDeleteTask}
+                      options={options}
+                      handleToggleTaskStatus={handleToggleTaskStatus}
+                      categoryOptions={categoryOptions}
+                    />
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
             ))}
-            <CompletedBoardItem
+            <TodoTrashItem
               tasks={doneTasks}
               handleToggleTaskStatus={handleToggleTaskStatus}
               options={options}
             />
           </div>
+        </DragDropContext>
+      ) : (
+        <div className={styles.categoryBoard}>
+          {categories.map((category, index) => (
+            <CategoryBoardItem
+              key={category.id}
+              category={category}
+              tasks={unDoneTasks}
+              index={index}
+              getTaskCount={getTaskCount}
+              handleDeleteCategory={handleDeleteCategory}
+              handleDeleteTask={handleDeleteTask}
+              options={options}
+              handleToggleTaskStatus={handleToggleTaskStatus}
+              categoryOptions={categoryOptions}
+            />
+          ))}
+          <CompletedBoardItem
+            tasks={doneTasks}
+            handleToggleTaskStatus={handleToggleTaskStatus}
+            options={options}
+          />
         </div>
       )}
 
