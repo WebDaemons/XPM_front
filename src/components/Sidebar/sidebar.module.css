@@ -12,7 +12,6 @@
   transition: width 0.3s ease;
   background-color: var(--secondary-color);
   min-height: 100svh;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

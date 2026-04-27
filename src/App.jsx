@@ -43,7 +43,6 @@ function App() {
             marginLeft: isCollapsed ? '70px' : '270px',
             width: `calc(100% - ${isCollapsed ? '70px' : '270px'})`,
             height: '100vh',
-            overflowX: 'scroll',
           }}
         >
           <Outlet />

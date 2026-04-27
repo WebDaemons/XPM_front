@@ -149,14 +149,21 @@ export const Category = () => {
   return (
     <div
       style={{
-        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         gap: '10px',
+        height: '100vh',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', gap: '5px' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          width: '100%',
+        }}
+      >
+        <div style={{ display: 'flex', gap: '5px', flexDirection: 'column' }}>
           <Button
             variant="outlined"
             size="lg"
@@ -174,7 +181,7 @@ export const Category = () => {
             List
           </Button>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
           <Button
             variant="outlined"
             startIcon={FiPlus}
@@ -245,11 +252,11 @@ export const Category = () => {
               categoryOptions={categoryOptions}
             />
           ))}
-          <CompletedBoardItem
+          {/* <CompletedBoardItem
             tasks={doneTasks}
             handleToggleTaskStatus={handleToggleTaskStatus}
             options={options}
-          />
+          /> */}
         </div>
       )}
 
