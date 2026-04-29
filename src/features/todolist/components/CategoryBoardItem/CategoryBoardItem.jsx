@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MdOutlineDelete } from '@ui/icons';
 import styles from './categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
@@ -30,6 +30,25 @@ export const CategoryBoardItem = ({
     setIsModalOpen(false);
   };
 
+  const ref = useRef(null);
+  const [hasScroll, setHasScroll] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const checkScroll = () => {
+      setHasScroll(el.scrollHeight > el.clientHeight);
+    };
+
+    checkScroll();
+
+    const resizeObserver = new ResizeObserver(checkScroll);
+    resizeObserver.observe(el);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
@@ -58,7 +77,10 @@ export const CategoryBoardItem = ({
           </button>
         </div>
       </div>
-      <ul className={styles.taskBoard}>
+      <ul
+        ref={ref}
+        className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
+      >
         {tasks
           .filter((task) => task.category === category.id)
           .map((task, index) => (

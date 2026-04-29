@@ -20,7 +20,7 @@ export const Category = () => {
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
-  const [viewType, setViewType] = useState('list');
+  const [viewType, setViewType] = useState('board');
 
   const handleOpenTaskModal = (type) => {
     setModalType(type);
@@ -181,7 +181,7 @@ export const Category = () => {
             List
           </Button>
         </div>
-        <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+        {/* <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
           <Button
             variant="outlined"
             startIcon={FiPlus}
@@ -195,7 +195,7 @@ export const Category = () => {
           >
             Add Task
           </Button>
-        </div>
+        </div> */}
       </div>
       {viewType == 'list' ? (
         <DragDropContext onDragEnd={onDragEnd}>

@@ -8,10 +8,6 @@
   transition: 0.2s transform ease;
 }
 
-.taskBoardItem:hover {
-  transform: scale(1.03);
-}
-
 .checkboxWrapper {
   display: flex;
   opacity: 0;
@@ -31,7 +27,6 @@
 
 .taskBoardItem:hover .taskBody {
   margin-left: 0;
-  /* margin-right: 0; */
 }
 
 .taskBoardItem:hover .checkboxWrapper {
