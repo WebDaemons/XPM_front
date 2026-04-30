@@ -85,8 +85,13 @@
 }
 
 .categoryBoard::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background-color: #c1c1c1;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.categoryBoard::-webkit-scrollbar-thumb:hover {
+  background-color: #868686;
 }
 
 .categoryBoard::-webkit-scrollbar-track {
