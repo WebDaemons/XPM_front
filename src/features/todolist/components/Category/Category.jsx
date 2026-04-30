@@ -278,11 +278,11 @@ export const Category = () => {
               categoryOptions={categoryOptions}
             />
           ))}
-          {/* <CompletedBoardItem
+          <CompletedBoardItem
             tasks={doneTasks}
             handleToggleTaskStatus={handleToggleTaskStatus}
             options={options}
-          /> */}
+          />
         </div>
       )}
 

@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import styles from './../CategoryBoardItem/categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
@@ -7,6 +8,25 @@ export const CompletedBoardItem = ({
   handleToggleTaskStatus,
   options,
 }) => {
+  const ref = useRef(null);
+  const [hasScroll, setHasScroll] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const checkScroll = () => {
+      setHasScroll(el.scrollHeight > el.clientHeight);
+    };
+
+    checkScroll();
+
+    const resizeObserver = new ResizeObserver(checkScroll);
+    resizeObserver.observe(el);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
@@ -29,7 +49,10 @@ export const CompletedBoardItem = ({
           </button>
         </div>
       </div>
-      <div className={styles.taskBoard}>
+      <li
+        ref={ref}
+        className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
+      >
         {tasks.map((task, index) => (
           <TaskBoardItem
             key={task.id}
@@ -39,7 +62,7 @@ export const CompletedBoardItem = ({
             options={options}
           />
         ))}
-      </div>
+      </li>
     </div>
   );
 };
