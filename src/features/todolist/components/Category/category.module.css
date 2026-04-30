@@ -77,6 +77,20 @@
   width: 100%;
   gap: 15px;
   overflow: auto;
+  margin-bottom: 3px;
+}
+
+.categoryBoard::-webkit-scrollbar {
+  height: 8px;
+}
+
+.categoryBoard::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 5px;
+}
+
+.categoryBoard::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @keyframes rotate {
