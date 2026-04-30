@@ -151,19 +151,21 @@ export const Category = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px',
-        height: '100vh',
+        // gap: '10px',
+        height: '100svh',
       }}
     >
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          flexDirection: 'column',
+          flexDirection: 'row',
           width: '100%',
+          // borderBottom: '5px solid red',
         }}
+        className={styles.header}
       >
-        <div style={{ display: 'flex', gap: '5px', flexDirection: 'column' }}>
+        {/* <div style={{ display: 'flex', gap: '5px', flexDirection: 'row' }}>
           <Button
             variant="outlined"
             size="lg"
@@ -180,8 +182,32 @@ export const Category = () => {
           >
             List
           </Button>
+        </div> */}
+        <div className={styles.viewSwitch}>
+          <button
+            className={`${styles.viewSwitchBtn} ${
+              viewType === 'kanban' ? styles.viewSwitchBtnActive : ''
+            }`}
+            onClick={() => setViewType('kanban')}
+          >
+            <span className={styles.viewIcon}>
+              <LuSquareKanban />
+            </span>
+            Board
+          </button>
+          <button
+            className={`${styles.viewSwitchBtn} ${
+              viewType === 'list' ? styles.viewSwitchBtnActive : ''
+            }`}
+            onClick={() => setViewType('list')}
+          >
+            <span className={styles.viewIcon}>
+              <LuListChecks />
+            </span>
+            List
+          </button>
         </div>
-        {/* <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+        {/* <div style={{ display: 'flex', gap: '10px', flexDirection: 'row' }}>
           <Button
             variant="outlined"
             startIcon={FiPlus}
