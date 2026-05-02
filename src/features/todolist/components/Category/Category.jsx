@@ -186,9 +186,9 @@ export const Category = () => {
         <div className={styles.viewSwitch}>
           <button
             className={`${styles.viewSwitchBtn} ${
-              viewType === 'kanban' ? styles.viewSwitchBtnActive : ''
+              viewType === 'board' ? styles.viewSwitchBtnActive : ''
             }`}
-            onClick={() => setViewType('kanban')}
+            onClick={() => setViewType('board')}
           >
             <span className={styles.viewIcon}>
               <LuSquareKanban />
