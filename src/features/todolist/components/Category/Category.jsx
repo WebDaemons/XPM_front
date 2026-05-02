@@ -186,6 +186,10 @@ export const Category = () => {
 
     const onMouseUp = () => {
       isDown = false;
+
+      setTimeout(() => {
+        isDragging = false;
+      }, 0);
     };
 
     const onClickCapture = (e) => {
