@@ -49,6 +49,7 @@ export const TaskBoardItem = ({
         color: task.is_done ? 'gray' : 'black',
       }}
       onClick={onClick}
+      data-task
     >
       <div className={styles.checkboxWrapper}>
         <Checkbox

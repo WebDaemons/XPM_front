@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '@features/todolist/slices/categorySlice';
 import { fetchTasks } from '@features/todolist/slices/taskSlice';
@@ -146,6 +146,71 @@ export const Category = () => {
     }
   };
 
+  const boardRef = useRef(null);
+
+  useEffect(() => {
+    const el = boardRef.current;
+    if (!el) return;
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let isDragging = false;
+
+    const onMouseDown = (e) => {
+      if (e.target.closest('[data-task]')) {
+        return;
+      }
+      isDown = true;
+      isDragging = false;
+
+      startX = e.pageX;
+      scrollLeft = el.scrollLeft;
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDown) return;
+
+      const walk = e.pageX - startX;
+
+      // 👇 если сдвинулись больше чем на 5px — это drag, а не клик
+      if (Math.abs(walk) > 5) {
+        isDragging = true;
+      }
+
+      if (isDragging) {
+        e.preventDefault();
+        el.scrollLeft = scrollLeft - walk;
+      }
+    };
+
+    const onMouseUp = () => {
+      isDown = false;
+    };
+
+    const onClickCapture = (e) => {
+      // 👇 если был drag — блокируем клик
+      if (isDragging) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    };
+
+    el.addEventListener('mousedown', onMouseDown);
+    el.addEventListener('mousemove', onMouseMove);
+    el.addEventListener('mouseup', onMouseUp);
+    el.addEventListener('mouseleave', onMouseUp);
+    el.addEventListener('click', onClickCapture, true);
+
+    return () => {
+      el.removeEventListener('mousedown', onMouseDown);
+      el.removeEventListener('mousemove', onMouseMove);
+      el.removeEventListener('mouseup', onMouseUp);
+      el.removeEventListener('mouseleave', onMouseUp);
+      el.removeEventListener('click', onClickCapture, true);
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -263,7 +328,10 @@ export const Category = () => {
           </div>
         </DragDropContext>
       ) : (
-        <div className={styles.categoryBoard}>
+        <div
+          ref={boardRef}
+          className={styles.categoryBoard}
+        >
           {categories.map((category, index) => (
             <CategoryBoardItem
               key={category.id}
