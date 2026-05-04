@@ -9,6 +9,7 @@ import { LuFlag } from 'react-icons/lu';
 import { adjustBrightness } from '@utils/adjustBrightness';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { useDraggable } from '@dnd-kit/core';
 
 export const TaskBoardItem = ({
   task,
@@ -42,8 +43,16 @@ export const TaskBoardItem = ({
     handleEditTask(task.id, updatedTask);
   };
 
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
+    useDraggable({
+      id: task.id,
+    });
+
   return (
     <li
+      ref={setNodeRef}
+      {...listeners}
+      {...attributes}
       className={styles.taskBoardItem}
       style={{
         color: task.is_done ? 'gray' : 'black',

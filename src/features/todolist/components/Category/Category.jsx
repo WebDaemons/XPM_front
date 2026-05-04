@@ -14,6 +14,7 @@ import { AddCategory } from '@features/todolist/components/AddCategory/AddCatego
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
+import { DndContext, closestCenter } from '@dnd-kit/core';
 
 export const Category = () => {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
@@ -69,15 +70,28 @@ export const Category = () => {
     handleDeleteCategory,
   } = useTodolist(token);
 
-  const onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
+  // const onDragEnd = (result) => {
+  //   const { destination, source, draggableId } = result;
 
-    if (!destination) return;
+  //   if (!destination) return;
 
-    const taskId = parseInt(draggableId);
-    const newCategoryId = parseInt(destination.droppableId);
+  //   const taskId = parseInt(draggableId);
+  //   const newCategoryId = parseInt(destination.droppableId);
 
-    handleEditTask(taskId, { category: newCategoryId });
+  //   handleEditTask(taskId, { category: newCategoryId });
+  // };
+
+  const onDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    const taskId = active.id;
+    const newCategoryId = over.id;
+
+    handleEditTask(taskId, {
+      category: newCategoryId,
+    });
   };
 
   const handleArrowClick = (index) => {
@@ -293,69 +307,75 @@ export const Category = () => {
         </div> */}
       </div>
       {viewType == 'list' ? (
-        <DragDropContext onDragEnd={onDragEnd}>
-          <div className={styles.categoryList}>
+        // <DragDropContext onDragEnd={onDragEnd}>
+        //   <div className={styles.categoryList}>
+        //     {categories.map((category, index) => (
+        //       <Droppable
+        //         droppableId={String(category.id)}
+        //         key={category.id}
+        //       >
+        //         {(provided) => (
+        //           <div
+        //             ref={provided.innerRef}
+        //             {...provided.droppableProps}
+        //           >
+        //             <CategoryListItem
+        //               key={category.id}
+        //               category={category}
+        //               tasks={unDoneTasks}
+        //               index={index}
+        //               rotatedState={rotatedStates[index]}
+        //               handleArrowClick={handleArrowClick}
+        //               getTaskCount={getTaskCount}
+        //               handleDeleteCategory={handleDeleteCategory}
+        //               handleDeleteTask={handleDeleteTask}
+        //               options={options}
+        //               handleToggleTaskStatus={handleToggleTaskStatus}
+        //               categoryOptions={categoryOptions}
+        //             />
+        //             {provided.placeholder}
+        //           </div>
+        //         )}
+        //       </Droppable>
+        //     ))}
+        //     <TodoTrashItem
+        //       tasks={doneTasks}
+        //       handleToggleTaskStatus={handleToggleTaskStatus}
+        //       options={options}
+        //     />
+        //   </div>
+        // </DragDropContext>
+        ''
+      ) : (
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={onDragEnd}
+        >
+          <div
+            ref={boardRef}
+            className={styles.categoryBoard}
+          >
             {categories.map((category, index) => (
-              <Droppable
-                droppableId={String(category.id)}
+              <CategoryBoardItem
                 key={category.id}
-              >
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    <CategoryListItem
-                      key={category.id}
-                      category={category}
-                      tasks={unDoneTasks}
-                      index={index}
-                      rotatedState={rotatedStates[index]}
-                      handleArrowClick={handleArrowClick}
-                      getTaskCount={getTaskCount}
-                      handleDeleteCategory={handleDeleteCategory}
-                      handleDeleteTask={handleDeleteTask}
-                      options={options}
-                      handleToggleTaskStatus={handleToggleTaskStatus}
-                      categoryOptions={categoryOptions}
-                    />
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
+                category={category}
+                tasks={unDoneTasks}
+                index={index}
+                getTaskCount={getTaskCount}
+                handleDeleteCategory={handleDeleteCategory}
+                handleDeleteTask={handleDeleteTask}
+                options={options}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+                categoryOptions={categoryOptions}
+              />
             ))}
-            <TodoTrashItem
+            <CompletedBoardItem
               tasks={doneTasks}
               handleToggleTaskStatus={handleToggleTaskStatus}
               options={options}
             />
           </div>
-        </DragDropContext>
-      ) : (
-        <div
-          ref={boardRef}
-          className={styles.categoryBoard}
-        >
-          {categories.map((category, index) => (
-            <CategoryBoardItem
-              key={category.id}
-              category={category}
-              tasks={unDoneTasks}
-              index={index}
-              getTaskCount={getTaskCount}
-              handleDeleteCategory={handleDeleteCategory}
-              handleDeleteTask={handleDeleteTask}
-              options={options}
-              handleToggleTaskStatus={handleToggleTaskStatus}
-              categoryOptions={categoryOptions}
-            />
-          ))}
-          <CompletedBoardItem
-            tasks={doneTasks}
-            handleToggleTaskStatus={handleToggleTaskStatus}
-            options={options}
-          />
-        </div>
+        </DndContext>
       )}
 
       <AddEditTodo

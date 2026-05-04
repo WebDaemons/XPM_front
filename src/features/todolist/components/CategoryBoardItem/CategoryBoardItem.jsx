@@ -5,6 +5,7 @@ import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskB
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IoMdAdd } from 'react-icons/io';
+import { useDroppable } from '@dnd-kit/core';
 
 export const CategoryBoardItem = ({
   category,
@@ -49,6 +50,15 @@ export const CategoryBoardItem = ({
     return () => resizeObserver.disconnect();
   }, []);
 
+  const { setNodeRef } = useDroppable({
+    id: category.id,
+  });
+
+  const setRefs = (node) => {
+    setNodeRef(node);
+    ref.current = node;
+  };
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
@@ -78,7 +88,7 @@ export const CategoryBoardItem = ({
         </div>
       </div>
       <ul
-        ref={ref}
+        ref={setRefs}
         className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
       >
         {tasks
