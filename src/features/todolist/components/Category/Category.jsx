@@ -19,6 +19,7 @@ import {
   DndContext,
   closestCenter,
   closestCorners,
+  pointerWithin,
   DragOverlay,
 } from '@dnd-kit/core';
 
@@ -26,7 +27,7 @@ export const Category = () => {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [token] = useState(localStorage.getItem('token'));
+  const token = localStorage.getItem('token');
   const [viewType, setViewType] = useState('board');
   const [activeTask, setActiveTask] = useState(null);
 
@@ -91,15 +92,16 @@ export const Category = () => {
   const onDragStart = (event) => {
     const taskId = event.active.id;
     const task = tasks.find((t) => t.id === taskId);
+    console.log('taskid:  ' + taskId + 'categoryid:  ' + task.category);
     setActiveTask(task);
   };
-  const onDragEnd = (event) => {
-    const { active, over } = event;
 
-    if (!over) return;
-    if (!active?.id || !over?.id) return;
+  const onDragEnd = ({ over }) => {
+    if (!over || !activeTask) return;
 
-    handleEditTask(Number(active.id), {
+    if (over.data?.current?.type !== 'category') return;
+
+    handleEditTask(activeTask.id, {
       category: Number(over.id),
     });
 
@@ -360,7 +362,7 @@ export const Category = () => {
         ''
       ) : (
         <DndContext
-          collisionDetection={closestCorners}
+          collisionDetection={pointerWithin}
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
         >

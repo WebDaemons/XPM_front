@@ -9,7 +9,8 @@ import { LuFlag } from 'react-icons/lu';
 import { adjustBrightness } from '@utils/adjustBrightness';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-import { useSortable } from '@dnd-kit/sortable';
+// import { useSortable } from '@dnd-kit/sortable';
+import { useDraggable } from '@dnd-kit/core';
 
 export const TaskBoardItem = ({
   task,
@@ -45,7 +46,7 @@ export const TaskBoardItem = ({
   };
 
   const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useSortable({
+    useDraggable({
       id: task.id,
     });
 
@@ -56,9 +57,6 @@ export const TaskBoardItem = ({
       {...attributes}
       className={styles.taskBoardItem}
       style={{
-        transform: transform
-          ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-          : undefined,
         opacity: isDragging ? 0.5 : 1,
         color: task.is_done ? 'gray' : 'black',
       }}

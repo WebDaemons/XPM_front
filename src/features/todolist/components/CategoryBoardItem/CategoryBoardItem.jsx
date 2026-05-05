@@ -52,12 +52,10 @@ export const CategoryBoardItem = ({
 
   const { setNodeRef } = useDroppable({
     id: category.id,
+    data: {
+      type: 'category',
+    },
   });
-
-  const setRefs = (node) => {
-    setNodeRef(node);
-    ref.current = node;
-  };
 
   return (
     <div className={styles.categoryBoardItem}>
@@ -87,24 +85,29 @@ export const CategoryBoardItem = ({
           </button>
         </div>
       </div>
-      <ul
-        ref={setRefs}
-        className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
+      <div
+        ref={setNodeRef}
+        style={{}}
       >
-        {tasks
-          .filter((task) => task.category === category.id)
-          .map((task, index) => (
-            <TaskBoardItem
-              key={task.id}
-              task={task}
-              taskId={task.id}
-              handleDeleteTask={handleDeleteTask}
-              handleToggleTaskStatus={handleToggleTaskStatus}
-              options={options}
-              onClick={() => handleModalOpen(task)}
-            />
-          ))}
-      </ul>
+        <ul
+          ref={ref}
+          className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
+        >
+          {tasks
+            .filter((task) => task.category === category.id)
+            .map((task, index) => (
+              <TaskBoardItem
+                key={task.id}
+                task={task}
+                taskId={task.id}
+                handleDeleteTask={handleDeleteTask}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+                options={options}
+                onClick={() => handleModalOpen(task)}
+              />
+            ))}
+        </ul>
+      </div>
       <AddEditTodo
         isOpen={isModalOpen}
         onClose={handleModalClose}
