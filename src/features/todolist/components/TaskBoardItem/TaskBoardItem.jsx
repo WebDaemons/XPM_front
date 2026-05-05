@@ -9,7 +9,7 @@ import { LuFlag } from 'react-icons/lu';
 import { adjustBrightness } from '@utils/adjustBrightness';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-import { useDraggable } from '@dnd-kit/core';
+import { useSortable } from '@dnd-kit/sortable';
 
 export const TaskBoardItem = ({
   task,
@@ -17,6 +17,7 @@ export const TaskBoardItem = ({
   handleToggleTaskStatus,
   options,
   onClick,
+  isOverlay,
 }) => {
   const [token] = useState(localStorage.getItem('token'));
 
@@ -44,7 +45,7 @@ export const TaskBoardItem = ({
   };
 
   const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
+    useSortable({
       id: task.id,
     });
 
@@ -55,9 +56,13 @@ export const TaskBoardItem = ({
       {...attributes}
       className={styles.taskBoardItem}
       style={{
+        transform: transform
+          ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+          : undefined,
+        opacity: isDragging ? 0.5 : 1,
         color: task.is_done ? 'gray' : 'black',
       }}
-      onClick={onClick}
+      onClick={isOverlay ? undefined : onClick}
       data-task
     >
       <div className={styles.checkboxWrapper}>

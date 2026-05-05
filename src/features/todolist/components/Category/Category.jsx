@@ -11,10 +11,16 @@ import { CompletedBoardItem } from '@features/todolist/components/CompletedBoard
 import { TodoTrashItem } from '@features/todolist/components/TodoTrashItem/TodoTrashItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
+import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
-import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+  DndContext,
+  closestCenter,
+  closestCorners,
+  DragOverlay,
+} from '@dnd-kit/core';
 
 export const Category = () => {
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
@@ -22,6 +28,7 @@ export const Category = () => {
   const [modalType, setModalType] = useState('');
   const [token] = useState(localStorage.getItem('token'));
   const [viewType, setViewType] = useState('board');
+  const [activeTask, setActiveTask] = useState(null);
 
   const handleOpenTaskModal = (type) => {
     setModalType(type);
@@ -81,17 +88,22 @@ export const Category = () => {
   //   handleEditTask(taskId, { category: newCategoryId });
   // };
 
+  const onDragStart = (event) => {
+    const taskId = event.active.id;
+    const task = tasks.find((t) => t.id === taskId);
+    setActiveTask(task);
+  };
   const onDragEnd = (event) => {
     const { active, over } = event;
 
     if (!over) return;
+    if (!active?.id || !over?.id) return;
 
-    const taskId = active.id;
-    const newCategoryId = over.id;
-
-    handleEditTask(taskId, {
-      category: newCategoryId,
+    handleEditTask(Number(active.id), {
+      category: Number(over.id),
     });
+
+    setActiveTask(null);
   };
 
   const handleArrowClick = (index) => {
@@ -348,7 +360,8 @@ export const Category = () => {
         ''
       ) : (
         <DndContext
-          collisionDetection={closestCenter}
+          collisionDetection={closestCorners}
+          onDragStart={onDragStart}
           onDragEnd={onDragEnd}
         >
           <div
@@ -375,6 +388,16 @@ export const Category = () => {
               options={options}
             />
           </div>
+          <DragOverlay>
+            {activeTask ? (
+              <TaskBoardItem
+                task={activeTask}
+                isOverlay
+                options={options}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+              />
+            ) : null}
+          </DragOverlay>
         </DndContext>
       )}
 
