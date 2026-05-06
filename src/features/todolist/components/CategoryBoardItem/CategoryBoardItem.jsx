@@ -85,10 +85,7 @@ export const CategoryBoardItem = ({
           </button>
         </div>
       </div>
-      <div
-        ref={setNodeRef}
-        style={{}}
-      >
+      <div ref={setNodeRef}>
         <ul
           ref={ref}
           className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}

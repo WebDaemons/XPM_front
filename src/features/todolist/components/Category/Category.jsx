@@ -21,6 +21,9 @@ import {
   closestCorners,
   pointerWithin,
   DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 
 export const Category = () => {
@@ -92,7 +95,6 @@ export const Category = () => {
   const onDragStart = (event) => {
     const taskId = event.active.id;
     const task = tasks.find((t) => t.id === taskId);
-    console.log('taskid:  ' + taskId + 'categoryid:  ' + task.category);
     setActiveTask(task);
   };
 
@@ -107,6 +109,14 @@ export const Category = () => {
 
     setActiveTask(null);
   };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+  );
 
   const handleArrowClick = (index) => {
     const newRotatedStates = [...rotatedStates];
@@ -363,6 +373,7 @@ export const Category = () => {
       ) : (
         <DndContext
           collisionDetection={pointerWithin}
+          sensors={sensors}
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
         >

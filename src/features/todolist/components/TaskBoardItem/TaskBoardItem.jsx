@@ -1,20 +1,15 @@
 import { useState } from 'react';
-import { PiDotsSixVertical, MdOutlineDelete, HiFlag } from '@ui/icons';
 import styles from './taskBoardItem.module.css';
-import { DropDown, Checkbox } from '@ui/index';
-import { DatePick } from '@components/index';
+import { Checkbox } from '@ui/index';
 import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { LuFlag } from 'react-icons/lu';
-import { adjustBrightness } from '@utils/adjustBrightness';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
-// import { useSortable } from '@dnd-kit/sortable';
 import { useDraggable } from '@dnd-kit/core';
 
 export const TaskBoardItem = ({
   task,
-  taskId,
   handleToggleTaskStatus,
   options,
   onClick,
@@ -24,31 +19,9 @@ export const TaskBoardItem = ({
 
   const { handleEditTask, handleDeleteTask } = useTodolist(token);
 
-  const getPriorityLabel = (value) => {
-    const option = options.find((opt) => opt.value === value);
-    return option ? option.label : '';
-  };
-
-  const handlePrioritySelect = (option) => {
-    const updatedTask = {
-      ...task,
-      priority: option.value,
-    };
-    handleEditTask(task.id, updatedTask);
-  };
-
-  const handleDateChange = (date) => {
-    const updatedTask = {
-      ...task,
-      due_date: date,
-    };
-    handleEditTask(task.id, updatedTask);
-  };
-
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      id: task.id,
-    });
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: task.id,
+  });
 
   return (
     <li
