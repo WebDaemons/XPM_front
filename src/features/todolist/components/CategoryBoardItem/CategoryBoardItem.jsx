@@ -50,7 +50,7 @@ export const CategoryBoardItem = ({
     return () => resizeObserver.disconnect();
   }, []);
 
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef, isOver } = useDroppable({
     id: category.id,
     data: {
       type: 'category',
@@ -89,6 +89,12 @@ export const CategoryBoardItem = ({
         <ul
           ref={ref}
           className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
+          style={{
+            // backgroundColor: isOver ? 'var(--accent-color)' : 'transparent',
+            borderRadius: '8px',
+            // transition: 'backgroundColor 0.2s ease',
+            outline: isOver ? '2px dashed var(--primary-blue)' : 'none',
+          }}
         >
           {tasks
             .filter((task) => task.category === category.id)

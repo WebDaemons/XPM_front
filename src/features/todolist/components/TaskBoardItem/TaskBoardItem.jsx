@@ -30,8 +30,9 @@ export const TaskBoardItem = ({
       {...attributes}
       className={styles.taskBoardItem}
       style={{
-        opacity: isDragging ? 0.5 : 1,
+        opacity: isDragging ? 0 : 1,
         color: task.is_done ? 'gray' : 'black',
+        transform: isOverlay ? 'rotate(2deg)' : '',
       }}
       onClick={isOverlay ? undefined : onClick}
       data-task

@@ -99,15 +99,19 @@ export const Category = () => {
   };
 
   const onDragEnd = ({ over }) => {
-    if (!over || !activeTask) return;
+    if (!activeTask) return;
+
+    const task = activeTask;
+
+    setActiveTask(null);
+
+    if (!over) return;
 
     if (over.data?.current?.type !== 'category') return;
 
-    handleEditTask(activeTask.id, {
+    handleEditTask(task.id, {
       category: Number(over.id),
     });
-
-    setActiveTask(null);
   };
 
   const sensors = useSensors(
