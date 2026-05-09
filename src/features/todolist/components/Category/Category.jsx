@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '@features/todolist/slices/categorySlice';
-import { fetchTasks } from '@features/todolist/slices/taskSlice';
+import {
+  fetchTasks,
+  updateTaskLocal,
+} from '@features/todolist/slices/taskSlice';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import styles from './category.module.css';
@@ -109,8 +112,19 @@ export const Category = () => {
 
     if (over.data?.current?.type !== 'category') return;
 
+    const newCategoryId = Number(over.id);
+
+    dispatch(
+      updateTaskLocal({
+        id: task.id,
+        changes: {
+          category: newCategoryId,
+        },
+      }),
+    );
+
     handleEditTask(task.id, {
-      category: Number(over.id),
+      category: newCategoryId,
     });
   };
 
