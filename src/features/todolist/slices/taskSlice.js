@@ -71,7 +71,17 @@ const taskSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    updateTaskLocal: (state, action) => {
+      const { id, changes } = action.payload;
+
+      const task = state.tasks.find((t) => t.id === id);
+
+      if (task) {
+        Object.assign(task, changes);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTasks.pending, (state) => {
@@ -122,4 +132,5 @@ const taskSlice = createSlice({
   },
 });
 
+export const { updateTaskLocal } = taskSlice.actions;
 export default taskSlice.reducer;
