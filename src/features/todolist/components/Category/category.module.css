@@ -75,7 +75,7 @@
   height: 100svh;
   display: flex;
   width: 100%;
-  gap: 15px;
+  gap: 5px;
   overflow: auto;
   margin-bottom: 3px;
 }

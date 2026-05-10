@@ -30,7 +30,7 @@ export const TaskBoardItem = ({
       {...attributes}
       style={{
         listStyle: 'none',
-        borderRadius: '5',
+        borderRadius: '6.5px',
         backgroundColor: isDragging ? 'var(--accent-color)' : '',
       }}
       onClick={isOverlay ? undefined : onClick}
