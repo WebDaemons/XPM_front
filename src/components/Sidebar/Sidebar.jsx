@@ -109,9 +109,13 @@ export const Sidebar = ({ onToggle }) => {
           justifyContent: isCollapsed ? 'center' : 'space-between',
           flexDirection: isCollapsed ? 'column' : 'row',
           gap: isCollapsed ? '20px' : '0px',
+          paddingRight: isCollapsed ? '15px' : '0',
         }}
       >
-        <div className={styles.userIcon}>
+        <div
+          className={styles.userIcon}
+          style={{ marginRight: isCollapsed ? '0' : '5px' }}
+        >
           <img src="/src/assets/pfp.jpeg" />
         </div>
         <div
@@ -126,6 +130,7 @@ export const Sidebar = ({ onToggle }) => {
         <button
           className={styles.logoutBtn}
           onClick={logout}
+          style={{ marginRight: isCollapsed ? '-6px' : '8px' }}
         >
           <span className={styles.logoutBtnWrapper}>
             <MdLogout />
