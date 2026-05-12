@@ -1,6 +1,8 @@
 .categoryBoardItem {
   min-width: 270px;
+  max-width: 270px;
   user-select: none;
+  flex: 1;
 }
 
 .categoryHeader {

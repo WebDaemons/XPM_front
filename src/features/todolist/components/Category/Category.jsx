@@ -18,6 +18,7 @@ import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskB
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
+import { MdKeyboardArrowDown } from '@ui/icons';
 import {
   DndContext,
   closestCenter,
@@ -313,20 +314,24 @@ export const Category = () => {
             List
           </button>
         </div>
-        <div style={{ display: 'flex', gap: '10px', flexDirection: 'row' }}>
-          <Button
-            variant="outlined"
-            startIcon={FiPlus}
-            onClick={() => handleCategoryOpen()}
-          >
-            Add Category
-          </Button>
-          <Button
-            startIcon={FiPlus}
+        <div className={styles.buttonActions}>
+          <button
+            className={styles.addTaskBtn}
             onClick={() => handleModalOpen()}
           >
-            Add Task
-          </Button>
+            <span>
+              <FiPlus />
+            </span>
+            Task
+          </button>
+          <button
+            className={styles.addTaskOptions}
+            onClick={() => handleCategoryOpen()}
+          >
+            <span>
+              <MdKeyboardArrowDown />
+            </span>
+          </button>
         </div>
       </div>
       <DndContext
