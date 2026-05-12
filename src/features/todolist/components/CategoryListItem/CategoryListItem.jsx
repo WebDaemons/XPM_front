@@ -3,7 +3,6 @@ import { MdKeyboardArrowDown, MdOutlineDelete } from '@ui/icons';
 import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
-import { Draggable } from 'react-beautiful-dnd';
 
 export const CategoryListItem = ({
   category,
@@ -77,29 +76,15 @@ export const CategoryListItem = ({
           {tasks
             .filter((task) => task.category === category.id)
             .map((task, index) => (
-              <Draggable
-                draggableId={String(task.id)}
-                index={index}
+              <TaskListItem
                 key={task.id}
-              >
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <TaskListItem
-                      key={task.id}
-                      task={task}
-                      taskId={task.id}
-                      handleDeleteTask={handleDeleteTask}
-                      handleToggleTaskStatus={handleToggleTaskStatus}
-                      options={options}
-                      onClick={() => handleModalOpen(task)}
-                    />
-                  </div>
-                )}
-              </Draggable>
+                task={task}
+                taskId={task.id}
+                handleDeleteTask={handleDeleteTask}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+                options={options}
+                onClick={() => handleModalOpen(task)}
+              />
             ))}
         </div>
       )}

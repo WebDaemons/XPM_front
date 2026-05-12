@@ -276,7 +276,7 @@ export const Category = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        // gap: '10px',
+        gap: '10px',
         height: '100svh',
       }}
     >
@@ -286,28 +286,9 @@ export const Category = () => {
           justifyContent: 'space-between',
           flexDirection: 'row',
           width: '100%',
-          // borderBottom: '5px solid red',
         }}
         className={styles.header}
       >
-        {/* <div style={{ display: 'flex', gap: '5px', flexDirection: 'row' }}>
-          <Button
-            variant="outlined"
-            size="lg"
-            startIcon={LuSquareKanban}
-            onClick={() => setViewType('kanban')}
-          >
-            Board
-          </Button>
-          <Button
-            variant="outlined"
-            size="lg"
-            startIcon={LuListChecks}
-            onClick={() => setViewType('list')}
-          >
-            List
-          </Button>
-        </div> */}
         <div className={styles.viewSwitch}>
           <button
             className={`${styles.viewSwitchBtn} ${
@@ -332,7 +313,7 @@ export const Category = () => {
             List
           </button>
         </div>
-        {/* <div style={{ display: 'flex', gap: '10px', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', gap: '10px', flexDirection: 'row' }}>
           <Button
             variant="outlined"
             startIcon={FiPlus}
@@ -346,48 +327,99 @@ export const Category = () => {
           >
             Add Task
           </Button>
-        </div> */}
+        </div>
       </div>
-      {viewType == 'list' ? (
-        // <DragDropContext onDragEnd={onDragEnd}>
-        //   <div className={styles.categoryList}>
-        //     {categories.map((category, index) => (
-        //       <Droppable
-        //         droppableId={String(category.id)}
-        //         key={category.id}
-        //       >
-        //         {(provided) => (
-        //           <div
-        //             ref={provided.innerRef}
-        //             {...provided.droppableProps}
-        //           >
-        //             <CategoryListItem
-        //               key={category.id}
-        //               category={category}
-        //               tasks={unDoneTasks}
-        //               index={index}
-        //               rotatedState={rotatedStates[index]}
-        //               handleArrowClick={handleArrowClick}
-        //               getTaskCount={getTaskCount}
-        //               handleDeleteCategory={handleDeleteCategory}
-        //               handleDeleteTask={handleDeleteTask}
-        //               options={options}
-        //               handleToggleTaskStatus={handleToggleTaskStatus}
-        //               categoryOptions={categoryOptions}
-        //             />
-        //             {provided.placeholder}
-        //           </div>
-        //         )}
-        //       </Droppable>
-        //     ))}
-        //     <TodoTrashItem
-        //       tasks={doneTasks}
-        //       handleToggleTaskStatus={handleToggleTaskStatus}
-        //       options={options}
-        //     />
-        //   </div>
-        // </DragDropContext>
-        ''
+      <DndContext
+        collisionDetection={pointerWithin}
+        sensors={sensors}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+      >
+        {viewType == 'list' ? (
+          <div className={styles.categoryList}>
+            {categories.map((category, index) => (
+              <CategoryListItem
+                key={category.id}
+                category={category}
+                tasks={unDoneTasks}
+                index={index}
+                rotatedState={rotatedStates[index]}
+                handleArrowClick={handleArrowClick}
+                getTaskCount={getTaskCount}
+                handleDeleteCategory={handleDeleteCategory}
+                handleDeleteTask={handleDeleteTask}
+                options={options}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+                categoryOptions={categoryOptions}
+              />
+            ))}
+            <TodoTrashItem
+              tasks={doneTasks}
+              handleToggleTaskStatus={handleToggleTaskStatus}
+              options={options}
+            />
+          </div>
+        ) : (
+          <div
+            ref={boardRef}
+            className={styles.categoryBoard}
+          >
+            {categories.map((category, index) => (
+              <CategoryBoardItem
+                key={category.id}
+                category={category}
+                tasks={unDoneTasks}
+                index={index}
+                getTaskCount={getTaskCount}
+                handleDeleteCategory={handleDeleteCategory}
+                handleDeleteTask={handleDeleteTask}
+                options={options}
+                handleToggleTaskStatus={handleToggleTaskStatus}
+                categoryOptions={categoryOptions}
+              />
+            ))}
+            <CompletedBoardItem
+              tasks={doneTasks}
+              handleToggleTaskStatus={handleToggleTaskStatus}
+              options={options}
+            />
+          </div>
+        )}
+        <DragOverlay>
+          {activeTask ? (
+            <TaskBoardItem
+              task={activeTask}
+              isOverlay
+              options={options}
+              handleToggleTaskStatus={handleToggleTaskStatus}
+            />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+      {/* {viewType == 'list' ? (
+        <div className={styles.categoryList}>
+          {categories.map((category, index) => (
+            <CategoryListItem
+              key={category.id}
+              category={category}
+              tasks={unDoneTasks}
+              index={index}
+              rotatedState={rotatedStates[index]}
+              handleArrowClick={handleArrowClick}
+              getTaskCount={getTaskCount}
+              handleDeleteCategory={handleDeleteCategory}
+              handleDeleteTask={handleDeleteTask}
+              options={options}
+              handleToggleTaskStatus={handleToggleTaskStatus}
+              categoryOptions={categoryOptions}
+            />
+          ))}
+          <TodoTrashItem
+            tasks={doneTasks}
+            handleToggleTaskStatus={handleToggleTaskStatus}
+            options={options}
+          />
+        </div>
       ) : (
         <DndContext
           collisionDetection={pointerWithin}
@@ -430,8 +462,7 @@ export const Category = () => {
             ) : null}
           </DragOverlay>
         </DndContext>
-      )}
-
+      )} */}
       <AddEditTodo
         isOpen={isTaskModalOpen}
         onClose={handleModalClose}

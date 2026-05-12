@@ -96,38 +96,8 @@ export const TaskBoardItem = ({
                 <span>{formatDate(task.due_date, 'shortView')}</span>
               </div>
             )}
-
-            {/* <div className={styles.priority}>
-            <span>Priority</span>
-            <DropDown
-            options={options}
-            onOptionSelect={handlePrioritySelect}
-            placeholder={getPriorityLabel(task.priority)}
-            selectedValue={task.priority}
-            icon={HiFlag}
-          />
-            <span>{task.priority}</span>
-          </div>
-          <div className={styles.dueDate}>
-            <span>Due date</span>
-            <DatePick
-            onDateChange={handleDateChange}
-            defaultDate={task.due_date}
-          />
-            <span>{formatDate(task.due_date)}</span>
-          </div> */}
           </div>
         </div>
-        {/* <button
-        onClick={() => {
-          handleDeleteTask(taskId);
-        }}
-        className={styles.deleteBtn}
-      >
-        <span className={styles.deleteIconWrapper}>
-          <MdOutlineDelete />
-        </span>
-      </button> */}
       </div>
     </li>
   );
