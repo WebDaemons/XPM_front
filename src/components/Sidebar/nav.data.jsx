@@ -9,11 +9,11 @@ export const navElements = [
     link: '/todo',
     icon: LuListTodo,
   },
-  {
-    title: 'Lists',
-    link: '/lists',
-    icon: NotebookTabs,
-  },
+  // {
+  //   title: 'Lists',
+  //   link: '/lists',
+  //   icon: NotebookTabs,
+  // },
   {
     title: 'Notes',
     link: '/notes',

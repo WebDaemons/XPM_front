@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MdKeyboardArrowDown, MdOutlineDelete } from '@ui/icons';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
@@ -55,16 +56,21 @@ export const CategoryListItem = ({
           </div>
         </div>
         <div className={styles.headerRight}>
-          <MdOutlineDelete
+          <button className={styles.categoryOptionsBtn}>
+            <span className={styles.iconWrapper}>
+              <HiOutlineDotsHorizontal />
+            </span>
+          </button>
+          {/* <MdOutlineDelete
             size={20}
             // color="#121212"
             className={styles.deleteCategoryIcon}
             onClick={() => handleDeleteCategory(category.id)}
-          />
+          /> */}
         </div>
       </div>
       {rotatedState && (
-        <div className={styles.taskList}>
+        <ul className={styles.taskList}>
           {getTaskCount(category.id) !== 0 && (
             <div className={styles.taskListHeader}>
               <span className={styles.taskName}>Name</span>
@@ -75,7 +81,7 @@ export const CategoryListItem = ({
           )}
           {tasks
             .filter((task) => task.category === category.id)
-            .map((task, index) => (
+            .map((task) => (
               <TaskListItem
                 key={task.id}
                 task={task}
@@ -86,7 +92,7 @@ export const CategoryListItem = ({
                 onClick={() => handleModalOpen(task)}
               />
             ))}
-        </div>
+        </ul>
       )}
       <AddEditTodo
         isOpen={isModalOpen}

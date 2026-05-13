@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { PiDotsSixVertical, MdOutlineDelete, HiFlag } from '@ui/icons';
+import { LuFlag } from 'react-icons/lu';
 import styles from './taskListItem.module.css';
 import { DropDown, Checkbox } from '@ui/index';
 import { DatePick } from '@components/index';
 import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
+import { BsCalendar2Check } from 'react-icons/bs';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 
 export const TaskListItem = ({
   task,
@@ -39,7 +42,7 @@ export const TaskListItem = ({
   };
 
   return (
-    <div
+    <li
       className={styles.taskListItem}
       style={{
         color: task.is_done ? 'gray' : 'black',
@@ -51,10 +54,12 @@ export const TaskListItem = ({
           className={styles.dragIcon}
         />
       </div>
-      <Checkbox
-        isChecked={task.is_done}
-        onChange={() => handleToggleTaskStatus(task.id)}
-      />
+      <div className={styles.checkboxWrapper}>
+        <Checkbox
+          isChecked={task.is_done}
+          onChange={() => handleToggleTaskStatus(task.id)}
+        />
+      </div>
       <div
         className={styles.name}
         style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
@@ -62,7 +67,7 @@ export const TaskListItem = ({
       >
         {task.name}
       </div>
-      <div className={styles.priority}>
+      {/* <div className={styles.priority}>
         <DropDown
           options={options}
           onOptionSelect={handlePrioritySelect}
@@ -70,15 +75,37 @@ export const TaskListItem = ({
           selectedValue={task.priority}
           icon={HiFlag}
         />
+      </div> */}
+      <div className={styles.priorityWrapper}>
+        <div
+          className={styles.priority}
+          style={{
+            color: options.find((flag) => flag.value == task.priority).color,
+            backgroundColor: options.find((flag) => flag.value == task.priority)
+              .rgba,
+          }}
+        >
+          <LuFlag />
+          {options.find((flag) => flag.value == task.priority).label}
+        </div>
       </div>
-      <div className={styles.dueDate}>
+
+      {/* <div className={styles.dueDate}>
         <DatePick
           onDateChange={handleDateChange}
           defaultDate={task.due_date}
         />
+      </div> */}
+      <div className={styles.dueDateWrapper}>
+        {' '}
+        <div className={styles.dueDate}>
+          <BsCalendar2Check />
+          <span>{formatDate(task.due_date, 'shortView')}</span>
+        </div>
       </div>
+
       <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
-      <div>
+      {/* <div>
         <MdOutlineDelete
           size={16}
           className={styles.deleteIcon}
@@ -86,7 +113,17 @@ export const TaskListItem = ({
             handleDeleteTask(taskId);
           }}
         />
+      </div> */}
+      <div>
+        <button
+          className={styles.optionTaskBtn}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <span className={styles.optionIconWrapper}>
+            <HiOutlineDotsHorizontal />
+          </span>
+        </button>
       </div>
-    </div>
+    </li>
   );
 };

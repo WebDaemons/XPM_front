@@ -1,12 +1,13 @@
 .categoryListItem {
   width: 100%;
+  user-select: none;
 }
 
 .header {
   border: 1.5px solid var(--accent-color);
   border-radius: 5px;
   font-size: 16px;
-  padding: 10px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,6 +34,34 @@
 
 .rotated {
   transform: rotateY(90deg);
+}
+
+.categoryOptionsBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.categoryOptionsBtn:hover {
+  background-color: var(--accent-color);
+  transition: 0.2s background-color ease;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.iconWrapper svg {
+  height: 20px;
+  width: 20px;
 }
 
 .categoryName {
@@ -80,9 +109,9 @@
   width: 100%;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text-color);
-  padding: 10px;
+  padding: 10px 0 3px 0;
   border-bottom: 1.5px solid var(--accent-color);
 }
 
