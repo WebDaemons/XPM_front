@@ -111,23 +111,23 @@
   align-items: center;
   font-size: 14px;
   color: var(--text-color);
-  padding: 10px 0 3px 0;
-  border-bottom: 1.5px solid var(--accent-color);
+  padding: 10px 0 10px 0;
+  /* border-bottom: 1.5px solid var(--accent-color); */
 }
 
 .taskName {
-  margin-left: 26px;
+  margin-left: 35px;
   flex: 1;
 }
 
 .taskPriority {
-  width: 150px;
+  width: 107px;
 }
 
 .taskDueDate {
-  width: 110px;
+  width: 95px;
 }
 
 .taskCreatedAt {
-  width: 126px;
+  width: 125px;
 }

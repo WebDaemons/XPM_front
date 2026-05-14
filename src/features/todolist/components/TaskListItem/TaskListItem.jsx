@@ -8,6 +8,7 @@ import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { RiDraggable } from 'react-icons/ri';
 
 export const TaskListItem = ({
   task,
@@ -48,18 +49,18 @@ export const TaskListItem = ({
         color: task.is_done ? 'gray' : 'black',
       }}
     >
-      <div>
-        <PiDotsSixVertical
-          size={16}
-          className={styles.dragIcon}
-        />
+      <div className={styles.taskNav}>
+        <div className={styles.dragIcon}>
+          <RiDraggable />
+        </div>
+        <div className={styles.checkboxWrapper}>
+          <Checkbox
+            isChecked={task.is_done}
+            onChange={() => handleToggleTaskStatus(task.id)}
+          />
+        </div>
       </div>
-      <div className={styles.checkboxWrapper}>
-        <Checkbox
-          isChecked={task.is_done}
-          onChange={() => handleToggleTaskStatus(task.id)}
-        />
-      </div>
+
       <div
         className={styles.name}
         style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
@@ -77,25 +78,22 @@ export const TaskListItem = ({
         />
       </div> */}
       <div className={styles.priorityWrapper}>
-        <div
-          className={styles.priority}
-          style={{
-            color: options.find((flag) => flag.value == task.priority).color,
-            backgroundColor: options.find((flag) => flag.value == task.priority)
-              .rgba,
-          }}
-        >
-          <LuFlag />
-          {options.find((flag) => flag.value == task.priority).label}
-        </div>
+        {task.priority != 'N' && (
+          <div
+            className={styles.priority}
+            style={{
+              color: options.find((flag) => flag.value == task.priority).color,
+              backgroundColor: options.find(
+                (flag) => flag.value == task.priority,
+              ).rgba,
+            }}
+          >
+            <LuFlag />
+            {options.find((flag) => flag.value == task.priority).label}
+          </div>
+        )}
       </div>
 
-      {/* <div className={styles.dueDate}>
-        <DatePick
-          onDateChange={handleDateChange}
-          defaultDate={task.due_date}
-        />
-      </div> */}
       <div className={styles.dueDateWrapper}>
         {' '}
         <div className={styles.dueDate}>
@@ -114,16 +112,14 @@ export const TaskListItem = ({
           }}
         />
       </div> */}
-      <div>
-        <button
-          className={styles.optionTaskBtn}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <span className={styles.optionIconWrapper}>
-            <HiOutlineDotsHorizontal />
-          </span>
-        </button>
-      </div>
+      <button
+        className={styles.optionTaskBtn}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <span className={styles.optionIconWrapper}>
+          <HiOutlineDotsHorizontal />
+        </span>
+      </button>
     </li>
   );
 };
