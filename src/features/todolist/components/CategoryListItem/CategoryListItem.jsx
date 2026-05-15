@@ -4,6 +4,7 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
+import { useDroppable } from '@dnd-kit/core';
 
 export const CategoryListItem = ({
   category,
@@ -30,6 +31,13 @@ export const CategoryListItem = ({
     setSelectedTask(null);
     setIsModalOpen(false);
   };
+
+  const { setNodeRef, isOver } = useDroppable({
+    id: category.id,
+    data: {
+      type: 'category',
+    },
+  });
 
   return (
     <div className={styles.categoryListItem}>
@@ -69,31 +77,33 @@ export const CategoryListItem = ({
           /> */}
         </div>
       </div>
-      {rotatedState && (
-        <ul className={styles.taskList}>
-          {getTaskCount(category.id) !== 0 && (
-            <div className={styles.taskListHeader}>
-              <span className={styles.taskName}>Name</span>
-              <span className={styles.taskPriority}>Priority</span>
-              <span className={styles.taskDueDate}>Due date</span>
-              <span className={styles.taskCreatedAt}>Created at</span>
-            </div>
-          )}
-          {tasks
-            .filter((task) => task.category === category.id)
-            .map((task) => (
-              <TaskListItem
-                key={task.id}
-                task={task}
-                taskId={task.id}
-                handleDeleteTask={handleDeleteTask}
-                handleToggleTaskStatus={handleToggleTaskStatus}
-                options={options}
-                onClick={() => handleModalOpen(task)}
-              />
-            ))}
-        </ul>
-      )}
+      <div ref={setNodeRef}>
+        {rotatedState && (
+          <ul className={styles.taskList}>
+            {getTaskCount(category.id) !== 0 && (
+              <div className={styles.taskListHeader}>
+                <span className={styles.taskName}>Name</span>
+                <span className={styles.taskPriority}>Priority</span>
+                <span className={styles.taskDueDate}>Due date</span>
+                <span className={styles.taskCreatedAt}>Created at</span>
+              </div>
+            )}
+            {tasks
+              .filter((task) => task.category === category.id)
+              .map((task) => (
+                <TaskListItem
+                  key={task.id}
+                  task={task}
+                  taskId={task.id}
+                  handleDeleteTask={handleDeleteTask}
+                  handleToggleTaskStatus={handleToggleTaskStatus}
+                  options={options}
+                  onClick={() => handleModalOpen(task)}
+                />
+              ))}
+          </ul>
+        )}
+      </div>
       <AddEditTodo
         isOpen={isModalOpen}
         onClose={handleModalClose}

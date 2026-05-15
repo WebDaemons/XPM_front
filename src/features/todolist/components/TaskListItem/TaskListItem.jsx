@@ -9,6 +9,7 @@ import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { RiDraggable } from 'react-icons/ri';
+import { useDraggable } from '@dnd-kit/core';
 
 export const TaskListItem = ({
   task,
@@ -42,15 +43,25 @@ export const TaskListItem = ({
     handleEditTask(task.id, updatedTask);
   };
 
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: task.id,
+  });
+
   return (
     <li
+      ref={setNodeRef}
       className={styles.taskListItem}
       style={{
         color: task.is_done ? 'gray' : 'black',
+        backgroundColor: isDragging ? 'var(--accent-color)' : '',
       }}
     >
       <div className={styles.taskNav}>
-        <div className={styles.dragIcon}>
+        <div
+          {...listeners}
+          {...attributes}
+          className={styles.dragIcon}
+        >
           <RiDraggable />
         </div>
         <div className={styles.checkboxWrapper}>

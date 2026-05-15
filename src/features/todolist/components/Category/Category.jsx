@@ -15,6 +15,7 @@ import { TodoTrashItem } from '@features/todolist/components/TodoTrashItem/TodoT
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
+import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
@@ -272,6 +273,8 @@ export const Category = () => {
     };
   }, []);
 
+  const OverlayComponent = viewType === 'board' ? TaskBoardItem : TaskListItem;
+
   return (
     <div
       style={{
@@ -392,7 +395,7 @@ export const Category = () => {
         )}
         <DragOverlay>
           {activeTask ? (
-            <TaskBoardItem
+            <OverlayComponent
               task={activeTask}
               isOverlay
               options={options}
