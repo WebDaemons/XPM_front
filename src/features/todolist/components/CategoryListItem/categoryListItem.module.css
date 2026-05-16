@@ -48,15 +48,15 @@
 }
 
 .categoryOptionsBtn:hover {
-  background-color: var(--accent-color);
+  background-color: #dbe9ff;
   transition: 0.2s background-color ease;
+  color: var(--primary-blue);
 }
 
 .iconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000;
 }
 
 .iconWrapper svg {

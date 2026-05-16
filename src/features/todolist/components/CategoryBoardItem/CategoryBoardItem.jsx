@@ -90,9 +90,7 @@ export const CategoryBoardItem = ({
           ref={ref}
           className={`${styles.taskBoard} ${hasScroll ? styles.withScroll : ''}`}
           style={{
-            // backgroundColor: isOver ? 'var(--accent-color)' : 'transparent',
             borderRadius: '8px',
-            // transition: 'backgroundColor 0.2s ease',
             outline: isOver ? '2px dashed var(--primary-blue)' : 'none',
           }}
         >

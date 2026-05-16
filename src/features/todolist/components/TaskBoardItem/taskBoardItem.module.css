@@ -17,13 +17,11 @@
 
 .taskBody {
   margin-left: -26px;
-  /* margin-right: -26px; */
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   transition: 0.2s margin-left ease;
-  /* transition: 0.2s margin-right ease; */
 }
 
 .taskBoardItem:hover .taskBody {
@@ -56,8 +54,7 @@
 }
 
 .optionTaskBtn:hover {
-  /* background-color: var(--accent-color); */
-  background-color: #dfecff;
+  background-color: #dbe9ff;
 }
 
 .optionIconWrapper {
@@ -70,6 +67,10 @@
 .optionIconWrapper svg {
   height: 16px;
   width: 16px;
+}
+
+.optionIconWrapper:hover {
+  color: var(--primary-blue);
 }
 
 .name {
@@ -103,38 +104,3 @@
 .dueDate {
   background-color: rgba(203, 203, 203, 0.25);
 }
-
-/*
-.deleteBtn {
-  background-color: transparent;
-  cursor: pointer;
-  padding: 0;
-  border: none;
-  opacity: 0;
-  transition: 0.2s opacity ease;
-}
-
-.deleteBtn:hover svg {
-  color: red;
-  transition: 0.2s color ease;
-}
-
-.deleteIconWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.deleteIconWrapper svg {
-  height: 20px;
-  width: 20px;
-}
-
-.taskBoardItem:hover .taskBody {
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.taskBoardItem:hover .deleteBtn {
-  opacity: 1;
-} */

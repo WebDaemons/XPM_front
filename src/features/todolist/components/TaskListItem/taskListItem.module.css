@@ -16,31 +16,11 @@
   /* background-color: #fbfbff; */
 }
 
-.taskListItem::after {
-  position: absolute;
-  content: '';
-  height: 1px;
-  top: 100%;
-  width: calc(100% - 10px);
-  background-color: var(--accent-color);
-  left: 5px;
-}
-
-.taskListItem:hover::after {
-  background-color: transparent;
-}
-
 .taskListItem:hover {
-  /* background-color: var(--accent-color); */
   background-color: #fafcff;
-  border: 1px solid var(--accent-color);
 }
 
 .taskListItem:hover .name {
-  color: var(--primary-blue);
-}
-
-.optionIconWrapper:hover {
   color: var(--primary-blue);
 }
 
@@ -120,6 +100,7 @@
 
 .optionTaskBtn:hover {
   background-color: #dbe9ff;
+  color: var(--primary-blue);
 }
 
 .optionIconWrapper {

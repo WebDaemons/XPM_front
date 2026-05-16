@@ -17,6 +17,7 @@ export const TaskListItem = ({
   handleToggleTaskStatus,
   options,
   onClick,
+  isOverlay,
 }) => {
   const [token] = useState(localStorage.getItem('token'));
 
@@ -50,36 +51,47 @@ export const TaskListItem = ({
   return (
     <li
       ref={setNodeRef}
-      className={styles.taskListItem}
       style={{
         color: task.is_done ? 'gray' : 'black',
         backgroundColor: isDragging ? 'var(--accent-color)' : '',
+        borderRadius: '6.5px',
+        listStyle: 'none',
       }}
+      onClick={onClick}
     >
-      <div className={styles.taskNav}>
-        <div
-          {...listeners}
-          {...attributes}
-          className={styles.dragIcon}
-        >
-          <RiDraggable />
-        </div>
-        <div className={styles.checkboxWrapper}>
-          <Checkbox
-            isChecked={task.is_done}
-            onChange={() => handleToggleTaskStatus(task.id)}
-          />
-        </div>
-      </div>
-
       <div
-        className={styles.name}
-        style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
-        onClick={onClick}
+        className={styles.taskListItem}
+        style={{
+          opacity: isDragging ? '0' : '1',
+          backgroundColor:
+            isDragging && !isOverlay ? 'var(--accent-color)' : '',
+          color: task.is_done ? 'gray' : 'black',
+          transform: isOverlay ? 'rotate(2deg)' : '',
+        }}
       >
-        {task.name}
-      </div>
-      {/* <div className={styles.priority}>
+        <div className={styles.taskNav}>
+          <div
+            {...listeners}
+            {...attributes}
+            className={styles.dragIcon}
+          >
+            <RiDraggable />
+          </div>
+          <div className={styles.checkboxWrapper}>
+            <Checkbox
+              isChecked={task.is_done}
+              onChange={() => handleToggleTaskStatus(task.id)}
+            />
+          </div>
+        </div>
+
+        <div
+          className={styles.name}
+          style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}
+        >
+          {task.name}
+        </div>
+        {/* <div className={styles.priority}>
         <DropDown
           options={options}
           onOptionSelect={handlePrioritySelect}
@@ -88,33 +100,32 @@ export const TaskListItem = ({
           icon={HiFlag}
         />
       </div> */}
-      <div className={styles.priorityWrapper}>
-        {task.priority != 'N' && (
-          <div
-            className={styles.priority}
-            style={{
-              color: options.find((flag) => flag.value == task.priority).color,
-              backgroundColor: options.find(
-                (flag) => flag.value == task.priority,
-              ).rgba,
-            }}
-          >
-            <LuFlag />
-            {options.find((flag) => flag.value == task.priority).label}
-          </div>
-        )}
-      </div>
-
-      <div className={styles.dueDateWrapper}>
-        {' '}
-        <div className={styles.dueDate}>
-          <BsCalendar2Check />
-          <span>{formatDate(task.due_date, 'shortView')}</span>
+        <div className={styles.priorityWrapper}>
+          {task.priority != 'N' && (
+            <div
+              className={styles.priority}
+              style={{
+                color: options.find((flag) => flag.value == task.priority)
+                  .color,
+                backgroundColor: options.find(
+                  (flag) => flag.value == task.priority,
+                ).rgba,
+              }}
+            >
+              <LuFlag />
+              {options.find((flag) => flag.value == task.priority).label}
+            </div>
+          )}
         </div>
-      </div>
 
-      <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
-      {/* <div>
+        <div className={styles.dueDateWrapper}>
+          <div className={styles.dueDate}>
+            <BsCalendar2Check />
+            <span>{formatDate(task.due_date, 'shortView')}</span>
+          </div>
+        </div>
+        <div className={styles.createdAt}>{formatDate(task.created_at)}</div>
+        {/* <div>
         <MdOutlineDelete
           size={16}
           className={styles.deleteIcon}
@@ -123,14 +134,15 @@ export const TaskListItem = ({
           }}
         />
       </div> */}
-      <button
-        className={styles.optionTaskBtn}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <span className={styles.optionIconWrapper}>
-          <HiOutlineDotsHorizontal />
-        </span>
-      </button>
+        <button
+          className={styles.optionTaskBtn}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <span className={styles.optionIconWrapper}>
+            <HiOutlineDotsHorizontal />
+          </span>
+        </button>
+      </div>
     </li>
   );
 };
