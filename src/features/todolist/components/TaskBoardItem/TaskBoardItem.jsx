@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './taskBoardItem.module.css';
-import { Checkbox } from '@ui/index';
+import { Checkbox, IconButton } from '@ui/index';
 import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 import { LuFlag } from 'react-icons/lu';
@@ -57,14 +57,18 @@ export const TaskBoardItem = ({
             <div className={styles.createdAt}>
               {formatDate(task.created_at)}
             </div>
-            <button
+            {/* <button
               className={styles.optionTaskBtn}
               onClick={(e) => e.stopPropagation()}
             >
               <span className={styles.optionIconWrapper}>
                 <HiOutlineDotsHorizontal />
               </span>
-            </button>
+            </button> */}
+            <IconButton
+              icon={HiOutlineDotsHorizontal}
+              variant="ghost"
+            />
           </div>
 
           <div

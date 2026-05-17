@@ -5,6 +5,7 @@ import styles from './categoryListItem.module.css';
 import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { useDroppable } from '@dnd-kit/core';
+import { IconButton } from '@ui/index';
 
 export const CategoryListItem = ({
   category,
@@ -64,11 +65,11 @@ export const CategoryListItem = ({
           </div>
         </div>
         <div className={styles.headerRight}>
-          <button className={styles.categoryOptionsBtn}>
-            <span className={styles.iconWrapper}>
-              <HiOutlineDotsHorizontal />
-            </span>
-          </button>
+          <IconButton
+            icon={HiOutlineDotsHorizontal}
+            variant="ghost"
+            size="md"
+          />
           {/* <MdOutlineDelete
             size={20}
             // color="#121212"

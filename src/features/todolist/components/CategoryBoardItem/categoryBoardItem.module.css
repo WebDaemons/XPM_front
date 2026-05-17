@@ -42,34 +42,6 @@
   align-items: center;
 }
 
-.categoryOptionsBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.categoryOptionsBtn:hover {
-  background-color: #dbe9ff;
-  color: var(--primary-blue);
-  transition: 0.2s background-color ease;
-}
-
-.iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.iconWrapper svg {
-  height: 20px;
-  width: 20px;
-}
-
 .taskBoard {
   display: flex;
   flex-direction: column;

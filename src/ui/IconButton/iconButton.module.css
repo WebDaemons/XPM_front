@@ -1,0 +1,51 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: transparent;
+  font-family: Jost, sans-serif;
+  transition: 0.2s all ease;
+  cursor: pointer;
+}
+
+.button span {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SIZES */
+
+.sm {
+  padding: 5px;
+}
+
+.sm svg {
+  height: 16px;
+  width: 16px;
+}
+
+.md {
+  padding: 6px;
+}
+
+.md svg {
+  height: 20px;
+  width: 20px;
+}
+
+/* VARIANTS */
+
+.toolbar {
+}
+
+.ghost {
+  border: none;
+}
+
+.ghost:hover {
+  background-color: #dbe9ff;
+  color: var(--primary-blue);
+}

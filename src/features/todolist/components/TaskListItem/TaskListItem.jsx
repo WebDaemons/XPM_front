@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PiDotsSixVertical, MdOutlineDelete, HiFlag } from '@ui/icons';
 import { LuFlag } from 'react-icons/lu';
 import styles from './taskListItem.module.css';
-import { DropDown, Checkbox } from '@ui/index';
+import { DropDown, Checkbox, IconButton } from '@ui/index';
 import { DatePick } from '@components/index';
 import { formatDate } from '@utils/formatDate';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
@@ -134,14 +134,11 @@ export const TaskListItem = ({
           }}
         />
       </div> */}
-        <button
-          className={styles.optionTaskBtn}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <span className={styles.optionIconWrapper}>
-            <HiOutlineDotsHorizontal />
-          </span>
-        </button>
+        <IconButton
+          icon={HiOutlineDotsHorizontal}
+          variant="ghost"
+          style={{ marginLeft: '10px', marginRight: '8px' }}
+        />
       </div>
     </li>
   );

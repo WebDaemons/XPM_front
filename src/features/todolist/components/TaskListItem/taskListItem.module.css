@@ -88,34 +88,6 @@
   width: 90px;
 }
 
-.optionTaskBtn {
-  margin-right: 10px;
-  margin-left: 5px;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.2s background-color ease;
-}
-
-.optionTaskBtn:hover {
-  background-color: #dbe9ff;
-  color: var(--primary-blue);
-}
-
-.optionIconWrapper {
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.optionIconWrapper svg {
-  height: 16px;
-  width: 16px;
-}
-
 .taskNav {
   display: flex;
   align-items: center;

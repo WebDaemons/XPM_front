@@ -36,34 +36,6 @@
   transform: rotateY(90deg);
 }
 
-.categoryOptionsBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.categoryOptionsBtn:hover {
-  background-color: #dbe9ff;
-  transition: 0.2s background-color ease;
-  color: var(--primary-blue);
-}
-
-.iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.iconWrapper svg {
-  height: 20px;
-  width: 20px;
-}
-
 .categoryName {
   font-weight: 500;
   margin-right: 10px;
