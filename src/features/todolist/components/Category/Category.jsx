@@ -20,10 +20,10 @@ import { Button } from '@ui/index';
 import { FiPlus } from '@ui/icons';
 import { LuSquareKanban, LuListChecks } from 'react-icons/lu';
 import { MdKeyboardArrowDown } from '@ui/icons';
+import { CiFilter } from 'react-icons/ci';
+import { GoSortDesc } from 'react-icons/go';
 import {
   DndContext,
-  closestCenter,
-  closestCorners,
   pointerWithin,
   DragOverlay,
   PointerSensor,
@@ -317,24 +317,36 @@ export const Category = () => {
             List
           </button>
         </div>
-        <div className={styles.buttonActions}>
-          <button
-            className={styles.addTaskBtn}
-            onClick={() => handleModalOpen()}
-          >
-            <span>
-              <FiPlus />
-            </span>
-            Task
-          </button>
-          <button
-            className={styles.addTaskOptions}
-            onClick={() => handleCategoryOpen()}
-          >
-            <span>
-              <MdKeyboardArrowDown />
+        <div className={styles.actionsBtn}>
+          <button className={styles.filterBtn}>
+            <span className={styles.filterIconWrapper}>
+              <CiFilter />
             </span>
           </button>
+          <button className={styles.sortBtn}>
+            <span className={styles.sortIconWrapper}>
+              <GoSortDesc />
+            </span>
+          </button>
+          <div className={styles.addBtn}>
+            <button
+              className={styles.addTaskBtn}
+              onClick={() => handleModalOpen()}
+            >
+              <span>
+                <FiPlus />
+              </span>
+              Task
+            </button>
+            <button
+              className={styles.addTaskOptions}
+              onClick={() => handleCategoryOpen()}
+            >
+              <span>
+                <MdKeyboardArrowDown />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
       <DndContext

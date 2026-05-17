@@ -63,7 +63,42 @@
   width: 20px;
 }
 
-.buttonActions {
+.actionsBtn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filterBtn,
+.sortBtn {
+  display: flex;
+  padding: 8px;
+  border: 1px solid var(--text-color);
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filterIconWrapper,
+.sortIconWrapper {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterBtn svg,
+.sortBtn svg {
+  height: 20px;
+  width: 20px;
+}
+
+.filterBtn:hover,
+.sortBtn:hover {
+  background-color: #fafcff;
+}
+
+.addBtn {
   /* padding: 8px 16px; */
   display: flex;
   align-items: center;
@@ -72,7 +107,7 @@
   border-radius: 5px;
 }
 
-.buttonActions button {
+.addBtn button {
   /* padding: 0; */
   height: 100%;
   display: flex;
@@ -88,7 +123,7 @@
   cursor: pointer;
 }
 
-.buttonActions button:hover {
+.addBtn button:hover {
   background-color: #005ae1;
 }
 
@@ -104,13 +139,13 @@
   border-radius: 0 5px 5px 0;
 }
 
-.buttonActions button span {
+.addBtn button span {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.buttonActions button svg {
+.addBtn button svg {
   height: 16px;
   width: 16px;
 }
