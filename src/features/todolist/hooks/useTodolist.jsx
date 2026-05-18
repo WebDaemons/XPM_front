@@ -40,11 +40,21 @@ export const useTodolist = (token) => {
     dispatch(removeCategory({ token, categoryId }));
   };
 
+  const handleDuplicateTask = (task) => {
+    const taskData = {
+      name: task.name,
+      category: task.category,
+      priority: task.priority,
+    };
+    dispatch(addTask({ token, taskData }));
+  };
+
   return {
     handleAddTask,
     handleDeleteTask,
     handleEditTask,
     handleAddCategory,
     handleDeleteCategory,
+    handleDuplicateTask,
   };
 };
