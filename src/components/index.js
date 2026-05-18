@@ -3,6 +3,7 @@ export * from './DatePick/DatePick.jsx';
 export * from './Sidebar/Sidebar';
 export * from './TabsBar/TabsBar';
 export * from './Toolbar/Toolbar';
+export * from './DropdownMenu/DropdownMenu';
 
 // AUTH PAGE
 

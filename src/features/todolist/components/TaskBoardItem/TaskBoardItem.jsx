@@ -7,6 +7,8 @@ import { LuFlag } from 'react-icons/lu';
 import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { useDraggable } from '@dnd-kit/core';
+import { DropdownMenu } from '@components/index';
+import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
 export const TaskBoardItem = ({
   task,
@@ -17,11 +19,33 @@ export const TaskBoardItem = ({
 }) => {
   const [token] = useState(localStorage.getItem('token'));
 
-  const { handleEditTask, handleDeleteTask } = useTodolist(token);
+  const { handleDeleteTask, handleDuplicateTask } = useTodolist(token);
 
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: task.id,
   });
+
+  const actionItems = [
+    {
+      label: 'Edit',
+      icon: HiPencil,
+      onClick: () => onClick(),
+    },
+    {
+      label: 'Duplicate',
+      icon: HiOutlineDocumentDuplicate,
+      onClick: () => handleDuplicateTask(task),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: 'Delete',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteTask(task.id),
+    },
+  ];
 
   return (
     <li
@@ -57,20 +81,16 @@ export const TaskBoardItem = ({
             <div className={styles.createdAt}>
               {formatDate(task.created_at)}
             </div>
-            {/* <button
-              className={styles.optionTaskBtn}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <span className={styles.optionIconWrapper}>
-                <HiOutlineDotsHorizontal />
-              </span>
-            </button> */}
-            <IconButton
-              icon={HiOutlineDotsHorizontal}
-              variant="ghost"
+            <DropdownMenu
+              trigger={
+                <IconButton
+                  icon={HiOutlineDotsHorizontal}
+                  variant="ghost"
+                />
+              }
+              items={actionItems}
             />
           </div>
-
           <div
             className={styles.name}
             style={{ textDecoration: task.is_done ? 'line-through' : 'none' }}

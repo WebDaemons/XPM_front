@@ -20,7 +20,6 @@ export const IconButton = ({
       type={type}
       disabled={disabled}
       onClick={(e) => {
-        e.stopPropagation();
         onClick?.(e);
       }}
       {...props}
