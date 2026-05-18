@@ -83,8 +83,7 @@
   align-items: center;
   font-size: 14px;
   color: var(--text-color);
-  padding: 10px 0 10px 0;
-  /* border-bottom: 1.5px solid var(--accent-color); */
+  padding: 10px 0;
 }
 
 .taskName {
@@ -101,5 +100,5 @@
 }
 
 .taskCreatedAt {
-  width: 125px;
+  width: 130px;
 }

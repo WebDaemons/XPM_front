@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import styles from './../CategoryBoardItem/categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { IconButton } from '@ui/index';
 
 export const CompletedBoardItem = ({
   tasks,
@@ -42,11 +43,11 @@ export const CompletedBoardItem = ({
           </div>
         </div>
         <div className={styles.categoryBtns}>
-          <button className={styles.categoryOptionsBtn}>
-            <span className={styles.iconWrapper}>
-              <HiOutlineDotsHorizontal />
-            </span>
-          </button>
+          <IconButton
+            icon={HiOutlineDotsHorizontal}
+            variant="ghost"
+            size="md"
+          />
         </div>
       </div>
       <li
