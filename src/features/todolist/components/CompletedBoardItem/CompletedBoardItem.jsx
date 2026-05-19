@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './../CategoryBoardItem/categoryBoardItem.module.css';
 import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskBoardItem';
-import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { HiOutlineDotsHorizontal, HiTrash } from 'react-icons/hi';
 import { IconButton } from '@ui/index';
+import { DropdownMenu } from '@components/index';
 
 export const CompletedBoardItem = ({
   tasks,
   handleToggleTaskStatus,
+  handleDeleteTask,
   options,
 }) => {
   const ref = useRef(null);
@@ -28,6 +30,19 @@ export const CompletedBoardItem = ({
     return () => resizeObserver.disconnect();
   }, []);
 
+  const actionItems = [
+    {
+      label: 'Delete all',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteAll(),
+    },
+  ];
+
+  const handleDeleteAll = () => {
+    tasks.forEach((task) => handleDeleteTask(task.id));
+  };
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
@@ -43,10 +58,15 @@ export const CompletedBoardItem = ({
           </div>
         </div>
         <div className={styles.categoryBtns}>
-          <IconButton
-            icon={HiOutlineDotsHorizontal}
-            variant="ghost"
-            size="md"
+          <DropdownMenu
+            trigger={
+              <IconButton
+                icon={HiOutlineDotsHorizontal}
+                variant="ghost"
+                size="md"
+              />
+            }
+            items={actionItems}
           />
         </div>
       </div>

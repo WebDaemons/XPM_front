@@ -9,6 +9,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { IconButton } from '@ui/index';
 import { DropdownMenu } from '@components/index';
 import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
 export const CategoryBoardItem = ({
   category,
@@ -62,6 +63,16 @@ export const CategoryBoardItem = ({
 
   const actionItems = [
     {
+      label: 'Edit',
+      icon: HiPencil,
+      onClick: () => console.log('edit'),
+    },
+    {
+      label: 'Complete all',
+      icon: IoCheckmarkDoneSharp,
+      onClick: () => handleCompleteAll(),
+    },
+    {
       label: 'Delete',
       icon: HiTrash,
       danger: true,
@@ -69,17 +80,26 @@ export const CategoryBoardItem = ({
     },
   ];
 
+  const handleCompleteAll = () => {
+    tasks.forEach((task) => {
+      if (task.category == category.id) {
+        handleToggleTaskStatus(task.id);
+      }
+    });
+  };
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
         <div className={styles.headerCategoryInfo}>
           <span className={styles.categoryName}>{category.name}</span>
           <div
-            className={`${styles.tasksCount} ${
-              getTaskCount(category.id) > 0
-                ? styles.tasksExist
-                : styles.tasksNotExist
-            }`}
+            style={{
+              color:
+                getTaskCount(category.id) > 0
+                  ? 'var(--primary-blue)'
+                  : 'var(--text-color)',
+            }}
           >
             {getTaskCount(category.id)}
           </div>

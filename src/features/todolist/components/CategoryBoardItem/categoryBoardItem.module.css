@@ -33,10 +33,6 @@
   font-weight: 500;
 }
 
-.tasksCount {
-  color: var(--primary-blue);
-}
-
 .categoryBtns {
   display: flex;
   align-items: center;

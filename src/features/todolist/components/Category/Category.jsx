@@ -402,6 +402,7 @@ export const Category = () => {
               tasks={doneTasks}
               handleToggleTaskStatus={handleToggleTaskStatus}
               options={options}
+              handleDeleteTask={handleDeleteTask}
             />
           </div>
         )}
