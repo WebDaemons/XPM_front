@@ -7,6 +7,8 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IoMdAdd } from 'react-icons/io';
 import { useDroppable } from '@dnd-kit/core';
 import { IconButton } from '@ui/index';
+import { DropdownMenu } from '@components/index';
+import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
 export const CategoryBoardItem = ({
   category,
@@ -58,6 +60,15 @@ export const CategoryBoardItem = ({
     },
   });
 
+  const actionItems = [
+    {
+      label: 'Delete',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteCategory(category.id),
+    },
+  ];
+
   return (
     <div className={styles.categoryBoardItem}>
       <div className={styles.categoryHeader}>
@@ -78,11 +89,17 @@ export const CategoryBoardItem = ({
             icon={IoMdAdd}
             variant="ghost"
             size="md"
+            onClick={() => handleModalOpen()}
           />
-          <IconButton
-            icon={HiOutlineDotsHorizontal}
-            variant="ghost"
-            size="md"
+          <DropdownMenu
+            trigger={
+              <IconButton
+                icon={HiOutlineDotsHorizontal}
+                variant="ghost"
+                size="md"
+              />
+            }
+            items={actionItems}
           />
         </div>
       </div>

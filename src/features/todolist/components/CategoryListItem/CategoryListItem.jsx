@@ -6,6 +6,8 @@ import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskLis
 import { AddEditTodo } from '@features/todolist/components/AddEditTodo/AddEditTodo';
 import { useDroppable } from '@dnd-kit/core';
 import { IconButton } from '@ui/index';
+import { DropdownMenu } from '@components/index';
+import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
 export const CategoryListItem = ({
   category,
@@ -40,6 +42,15 @@ export const CategoryListItem = ({
     },
   });
 
+  const actionItems = [
+    {
+      label: 'Delete',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteCategory(category.id),
+    },
+  ];
+
   return (
     <div className={styles.categoryListItem}>
       <div className={styles.header}>
@@ -65,17 +76,16 @@ export const CategoryListItem = ({
           </div>
         </div>
         <div className={styles.headerRight}>
-          <IconButton
-            icon={HiOutlineDotsHorizontal}
-            variant="ghost"
-            size="md"
+          <DropdownMenu
+            trigger={
+              <IconButton
+                icon={HiOutlineDotsHorizontal}
+                variant="ghost"
+                size="md"
+              />
+            }
+            items={actionItems}
           />
-          {/* <MdOutlineDelete
-            size={20}
-            // color="#121212"
-            className={styles.deleteCategoryIcon}
-            onClick={() => handleDeleteCategory(category.id)}
-          /> */}
         </div>
       </div>
       <div ref={setNodeRef}>

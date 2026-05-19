@@ -10,6 +10,8 @@ import { BsCalendar2Check } from 'react-icons/bs';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { RiDraggable } from 'react-icons/ri';
 import { useDraggable } from '@dnd-kit/core';
+import { DropdownMenu } from '@components/index';
+import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
 
 export const TaskListItem = ({
   task,
@@ -21,7 +23,8 @@ export const TaskListItem = ({
 }) => {
   const [token] = useState(localStorage.getItem('token'));
 
-  const { handleEditTask, handleDeleteTask } = useTodolist(token);
+  const { handleEditTask, handleDeleteTask, handleDuplicateTask } =
+    useTodolist(token);
 
   const getPriorityLabel = (value) => {
     const option = options.find((opt) => opt.value === value);
@@ -47,6 +50,28 @@ export const TaskListItem = ({
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: task.id,
   });
+
+  const actionItems = [
+    {
+      label: 'Edit',
+      icon: HiPencil,
+      onClick: () => onClick(),
+    },
+    {
+      label: 'Duplicate',
+      icon: HiOutlineDocumentDuplicate,
+      onClick: () => handleDuplicateTask(task),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: 'Delete',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteTask(task.id),
+    },
+  ];
 
   return (
     <li
@@ -134,10 +159,15 @@ export const TaskListItem = ({
           }}
         />
       </div> */}
-        <IconButton
-          icon={HiOutlineDotsHorizontal}
-          variant="ghost"
-          style={{ marginLeft: '10px', marginRight: '8px' }}
+        <DropdownMenu
+          trigger={
+            <IconButton
+              icon={HiOutlineDotsHorizontal}
+              variant="ghost"
+              style={{ marginLeft: '10px', marginRight: '8px' }}
+            />
+          }
+          items={actionItems}
         />
       </div>
     </li>
