@@ -10,6 +10,7 @@ import { DropdownMenu } from '@components/index';
 import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
 import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 import { IoMdAdd } from 'react-icons/io';
+import { AddCategory } from '@features/todolist/components/AddCategory/AddCategory';
 
 export const CategoryListItem = ({
   category,
@@ -26,6 +27,7 @@ export const CategoryListItem = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
 
   const handleModalOpen = (task = null) => {
     setSelectedTask(task);
@@ -52,11 +54,15 @@ export const CategoryListItem = ({
     });
   };
 
+  const handleCategoryOpen = () => {
+    setIsCategoryModalOpen((prev) => !prev);
+  };
+
   const actionItems = [
     {
       label: 'Edit',
       icon: HiPencil,
-      onClick: () => console.log('edit'),
+      onClick: () => handleCategoryOpen(),
     },
     {
       label: 'Complete all',
@@ -147,6 +153,11 @@ export const CategoryListItem = ({
         task={selectedTask}
         type={selectedTask ? 'edit' : 'add'}
         categoryOptions={categoryOptions}
+      />
+      <AddCategory
+        isOpen={isCategoryModalOpen}
+        onClose={handleCategoryOpen}
+        category={category}
       />
     </div>
   );
