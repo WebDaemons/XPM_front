@@ -7,6 +7,7 @@ import {
 import {
   addCategory,
   removeCategory,
+  editCategory,
 } from '@features/todolist/slices/categorySlice';
 
 export const useTodolist = (token) => {
@@ -40,6 +41,10 @@ export const useTodolist = (token) => {
     dispatch(removeCategory({ token, categoryId }));
   };
 
+  const handleEditCategory = (categoryId, categoryData) => {
+    dispatch(editCategory({ token, categoryId, categoryData }));
+  };
+
   const handleDuplicateTask = (task) => {
     const taskData = {
       name: task.name,
@@ -53,8 +58,9 @@ export const useTodolist = (token) => {
     handleAddTask,
     handleDeleteTask,
     handleEditTask,
+    handleDuplicateTask,
     handleAddCategory,
     handleDeleteCategory,
-    handleDuplicateTask,
+    handleEditCategory,
   };
 };

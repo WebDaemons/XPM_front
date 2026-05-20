@@ -46,7 +46,7 @@ export const editCategory = createAsyncThunk(
   'categories/editCategory',
   async ({ token, categoryId, categoryData }, { rejectedWithValue }) => {
     try {
-      const data = await updateCategory(token, categoryData, categoryId);
+      const data = await updateCategory(token, categoryId, categoryData);
       return data;
     } catch (error) {
       return rejectedWithValue(error.response.data);

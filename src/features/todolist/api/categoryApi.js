@@ -45,7 +45,7 @@ export const deleteCategory = async (token, categoryId) => {
   }
 };
 
-export const updateCategory = async (token, data, categoryId) => {
+export const updateCategory = async (token, categoryId, data) => {
   try {
     const response = await axiosInstance.put(
       `/tasks/category/update/${categoryId}`,

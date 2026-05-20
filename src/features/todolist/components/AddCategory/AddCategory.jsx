@@ -4,10 +4,20 @@ import { IoIosClose } from '@ui/icons';
 import { Button } from '@ui/index';
 import { useTodolist } from '@features/todolist/hooks/useTodolist';
 
-export const AddCategory = ({ isOpen, onClose }) => {
+export const AddCategory = ({ isOpen, onClose, category }) => {
   const [token] = useState(localStorage.getItem('token'));
   const [name, setName] = useState('');
-  const { handleAddCategory } = useTodolist(token);
+  const { handleAddCategory, handleEditCategory } = useTodolist(token);
+
+  useEffect(() => {
+    if (isOpen) {
+      if (category) {
+        setName(category.name);
+      } else {
+        setName('');
+      }
+    }
+  }, [category, isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -23,8 +33,12 @@ export const AddCategory = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleSave = () => {
-    if (name === '') return;
-    handleAddCategory({ name });
+    if (name == '') return;
+    if (category) {
+      handleEditCategory(category.id, { name });
+    } else {
+      handleAddCategory({ name });
+    }
     setName('');
     onClose();
   };
