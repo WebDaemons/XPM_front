@@ -8,6 +8,8 @@ import { useDroppable } from '@dnd-kit/core';
 import { IconButton } from '@ui/index';
 import { DropdownMenu } from '@components/index';
 import { HiTrash, HiPencil, HiOutlineDocumentDuplicate } from 'react-icons/hi';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
+import { IoMdAdd } from 'react-icons/io';
 
 export const CategoryListItem = ({
   category,
@@ -42,7 +44,25 @@ export const CategoryListItem = ({
     },
   });
 
+  const handleCompleteAll = () => {
+    tasks.forEach((task) => {
+      if (task.category == category.id) {
+        handleToggleTaskStatus(task.id);
+      }
+    });
+  };
+
   const actionItems = [
+    {
+      label: 'Edit',
+      icon: HiPencil,
+      onClick: () => console.log('edit'),
+    },
+    {
+      label: 'Complete all',
+      icon: IoCheckmarkDoneSharp,
+      onClick: () => handleCompleteAll(),
+    },
     {
       label: 'Delete',
       icon: HiTrash,
@@ -75,7 +95,13 @@ export const CategoryListItem = ({
             {getTaskCount(category.id)}
           </div>
         </div>
-        <div className={styles.headerRight}>
+        <div className={styles.categoryBtns}>
+          <IconButton
+            icon={IoMdAdd}
+            variant="ghost"
+            size="md"
+            onClick={() => handleModalOpen()}
+          />
           <DropdownMenu
             trigger={
               <IconButton

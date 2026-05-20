@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { MdKeyboardArrowDown } from '@ui/icons';
 import styles from './todoTrashItem.module.css';
 import { TaskListItem } from '@features/todolist/components/TaskListItem/TaskListItem';
+import { IconButton } from '@ui/index';
+import { DropdownMenu } from '@components/index';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
+import { HiOutlineDotsHorizontal, HiTrash } from 'react-icons/hi';
 
 export const TodoTrashItem = ({
   tasks,
@@ -16,6 +20,28 @@ export const TodoTrashItem = ({
 
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const handleDeleteAll = () => {
+    tasks.forEach((task) => handleDeleteTask(task.id));
+  };
+
+  const handleUncompleteAll = () => {
+    tasks.forEach((task) => handleToggleTaskStatus(task.id));
+  };
+
+  const actionItems = [
+    {
+      label: 'Uncomplete all',
+      icon: IoCheckmarkDoneSharp,
+      onClick: () => handleUncompleteAll(),
+    },
+    {
+      label: 'Delete all',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteAll(),
+    },
+  ];
+
   return (
     <div className={styles.categoryListItem}>
       <div className={styles.header}>
@@ -29,8 +55,31 @@ export const TodoTrashItem = ({
             }}
             onClick={handleArrowClick}
           />
-          <span className={styles.categoryName}>Completed</span>
+          <div className={styles.headerCategoryInfo}>
+            <span className={styles.categoryName}>Completed</span>
+            <div
+              className={styles.tasksCount}
+              style={{
+                color:
+                  tasks.length > 0
+                    ? 'var(--primary-blue)'
+                    : 'var(--text-color)',
+              }}
+            >
+              {tasks.length}
+            </div>
+          </div>
         </div>
+        <DropdownMenu
+          trigger={
+            <IconButton
+              icon={HiOutlineDotsHorizontal}
+              variant="ghost"
+              size="md"
+            />
+          }
+          items={actionItems}
+        />
       </div>
       {isCollapsed && (
         <div className={styles.taskList}>

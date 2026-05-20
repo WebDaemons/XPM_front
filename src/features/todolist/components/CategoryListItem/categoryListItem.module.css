@@ -71,7 +71,7 @@
 }
 /*  */
 
-.headerRight {
+.categoryBtns {
   display: flex;
   align-items: center;
 }
