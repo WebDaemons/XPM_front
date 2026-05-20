@@ -55,7 +55,8 @@ export const TaskBoardItem = ({
       style={{
         listStyle: 'none',
         borderRadius: '6.5px',
-        backgroundColor: isDragging ? 'var(--accent-color)' : '',
+        backgroundColor: isDragging ? '#fafcff' : '',
+        border: isDragging ? '1.5px dashed var(--accent-color)' : '',
       }}
       onClick={isOverlay ? undefined : onClick}
       data-task

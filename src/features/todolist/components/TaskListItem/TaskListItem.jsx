@@ -78,7 +78,8 @@ export const TaskListItem = ({
       ref={setNodeRef}
       style={{
         color: task.is_done ? 'gray' : 'black',
-        backgroundColor: isDragging ? 'var(--accent-color)' : '',
+        backgroundColor: isDragging ? '#fafcff' : '',
+        border: isDragging ? '1.5px dashed var(--accent-color)' : '',
         borderRadius: '6.5px',
         listStyle: 'none',
       }}
