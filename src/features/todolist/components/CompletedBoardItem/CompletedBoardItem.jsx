@@ -4,6 +4,7 @@ import { TaskBoardItem } from '@features/todolist/components/TaskBoardItem/TaskB
 import { HiOutlineDotsHorizontal, HiTrash } from 'react-icons/hi';
 import { IconButton } from '@ui/index';
 import { DropdownMenu } from '@components/index';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
 export const CompletedBoardItem = ({
   tasks,
@@ -32,6 +33,11 @@ export const CompletedBoardItem = ({
 
   const actionItems = [
     {
+      label: 'Uncomplete all',
+      icon: IoCheckmarkDoneSharp,
+      onClick: () => handleUncompleteAll(),
+    },
+    {
       label: 'Delete all',
       icon: HiTrash,
       danger: true,
@@ -41,6 +47,10 @@ export const CompletedBoardItem = ({
 
   const handleDeleteAll = () => {
     tasks.forEach((task) => handleDeleteTask(task.id));
+  };
+
+  const handleUncompleteAll = () => {
+    tasks.forEach((task) => handleToggleTaskStatus(task.id));
   };
 
   return (
