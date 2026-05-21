@@ -134,15 +134,17 @@
 .tag {
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 4px;
   font-size: 14px;
   border-radius: 5px;
-  padding: 7px 7px 7px 10px;
+  padding: 10px 10px;
   font-weight: 550;
 }
 
 .clearTag {
-  font-size: 16px;
+  height: 14px;
+  width: 14px;
 }
 
 .clearTag:hover {

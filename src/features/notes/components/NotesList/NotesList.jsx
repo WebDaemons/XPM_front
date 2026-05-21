@@ -29,12 +29,12 @@ export const NotesList = ({ notes }) => {
           onClick={() => handleModalOpen(note)}
         />
       ))}
-      <div
+      {/* <div
         className={styles.addNoteButton}
         onClick={() => handleModalOpen()}
       >
         + Add Note
-      </div>
+      </div> */}
       <AddEditNote
         isOpen={isModalOpen}
         onClose={handleModalClose}
