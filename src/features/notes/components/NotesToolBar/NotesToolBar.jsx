@@ -8,15 +8,15 @@ export const NotesToolBar = ({ handleModalOpen }) => {
     <div className={styles.notesToolBarWrapper}>
       <h2>Notes</h2>
       <div className={styles.notesToolBar}>
-        <Button
+        {/* <Button
           size="lg"
           startIcon={ArrowDownNarrowWide}
           variant="outlined"
         >
           Filter
-        </Button>
+        </Button> */}
         <Button
-          size="lg"
+          size="md"
           startIcon={Plus}
           onClick={handleModalOpen}
         >

@@ -12,7 +12,15 @@ export const NotesFeature = () => {
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
 
   return (
-    <div style={{ backgroundColor: '#fafcff' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#fafcff',
+        gap: '20px',
+        padding: '25px',
+      }}
+    >
       <NotesToolBar
         handleModalOpen={handleModalOpen}
         handleModalClose={handleModalClose}

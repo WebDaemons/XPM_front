@@ -1,11 +1,44 @@
-import React from 'react';
 import styles from './noteItem.module.css';
-// import { TbPinnedFilled } from '@ui/icons';
-import { Pin, Ellipsis, Star } from 'lucide-react';
+import { useState } from 'react';
+import { Star } from 'lucide-react';
 import { hexToRgba } from '@utils/hexToRgba';
+import { DropdownMenu } from '@components/index';
+import { IconButton } from '@ui/index';
+import {
+  HiTrash,
+  HiPencil,
+  HiOutlineDocumentDuplicate,
+  HiOutlineDotsHorizontal,
+} from 'react-icons/hi';
+import { useNotes } from '@features/notes/hooks/useNotes';
 
 export const NoteItem = ({ note, onClick }) => {
   const { title, content, createdAt, isPinned, tags } = note;
+  const [token] = useState(localStorage.getItem('token'));
+
+  const { handleDeleteNote } = useNotes(token);
+
+  const actionItems = [
+    {
+      label: 'Edit',
+      icon: HiPencil,
+      onClick: () => onClick(),
+    },
+    {
+      label: 'Duplicate',
+      icon: HiOutlineDocumentDuplicate,
+      onClick: () => console.log('duplicate'),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: 'Delete',
+      icon: HiTrash,
+      danger: true,
+      onClick: () => handleDeleteNote(note.id),
+    },
+  ];
 
   return (
     <div
@@ -14,21 +47,25 @@ export const NoteItem = ({ note, onClick }) => {
     >
       <div className={styles.header}>
         <div className={styles.createdAt}>{createdAt.split('T')[0]}</div>
-        <div className={styles.icons}>
-          {isPinned && (
-            <>
-              <Star
-                size={20}
-                color="#ffbf00"
-                fill="#ffbf00"
-              />
-              <Ellipsis
-                size={20}
-                color="#787c99"
-              />
-            </>
-          )}
-        </div>
+        {isPinned && (
+          <>
+            <Star
+              size={20}
+              color="#ffbf00"
+              fill="#ffbf00"
+            />
+          </>
+        )}
+        <DropdownMenu
+          trigger={
+            <IconButton
+              icon={HiOutlineDotsHorizontal}
+              variant="ghost"
+              size="md"
+            />
+          }
+          items={actionItems}
+        />
       </div>
       <div className={styles.noteBody}>
         <h3 className={styles.noteName}>{title}</h3>
