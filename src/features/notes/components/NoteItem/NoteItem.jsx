@@ -2,27 +2,10 @@ import React from 'react';
 import styles from './noteItem.module.css';
 // import { TbPinnedFilled } from '@ui/icons';
 import { Pin, Ellipsis, Star } from 'lucide-react';
-import { adjustBrightness } from '@utils/adjustBrightness';
+import { hexToRgba } from '@utils/hexToRgba';
 
 export const NoteItem = ({ note, onClick }) => {
   const { title, content, createdAt, isPinned, tags } = note;
-
-  function hexToRgba(hex, alpha = 1) {
-    let cleanHex = hex.replace('#', '');
-
-    if (cleanHex.length === 3) {
-      cleanHex = cleanHex
-        .split('')
-        .map((char) => char + char)
-        .join('');
-    }
-
-    const r = parseInt(cleanHex.substring(0, 2), 16);
-    const g = parseInt(cleanHex.substring(2, 4), 16);
-    const b = parseInt(cleanHex.substring(4, 6), 16);
-
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  }
 
   return (
     <div
@@ -68,9 +51,6 @@ export const NoteItem = ({ note, onClick }) => {
             key={tag.id}
             className={styles.tag}
             style={{
-              // backgroundColor: 'transparent',
-              // color: adjustBrightness(tag.color, 100),
-              // border: '1px solid',
               color: tag.color,
               backgroundColor: hexToRgba(tag.color, 0.1),
             }}
