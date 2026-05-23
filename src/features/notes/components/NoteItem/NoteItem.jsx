@@ -10,15 +10,24 @@ import {
   HiOutlineDocumentDuplicate,
   HiOutlineDotsHorizontal,
 } from 'react-icons/hi';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { useNotes } from '@features/notes/hooks/useNotes';
+import { useNoteForm } from '@features/notes/hooks/useNoteForm';
 
 export const NoteItem = ({ note, onClick }) => {
   const { title, content, createdAt, isPinned, tags } = note;
   const [token] = useState(localStorage.getItem('token'));
 
-  const { handleDeleteNote } = useNotes(token);
+  const { handleDeleteNote, handleDuplicateNote } = useNotes(token);
+  const { handlePinned } = useNoteForm(note, 'edit');
 
   const actionItems = [
+    {
+      label: isPinned ? 'Unpin' : 'Pin',
+      icon: isPinned ? FaStar : FaRegStar,
+      warning: true,
+      onClick: () => handlePinned(),
+    },
     {
       label: 'Edit',
       icon: HiPencil,
@@ -27,7 +36,7 @@ export const NoteItem = ({ note, onClick }) => {
     {
       label: 'Duplicate',
       icon: HiOutlineDocumentDuplicate,
-      onClick: () => console.log('duplicate'),
+      onClick: () => handleDuplicateNote(note),
     },
     {
       type: 'divider',

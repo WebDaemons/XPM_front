@@ -42,12 +42,20 @@
   background-color: #f4f8ff;
 }
 
-.dropdownItemDanger {
+.danger {
   color: #dc2626;
 }
 
-.dropdownItemDanger:hover {
+.danger:hover {
   background: rgba(220, 38, 38, 0.08);
+}
+
+.warning {
+  color: #ffbf00;
+}
+
+.warning:hover {
+  background: rgba(220, 38, 38, 0.05);
 }
 
 .dropdownItemIcon {

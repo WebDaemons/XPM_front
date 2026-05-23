@@ -1,5 +1,5 @@
 .noteWrapper {
-  /* width: 250px; */
+  /* max-width: 250px; */
   min-height: 260px;
   padding: 20px;
   display: flex;

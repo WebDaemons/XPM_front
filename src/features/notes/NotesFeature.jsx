@@ -19,6 +19,7 @@ export const NotesFeature = () => {
         backgroundColor: '#fafcff',
         gap: '20px',
         padding: '25px',
+        minHeight: '100svh',
       }}
     >
       <NotesToolBar

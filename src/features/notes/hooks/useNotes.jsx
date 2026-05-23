@@ -27,6 +27,10 @@ export const useNotes = (token) => {
     dispatch(editNote({ token, data, id }));
   };
 
+  const handleDuplicateNote = (data) => {
+    dispatch(addNote({ token, data }));
+  };
+
   return {
     notes,
     status,
@@ -34,5 +38,6 @@ export const useNotes = (token) => {
     handleAddNote,
     handleDeleteNote,
     handleEditNote,
+    handleDuplicateNote,
   };
 };

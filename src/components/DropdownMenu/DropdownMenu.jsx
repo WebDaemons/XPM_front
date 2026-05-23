@@ -54,8 +54,8 @@ export const DropdownMenu = ({ trigger, items = [], align = 'right' }) => {
               <button
                 key={index}
                 className={`${styles.dropdownItem} ${
-                  item.danger ? styles.dropdownItemDanger : ''
-                }`}
+                  item.danger ? styles.danger : ''
+                } ${item.warning ? styles.warning : ''}`}
                 onClick={() => {
                   item.onClick?.();
                   setIsOpen(false);
