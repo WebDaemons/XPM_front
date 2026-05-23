@@ -8,16 +8,35 @@
   border-radius: 10px;
   border: 1.5px solid var(--accent-color);
   background: var(--background-color);
-  /* border-left: 3px solid red; */
+  transition:
+    0.2s transform ease,
+    0.2s box-shadow ease;
 }
 
 .noteWrapper:hover {
   cursor: pointer;
+  transform: scale(1.02);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -4px rgba(0, 0, 0, 0.05);
 }
 
 .header {
   display: flex;
+  gap: 10px;
   align-items: center;
+}
+
+.favoriteIcon {
+  display: flex;
+  align-items: center;
+  color: #ffbf00;
+}
+
+.favoriteIcon svg {
+  fill: #ffbf00;
+  height: 16px;
+  width: 16px;
 }
 
 .header > :last-child {

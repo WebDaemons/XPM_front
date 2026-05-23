@@ -48,13 +48,9 @@ export const NoteItem = ({ note, onClick }) => {
       <div className={styles.header}>
         <div className={styles.createdAt}>{createdAt.split('T')[0]}</div>
         {isPinned && (
-          <>
-            <Star
-              size={20}
-              color="#ffbf00"
-              fill="#ffbf00"
-            />
-          </>
+          <span className={styles.favoriteIcon}>
+            <Star />
+          </span>
         )}
         <DropdownMenu
           trigger={
