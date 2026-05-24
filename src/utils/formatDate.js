@@ -9,7 +9,23 @@ export function formatDate(dateInput, view = 'fullView') {
     month: 'short',
     day: '2-digit',
   });
+
   const fullView = `${day}.${month}.${year}`;
 
-  return view == 'fullView' ? fullView : shortView;
+  const longView = date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+
+  switch (view) {
+    case 'shortView':
+      return shortView;
+
+    case 'longView':
+      return longView;
+
+    default:
+      return fullView;
+  }
 }
