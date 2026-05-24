@@ -1,11 +1,17 @@
 .header {
+  width: 100%;
+  position: sticky;
+  top: 0;
   display: flex;
   gap: 15px;
-  justify-content: end;
+  justify-content: space-between;
+  flex-direction: row;
   padding: 0 0 10px 0;
   border-bottom: 1.5px solid #e8f1ff;
   /* padding: 10px 15px 15px 15px; */
   padding: 15px;
+  background-color: #fafcff;
+  z-index: 10;
 }
 
 /* .header button {

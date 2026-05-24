@@ -17,9 +17,7 @@ export const NotesFeature = () => {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#fafcff',
-        gap: '20px',
-        padding: '25px',
-        minHeight: '100svh',
+        height: '100svh',
       }}
     >
       <NotesToolBar

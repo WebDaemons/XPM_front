@@ -284,15 +284,7 @@ export const Category = () => {
         height: '100svh',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          width: '100%',
-        }}
-        className={styles.header}
-      >
+      <div className={styles.header}>
         <div className={styles.viewSwitch}>
           <button
             className={`${styles.viewSwitchBtn} ${
