@@ -3,10 +3,10 @@ import { useNotes } from './hooks/useNotes';
 import { useModal } from '@hooks/useModal';
 
 import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
-import { NotesList } from '@features/notes/components/NotesList/NotesList';
-import { NotesToolBar } from '@features/notes/components/NotesToolBar/NotesToolBar';
+import { NotesGrid } from '@features/notes/components/NotesGrid/NotesGrid';
+import { NotesToolbar } from '@features/notes/components/NotesToolbar/NotesToolbar';
 
-export const NotesFeature = () => {
+export const NotesContent = () => {
   const [token] = useState(localStorage.getItem('token'));
   const { notes } = useNotes(token);
   const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
@@ -20,16 +20,22 @@ export const NotesFeature = () => {
         height: '100svh',
       }}
     >
-      <NotesToolBar
+      <NotesToolbar
         handleModalOpen={handleModalOpen}
         handleModalClose={handleModalClose}
       />
-      <NotesList notes={notes} />
+      <NotesGrid notes={notes} />
       <AddEditNote
         isOpen={isModalOpen}
         onClose={handleModalClose}
         type="add"
       />
+      {/* <NotesHeader />
+      <NotesToolBar />
+      <NotesWorkspace>
+        <NotesGrid />
+        <NoteEditor />
+      </NotesWorkspace> */}
     </div>
   );
 };

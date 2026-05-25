@@ -1,11 +1,11 @@
 import { useModal } from '@hooks/useModal';
 
-import styles from './notesList.module.css';
+import styles from './notesGrid.module.css';
 
 import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
 import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
 
-export const NotesList = ({ notes }) => {
+export const NotesGrid = ({ notes }) => {
   const {
     isModalOpen,
     selectedItem: selectedNote,

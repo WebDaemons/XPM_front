@@ -3,7 +3,7 @@ import { ArrowDownNarrowWide, Plus } from 'lucide-react';
 
 import styles from './notesToolBar.module.css';
 
-export const NotesToolBar = ({ handleModalOpen }) => {
+export const NotesToolbar = ({ handleModalOpen }) => {
   return (
     <div className={styles.notesToolBarWrapper}>
       <h2>Notes</h2>

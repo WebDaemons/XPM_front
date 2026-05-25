@@ -1,9 +1,9 @@
-import { NotesFeature } from '@features/notes/NotesFeature';
+import { NotesContent } from '@features/notes/NotesContent';
 
 export default function Notes() {
   return (
     <>
-      <NotesFeature />
+      <NotesContent />
     </>
   );
 }

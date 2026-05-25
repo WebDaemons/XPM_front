@@ -13,6 +13,7 @@ import {
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { useNotes } from '@features/notes/hooks/useNotes';
 import { useNoteForm } from '@features/notes/hooks/useNoteForm';
+import { formatDate } from '@utils/formatDate';
 
 export const NoteItem = ({ note, onClick }) => {
   const { title, content, createdAt, isPinned, tags } = note;
@@ -55,7 +56,9 @@ export const NoteItem = ({ note, onClick }) => {
       onClick={onClick}
     >
       <div className={styles.header}>
-        <div className={styles.createdAt}>{createdAt.split('T')[0]}</div>
+        <div className={styles.createdAt}>
+          {formatDate(createdAt, 'longView')}
+        </div>
         {isPinned && (
           <span className={styles.favoriteIcon}>
             <Star />
