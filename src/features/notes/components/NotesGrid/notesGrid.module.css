@@ -1,5 +1,6 @@
 .notesListWrapper {
-  padding: 25px;
+  flex: 1;
+  padding: 0 25px;
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

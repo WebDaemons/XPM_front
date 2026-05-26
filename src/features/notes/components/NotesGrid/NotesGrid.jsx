@@ -5,7 +5,7 @@ import styles from './notesGrid.module.css';
 import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
 import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
 
-export const NotesGrid = ({ notes }) => {
+export const NotesGrid = ({ notes, onSelectNote }) => {
   const {
     isModalOpen,
     selectedItem: selectedNote,
@@ -26,7 +26,8 @@ export const NotesGrid = ({ notes }) => {
         <NoteItem
           key={note.id}
           note={note}
-          onClick={() => handleModalOpen(note)}
+          // onClick={() => handleModalOpen(note)}
+          onClick={() => onSelectNote(note)}
         />
       ))}
       {/* <div
