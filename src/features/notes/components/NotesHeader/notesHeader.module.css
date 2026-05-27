@@ -6,7 +6,7 @@
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-  border-bottom: 1.5px solid #e8f1ff;
+  /* border-bottom: 1.5px solid #e8f1ff; */
   background-color: #fafcff;
 }
 

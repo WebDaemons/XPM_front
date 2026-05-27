@@ -1,18 +1,8 @@
-import { useModal } from '@hooks/useModal';
-
 import styles from './notesGrid.module.css';
-
 import { NoteItem } from '@features/notes/components/NoteItem/NoteItem';
-import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
+import { IoMdAdd } from 'react-icons/io';
 
-export const NotesGrid = ({ notes, onSelectNote }) => {
-  const {
-    isModalOpen,
-    selectedItem: selectedNote,
-    handleModalOpen,
-    handleModalClose,
-  } = useModal();
-
+export const NotesGrid = ({ notes, onSelectNote, selectedNote, onCreate }) => {
   const sortedData = [...notes].sort((a, b) => {
     if (a.isPinned === b.isPinned) {
       return 0;
@@ -26,22 +16,19 @@ export const NotesGrid = ({ notes, onSelectNote }) => {
         <NoteItem
           key={note.id}
           note={note}
-          // onClick={() => handleModalOpen(note)}
           onClick={() => onSelectNote(note)}
+          isActive={selectedNote?.id == note.id}
         />
       ))}
-      {/* <div
-        className={styles.addNoteButton}
-        onClick={() => handleModalOpen()}
+      <button
+        className={styles.addNoteBtn}
+        onClick={() => onCreate()}
       >
-        + Add Note
-      </div> */}
-      <AddEditNote
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        note={selectedNote}
-        type={selectedNote ? 'edit' : 'add'}
-      />
+        <span>
+          <IoMdAdd />
+        </span>
+        Add Note
+      </button>
     </div>
   );
 };

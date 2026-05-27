@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNotes } from '@features/notes/hooks/useNotes';
 
-export const useNoteForm = (note, type, onClose) => {
+export const useNoteForm = (note, onClose) => {
   const [token] = useState(localStorage.getItem('token'));
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -32,7 +32,7 @@ export const useNoteForm = (note, type, onClose) => {
     if (!title || !content) return;
     const data = { title, content, tags: currentTags };
 
-    type === 'edit' ? handleEditNote(data, note.id) : handleAddNote(data);
+    note.id ? handleEditNote(data, note.id) : handleAddNote(data);
     resetForm();
     onClose();
   };

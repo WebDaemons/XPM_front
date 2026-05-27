@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useNotes } from './hooks/useNotes';
-import { useModal } from '@hooks/useModal';
 
-import { AddEditNote } from '@features/notes/components/AddEditNote/AddEditNote';
 import { NotesGrid } from '@features/notes/components/NotesGrid/NotesGrid';
 import { NotesToolbar } from '@features/notes/components/NotesToolbar/NotesToolbar';
 import { NotesHeader } from '@features/notes/components/NotesHeader/NotesHeader';
@@ -12,8 +10,13 @@ import { NotesWorkspace } from '@features/notes/components/NotesWorkspace/NotesW
 export const NotesContent = () => {
   const [token] = useState(localStorage.getItem('token'));
   const { notes } = useNotes(token);
-  const { isModalOpen, handleModalOpen, handleModalClose } = useModal();
   const [selectedNote, setSelectedNote] = useState(null);
+  const EMPTY_NOTE = {
+    id: null,
+    title: '',
+    content: '',
+    tags: [],
+  };
 
   return (
     <div
@@ -25,21 +28,21 @@ export const NotesContent = () => {
         overflowY: 'hidden',
       }}
     >
-      {
-        // <AddEditNote
-        //   isOpen={isModalOpen}
-        //   onClose={handleModalClose}
-        //   type="add"
-        // />
-      }
-      <NotesHeader handleModalOpen={handleModalOpen} />
+      <NotesHeader onCreate={() => setSelectedNote(EMPTY_NOTE)} />
       {/* <NotesToolbar /> */}
       <NotesWorkspace>
         <NotesGrid
           notes={notes}
           onSelectNote={setSelectedNote}
+          selectedNote={selectedNote}
+          onCreate={() => setSelectedNote(EMPTY_NOTE)}
         />
-        {selectedNote && <NoteEditor />}
+        {selectedNote && (
+          <NoteEditor
+            note={selectedNote}
+            onClose={() => setSelectedNote(null)}
+          />
+        )}
       </NotesWorkspace>
     </div>
   );

@@ -1,29 +1,39 @@
 .notesListWrapper {
   flex: 1;
-  padding: 0 25px;
+  padding: 3px 25px;
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   justify-content: center;
 }
 
-.addNoteButton {
-  min-width: 300px;
-  min-height: 214px;
-  /* height: 250px; */
+.addNoteBtn {
+  min-height: 260px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  gap: 15px;
   align-items: center;
   border-radius: 10px;
-  border: 1.5px dashed var(--accent-color);
-  background: var(--background-color);
-  font-size: 30px;
-  font-weight: 300;
+  border: 1.5px solid var(--accent-color);
+  background: transparent;
+  font-size: 20px;
+  font-weight: 400;
   color: var(--text-color);
+  cursor: pointer;
+  font-family: Jost, sans-serif;
 }
 
-.addNoteButton:hover {
-  cursor: pointer;
-  background-color: var(--accent-color);
-  transition: background-color 0.3s ease;
+.addNoteBtn span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addNoteBtn svg {
+  height: 24px;
+  width: 24px;
+}
+
+.addNoteBtn:hover {
 }

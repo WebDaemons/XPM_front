@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { X, Plus } from 'lucide-react';
 import { ColorPicker } from '@components/index';
 import { hexToRgba } from '@utils/hexToRgba';
-import styles from './AddEditNote/addEditNote.module.css';
+import styles from './NoteEditor/noteEditor.module.css';
 
 export const TagManager = ({
   currentTags,

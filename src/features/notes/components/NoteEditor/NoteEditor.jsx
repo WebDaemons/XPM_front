@@ -7,7 +7,7 @@ import { Button } from '@ui/index';
 import styles from './noteEditor.module.css';
 import { HiArrowLeft } from 'react-icons/hi';
 
-export const NoteEditor = ({ isOpen, onClose, type, note }) => {
+export const NoteEditor = ({ onClose, note }) => {
   const {
     title,
     setTitle,
@@ -22,21 +22,24 @@ export const NoteEditor = ({ isOpen, onClose, type, note }) => {
     handlePinned,
     handleDelete,
     resetForm,
-  } = useNoteForm(note, type, onClose);
+  } = useNoteForm(note, onClose);
 
-  // if (!isOpen) return null;
+  console.log(note);
 
   return (
     <div className={styles.noteEditor}>
       <div className={styles.editorHeader}>
-        <button className={styles.backBtn}>
+        <button
+          className={styles.backBtn}
+          onClick={onClose}
+        >
           <span>
             <HiArrowLeft />
           </span>
           Back
         </button>
 
-        <h3>Edit Note</h3>
+        <h3>{note.id ? 'Edit note' : 'Create note'}</h3>
       </div>
       <div className={styles.editorBody}>
         <input
@@ -63,7 +66,7 @@ export const NoteEditor = ({ isOpen, onClose, type, note }) => {
         />
         <div className={styles.footerBtns}>
           <Button
-            onClick={resetForm}
+            onClick={onClose}
             variant="outlined"
           >
             Cancel

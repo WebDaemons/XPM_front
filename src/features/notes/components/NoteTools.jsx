@@ -1,5 +1,5 @@
 import { X, Pin, PinOff, Trash, Star } from 'lucide-react';
-import styles from './AddEditNote/addEditNote.module.css';
+import styles from './NoteEditor/noteEditor.module.css';
 
 export const NoteTools = ({
   type,

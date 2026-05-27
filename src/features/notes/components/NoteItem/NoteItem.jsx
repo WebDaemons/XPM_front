@@ -14,8 +14,9 @@ import { FaRegStar, FaStar } from 'react-icons/fa';
 import { useNotes } from '@features/notes/hooks/useNotes';
 import { useNoteForm } from '@features/notes/hooks/useNoteForm';
 import { formatDate } from '@utils/formatDate';
+import { isAction } from '@reduxjs/toolkit';
 
-export const NoteItem = ({ note, onClick }) => {
+export const NoteItem = ({ note, onClick, isActive }) => {
   const { title, content, createdAt, isPinned, tags } = note;
   const [token] = useState(localStorage.getItem('token'));
 
@@ -54,6 +55,7 @@ export const NoteItem = ({ note, onClick }) => {
     <div
       className={styles.noteWrapper}
       onClick={onClick}
+      style={{ border: isActive ? '2px solid var(--primary-blue)' : '' }}
     >
       <div className={styles.header}>
         <div className={styles.createdAt}>

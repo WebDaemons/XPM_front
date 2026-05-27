@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 
 import styles from './notesHeader.module.css';
 
-export const NotesHeader = ({ handleModalOpen }) => {
+export const NotesHeader = ({ onCreate }) => {
   return (
     <div className={styles.notesHeaderWrapper}>
       <h2>Notes</h2>
@@ -11,7 +11,7 @@ export const NotesHeader = ({ handleModalOpen }) => {
         <Button
           size="md"
           startIcon={Plus}
-          onClick={handleModalOpen}
+          onClick={onCreate}
         >
           Create Note
         </Button>
