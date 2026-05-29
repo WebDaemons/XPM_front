@@ -1,21 +1,119 @@
-.notesToolBarWrapper {
-  position: sticky;
-  padding: 25px;
-  top: 0;
+.notesToolbarWrapper {
+  width: 100%;
+  padding: 10px 25px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  z-index: 10;
-  border-bottom: 1.5px solid #e8f1ff;
-  background-color: #fafcff;
+  gap: 2px;
 }
 
-.notesToolBarWrapper h2 {
-  font-size: 2rem;
-  font-weight: 500;
-}
-
-.notesToolBar {
+.searchFieldWrapper {
+  padding: 8px 10px;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid var(--accent-color);
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.searchFieldWrapper input {
+  font-size: 18px;
+  font-family: Jost, sans-serif;
+  outline: none;
+  border: none;
+}
+
+.searchFieldWrapper input::placeholder {
+  color: var(--text-color);
+}
+
+.searchFieldWrapper span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.searchFieldWrapper svg {
+  height: 18px;
+  width: 18px;
+}
+
+.filterBtn {
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filterIcon {
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  background-color: #fff;
+  border: 1.5px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+.filterIcon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.sortSelect {
+  padding: 13px 15px;
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 18px;
+  border: 1.5px solid var(--accent-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.arrowIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.arrowIcon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.viewSwitcher {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background-color: #fff;
+  border: 1.5px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+.viewSwitchBtn {
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.viewSwitchBtn span {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.viewSwitchBtn svg {
+  height: 18px;
+  width: 18px;
 }
