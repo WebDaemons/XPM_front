@@ -29,7 +29,7 @@ export const NotesContent = () => {
       }}
     >
       <NotesHeader onCreate={() => setSelectedNote(EMPTY_NOTE)} />
-      {/* <NotesToolbar /> */}
+      <NotesToolbar />
       <NotesWorkspace>
         <NotesGrid
           notes={notes}

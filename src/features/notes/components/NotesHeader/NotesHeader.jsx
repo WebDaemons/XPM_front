@@ -1,7 +1,7 @@
+import styles from './notesHeader.module.css';
+
 import { Button } from '@ui/index';
 import { Plus } from 'lucide-react';
-
-import styles from './notesHeader.module.css';
 
 export const NotesHeader = ({ onCreate }) => {
   return (

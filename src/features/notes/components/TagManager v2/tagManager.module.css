@@ -1,0 +1,154 @@
+.mainView {
+  display: flex;
+  align-items: flex-start;
+}
+
+.currentTagsList {
+  width: fit-content;
+  padding: 5px;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* background-color: #fafcff; */
+  /* background-color: var(--accent-color); */
+  border-radius: 8px;
+}
+
+.tag {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  /* gap: 5px; */
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 5px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s transform ease;
+}
+
+.tag:hover {
+  transform: scale(1.05);
+}
+
+.tagName {
+  line-height: 1.1;
+  margin-left: 3px;
+  margin-right: 6px;
+}
+
+.hashIcon,
+.closeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hashIcon svg {
+  height: 16px;
+  width: 16px;
+}
+
+.closeIcon svg {
+  height: 14px;
+  width: 14px;
+}
+
+.tagsMenuBtn {
+  margin-left: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s background-color ease;
+}
+
+.tagsMenuBtn:hover {
+  background-color: var(--accent-color);
+}
+
+.tagsMenuBtn span {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.tagsMenuBtn svg {
+  height: 16px;
+  width: 16px;
+}
+
+.addNewTag {
+  margin-top: 15px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    0.2s color ease,
+    0.2s background-color ease;
+  border-radius: 5px;
+}
+
+.addNewTag:hover {
+  color: var(--primary-blue);
+  background-color: #dbe9ff;
+}
+
+.addNewTag span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addNewTag svg {
+  height: 20px;
+  width: 20px;
+}
+
+.expandedTagsMenu {
+  /* padding: 10px; */
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.tagType {
+  color: var(--text-color);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.availableTagsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.availableTag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.availableTag span {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.availableTag svg {
+  height: 16px;
+  width: 16px;
+}
