@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './tagManager.module.css';
 import { IoMdClose } from 'react-icons/io';
 import { HiHashtag } from 'react-icons/hi';
@@ -6,9 +7,12 @@ import { hexToRgba } from '@utils/hexToRgba';
 import { Plus } from 'lucide-react';
 
 export const TagManager = ({ tags }) => {
+  const [tagManagerState, setTagManagerState] = useState('searchTag');
+
   return (
     <div className={styles.tagManagerWrapper}>
-      {/* <div className={styles.mainView}>
+      <div className={styles.mainView}>
+        <h3>Tags</h3>
         <ul className={styles.currentTagsList}>
           {tags.map((tag) => (
             <li
@@ -28,18 +32,21 @@ export const TagManager = ({ tags }) => {
               </span>
             </li>
           ))}
+          <button className={styles.openSearchbarBtn}>
+            <span>
+              <Plus />
+            </span>
+          </button>
         </ul>
-        <button className={styles.tagsMenuBtn}>
-          <span>
-            <IoIosArrowDown />
-          </span>
-        </button>
-      </div> */}
-      <div className={styles.addTagWrapper}>
+      </div>
+      <div className={styles.searchTagWrapper}>
         <span>
           <HiHashtag />
         </span>
-        <input type="text" />
+        <input
+          type="text"
+          placeholder="Add tags..."
+        />
       </div>
       <div className={styles.expandedTagsMenu}>
         <span className={styles.tagType}>Recent</span>
@@ -48,7 +55,8 @@ export const TagManager = ({ tags }) => {
             <span
               style={{
                 color: '#800080',
-                backgroundColor: hexToRgba('#800080', 0.075),
+                // backgroundColor: hexToRgba('#800080', 0.075),
+                backgroundColor: '#f7eef6',
               }}
             >
               <HiHashtag />

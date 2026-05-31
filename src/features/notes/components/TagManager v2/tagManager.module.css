@@ -1,15 +1,30 @@
+.tagManagerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .mainView {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 5px;
+}
+
+.mainView h3 {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-color);
 }
 
 .currentTagsList {
-  width: fit-content;
-  padding: 5px;
-  display: inline-flex;
+  /* width: fit-content; */
+  padding: 5px 0;
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 7px;
   /* background-color: #fafcff; */
   /* background-color: var(--accent-color); */
   border-radius: 8px;
@@ -55,35 +70,42 @@
   width: 14px;
 }
 
-.tagsMenuBtn {
-  margin-left: auto;
-  padding: 0;
-  border: none;
-  background: transparent;
+.searchTagWrapper {
+  padding: 8px 11px;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--accent-color);
   border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s background-color ease;
 }
 
-.tagsMenuBtn:hover {
-  background-color: var(--accent-color);
-}
-
-.tagsMenuBtn span {
-  padding: 10px;
+.searchTagWrapper span {
+  padding-right: 10px;
+  margin-right: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  color: var(--text-color);
+  border-right: 1px solid var(--accent-color);
 }
-
-.tagsMenuBtn svg {
+.searchTagWrapper svg {
   height: 16px;
   width: 16px;
 }
+.searchTagWrapper input {
+  padding: 0;
+  width: 100%;
+  font-size: 16px;
+  font-family: Jost, sans-serif;
+  border: none;
+  outline: none;
+}
+.searchTagWrapper input::placeholder {
+  color: var(--text-color);
+}
 
 .addNewTag {
-  margin-top: 15px;
+  padding: 10px;
+  margin-top: 5px;
   color: var(--text-color);
   display: flex;
   align-items: center;
@@ -128,16 +150,28 @@
 }
 
 .availableTagsList {
+  /* padding: 0 10px; */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
 }
 
 .availableTag {
+  padding: 5px 7px;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 500;
+  cursor: pointer;
+  border-radius: 7px;
+  transition:
+    0.2s color ease,
+    0.2s background-color ease;
+}
+
+.availableTag:hover {
+  background-color: #fafcff;
+  color: #1f790f;
 }
 
 .availableTag span {
@@ -151,4 +185,36 @@
 .availableTag svg {
   height: 16px;
   width: 16px;
+}
+
+.openSearchbarBtn {
+  padding: 0;
+  border: 1.5px solid var(--accent-color);
+  background-color: transparent;
+  color: var(--text-color);
+  border-radius: 5px;
+  transition:
+    0.2s color ease,
+    0.2s background-color ease;
+  cursor: pointer;
+}
+
+.openSearchbarBtn span {
+  padding: 4.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.openSearchbarBtn svg {
+  height: 18px;
+  width: 18px;
+}
+
+.openSearchbarBtn:hover {
+  border: #dbe9ff;
+  padding: 1.5px;
+  color: var(--primary-blue);
+  background-color: #dbe9ff;
 }
