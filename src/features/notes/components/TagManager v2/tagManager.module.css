@@ -1,14 +1,13 @@
 .tagManagerWrapper {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 .mainView {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  gap: 5px;
+  gap: 10px;
 }
 
 .mainView h3 {
@@ -19,14 +18,10 @@
 }
 
 .currentTagsList {
-  /* width: fit-content; */
-  padding: 5px 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 7px;
-  /* background-color: #fafcff; */
-  /* background-color: var(--accent-color); */
   border-radius: 8px;
 }
 
@@ -112,10 +107,13 @@
   gap: 10px;
   font-size: 16px;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
   transition:
     0.2s color ease,
     0.2s background-color ease;
   border-radius: 5px;
+  font-family: Jost, sans-serif;
 }
 
 .addNewTag:hover {
@@ -200,7 +198,7 @@
 }
 
 .openSearchbarBtn span {
-  padding: 4.5px;
+  padding: 3.5px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,6 +206,7 @@
 }
 
 .openSearchbarBtn svg {
+  transition: 0.2s transform ease;
   height: 18px;
   width: 18px;
 }
@@ -217,4 +216,18 @@
   padding: 1.5px;
   color: var(--primary-blue);
   background-color: #dbe9ff;
+}
+
+.creationTagWrapper {
+  padding: 5px 7px;
+  /* margin-top: 20px; */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.creationTagActionBtns {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
 }
