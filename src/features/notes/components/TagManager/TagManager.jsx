@@ -8,17 +8,29 @@ import { Plus } from 'lucide-react';
 import { Button } from '@ui/index';
 import { ColorPicker } from '@components/index';
 
-export const TagManager = ({ tags }) => {
-  const [mode, setMode] = useState('none');
+export const TagManager = ({ currentTags, setCurrentTags }) => {
+  const [tagName, setTagName] = useState('');
+  const [mode, setMode] = useState('search');
   const [isSearchTagOpened, setIsSearchTagOpened] = useState(false);
   const [color, setColor] = useState('#4F7CFF');
+
+  const handleAddTag = () => {
+    if (!tagName) return;
+    setCurrentTags([...currentTags, { name: tagName, color }]);
+    setTagName('');
+    setMode('none');
+  };
+
+  const handleDeleteTag = (name) => {
+    setCurrentTags(currentTags.filter((tag) => tag.name !== name));
+  };
 
   return (
     <div className={styles.tagManagerWrapper}>
       <div className={styles.mainView}>
         <h3>Tags</h3>
         <ul className={styles.currentTagsList}>
-          {tags.map((tag) => (
+          {currentTags.map((tag) => (
             <li
               className={styles.tag}
               key={tag.id}
@@ -31,9 +43,15 @@ export const TagManager = ({ tags }) => {
                 <HiHashtag />
               </span>
               <span className={styles.tagName}>{tag.name}</span>
-              <span className={styles.closeIcon}>
-                <IoMdClose />
-              </span>
+              <button
+                className={styles.deleteTagBtn}
+                style={{ color: tag.color }}
+                onClick={() => handleDeleteTag(tag.name)}
+              >
+                <span className={styles.closeIcon}>
+                  <IoMdClose />
+                </span>
+              </button>
             </li>
           ))}
           <button
@@ -69,8 +87,10 @@ export const TagManager = ({ tags }) => {
           </span>
           <input
             type="text"
-            placeholder={mode == 'search' ? 'Search tags...' : 'Create tag...'}
-            onFocus={() => setMode('search')}
+            placeholder={mode == 'create' ? 'Create tag...' : 'Search tags...'}
+            onFocus={() => (mode == 'none' ? setMode('search') : '')}
+            value={tagName}
+            onChange={(e) => setTagName(e.target.value)}
           />
         </div>
       )}
@@ -140,7 +160,7 @@ export const TagManager = ({ tags }) => {
                 >
                   Cancel
                 </Button>
-                <Button>Create</Button>
+                <Button onClick={handleAddTag}>Create</Button>
               </div>
             </div>
           )}

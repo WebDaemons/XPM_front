@@ -48,6 +48,13 @@
   margin-right: 6px;
 }
 
+.deleteTagBtn {
+  padding: 0;
+  background-color: transparent;
+  border: 5px;
+  cursor: pointer;
+}
+
 .hashIcon,
 .closeIcon {
   display: flex;

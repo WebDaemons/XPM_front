@@ -1,8 +1,10 @@
 .noteEditor {
-  height: 100%;
-  width: 30%;
-  min-width: 350px;
-  position: relative;
+  /* height: calc(100% - 50px); */
+  max-width: 40%;
+  min-width: 400px;
+  /* position: relative; */
+  position: sticky;
+  top: 0;
   margin-right: 25px;
   display: flex;
   flex-direction: column;
@@ -55,6 +57,7 @@
 
 .editorBody {
   padding: 25px 30px 30px;
+  flex: 1;
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -85,7 +88,8 @@
 }
 
 .editorFooter {
-  padding: 20px;
+  margin-top: auto;
+  padding: 16px 20px;
   /* background-color: azure; */
 }
 

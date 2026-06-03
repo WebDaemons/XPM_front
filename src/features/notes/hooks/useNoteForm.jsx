@@ -6,8 +6,6 @@ export const useNoteForm = (note, onClose) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [currentTags, setCurrentTags] = useState([]);
-  const [selectedColor, setSelectedColor] = useState('#aabbcc');
-  const [isTagAddVisible, setIsAddTagVisible] = useState(false);
   const [isNotePinned, setIsNotePinned] = useState(false);
   const { handleAddNote, handleEditNote, handleDeleteNote } = useNotes(token);
 
@@ -24,7 +22,6 @@ export const useNoteForm = (note, onClose) => {
     setTitle('');
     setContent('');
     setCurrentTags([]);
-    setIsAddTagVisible(false);
     onClose();
   };
 
@@ -55,10 +52,6 @@ export const useNoteForm = (note, onClose) => {
     setContent,
     currentTags,
     setCurrentTags,
-    selectedColor,
-    setSelectedColor,
-    isTagAddVisible,
-    setIsAddTagVisible,
     isNotePinned,
     handleSave,
     handlePinned,

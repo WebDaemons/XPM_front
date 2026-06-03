@@ -86,14 +86,30 @@
 
 .tags {
   margin-top: auto;
-  /* display: flex; */
-  gap: 10px;
+  gap: 8px;
   overflow-x: hidden;
 }
 
 .tag {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
   font-size: 14px;
-  border-radius: 5px;
-  padding: 10px 7px;
-  font-weight: 400;
+  font-weight: 500;
+  border-radius: 7px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s transform ease;
+}
+
+.hashIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hashIcon svg {
+  height: 14px;
+  width: 14px;
 }

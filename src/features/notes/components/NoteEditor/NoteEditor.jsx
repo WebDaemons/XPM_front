@@ -1,6 +1,5 @@
 import { useNoteForm } from '@features/notes/hooks/useNoteForm';
-
-import { TagManager } from '../TagManager';
+import { TagManager } from '../TagManager/TagManager';
 import { NoteTools } from '../NoteTools';
 
 import { Button } from '@ui/index';
@@ -15,16 +14,12 @@ export const NoteEditor = ({ onClose, note }) => {
     setContent,
     currentTags,
     setCurrentTags,
-    selectedColor,
-    setSelectedColor,
     isNotePinned,
     handleSave,
     handlePinned,
     handleDelete,
     resetForm,
   } = useNoteForm(note, onClose);
-
-  console.log(note);
 
   return (
     <div className={styles.noteEditor}>
@@ -52,7 +47,7 @@ export const NoteEditor = ({ onClose, note }) => {
         <textarea
           className={styles.content}
           placeholder="Start writing..."
-          rows={10}
+          rows={5}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
@@ -61,8 +56,6 @@ export const NoteEditor = ({ onClose, note }) => {
         <TagManager
           currentTags={currentTags}
           setCurrentTags={setCurrentTags}
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
         />
         <div className={styles.footerBtns}>
           <Button
