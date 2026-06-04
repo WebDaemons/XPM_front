@@ -30,7 +30,8 @@ export const removeNote = createAsyncThunk(
   'notes/removeNote',
   async ({ token, id }, { rejectWithValue }) => {
     try {
-      return await deleteNote(token, id);
+      await deleteNote(token, id);
+      return id;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
