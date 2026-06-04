@@ -28,12 +28,15 @@ export const DropdownMenu = ({ trigger, items = [], align = 'right' }) => {
     <div
       ref={menuRef}
       className={styles.dropdownWrapper}
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleMenu();
-      }}
     >
-      {trigger}
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleMenu();
+        }}
+      >
+        {trigger}
+      </div>
       {isOpen && (
         <div
           className={`${styles.dropdownMenu} ${
@@ -56,7 +59,8 @@ export const DropdownMenu = ({ trigger, items = [], align = 'right' }) => {
                 className={`${styles.dropdownItem} ${
                   item.danger ? styles.danger : ''
                 } ${item.warning ? styles.warning : ''}`}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   item.onClick?.();
                   setIsOpen(false);
                 }}
