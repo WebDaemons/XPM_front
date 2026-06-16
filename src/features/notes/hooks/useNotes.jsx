@@ -5,14 +5,18 @@ import {
   addNote,
   removeNote,
   editNote,
+  fetchTags,
+  addTag,
+  removeTag,
 } from '@features/notes/slices/noteSlice';
 
 export const useNotes = (token) => {
   const dispatch = useDispatch();
-  const { notes, status, error } = useSelector((state) => state.notes);
+  const { notes, tags, status, error } = useSelector((state) => state.notes);
 
   useEffect(() => {
     dispatch(fetchNotes(token));
+    dispatch(fetchTags(token));
   }, [dispatch, token]);
 
   const handleAddNote = (data) => {
@@ -31,13 +35,24 @@ export const useNotes = (token) => {
     dispatch(addNote({ token, data }));
   };
 
+  const handleDeleteTag = (id) => {
+    dispatch(removeTag({ token, id }));
+  };
+
+  const handleAddTag = (data) => {
+    dispatch(addTag({ token, data }));
+  };
+
   return {
     notes,
+    tags,
     status,
     error,
     handleAddNote,
     handleDeleteNote,
     handleEditNote,
     handleDuplicateNote,
+    handleAddTag,
+    handleDeleteTag,
   };
 };

@@ -2,28 +2,46 @@ import { useState } from 'react';
 import styles from './tagManager.module.css';
 import { IoMdClose } from 'react-icons/io';
 import { HiHashtag } from 'react-icons/hi';
-import { IoIosArrowDown } from 'react-icons/io';
 import { hexToRgba } from '@utils/hexToRgba';
 import { Plus } from 'lucide-react';
 import { Button } from '@ui/index';
 import { ColorPicker } from '@components/index';
+import { useNotes } from '../../hooks/useNotes';
 
-export const TagManager = ({ currentTags, setCurrentTags }) => {
+export const TagManager = ({ currentTags, setCurrentTags, availableTags }) => {
   const [tagName, setTagName] = useState('');
   const [mode, setMode] = useState('search');
   const [isSearchTagOpened, setIsSearchTagOpened] = useState(false);
   const [color, setColor] = useState('#4F7CFF');
 
-  const handleAddTag = () => {
-    if (!tagName) return;
-    setCurrentTags([...currentTags, { name: tagName, color }]);
-    setTagName('');
-    setMode('none');
+  const [token] = useState(localStorage.getItem('token'));
+  const { handleDeleteTag: tagDelete, handleAddTag } = useNotes(token);
+
+  const deleteAllTags = () => {
+    availableTags.forEach((tag) => {
+      tagDelete(tag.id);
+    });
   };
 
-  const handleDeleteTag = (name) => {
-    setCurrentTags(currentTags.filter((tag) => tag.name !== name));
+  const handleAddExistingTag = (tag) => {
+    const alreadyExists = currentTags.some((item) => item.id === tag.id);
+
+    if (alreadyExists) return;
+
+    setCurrentTags([...currentTags, tag]);
   };
+
+  const handleCreateTag = () => {
+    if (!tagName) return;
+    handleAddTag({ name: tagName, color });
+    // setCurrentTags([...currentTags, { name: tagName, color }]);
+    setTagName('');
+    setMode('search');
+  };
+
+  function handleDeleteTag(name) {
+    setCurrentTags(currentTags.filter((tag) => tag.name !== name));
+  }
 
   return (
     <div className={styles.tagManagerWrapper}>
@@ -58,9 +76,8 @@ export const TagManager = ({ currentTags, setCurrentTags }) => {
             className={styles.openSearchbarBtn}
             onClick={() => {
               setIsSearchTagOpened((prev) => !prev);
-
               if (!isSearchTagOpened) {
-                setMode('none');
+                setMode('search');
               }
             }}
           >
@@ -86,6 +103,7 @@ export const TagManager = ({ currentTags, setCurrentTags }) => {
             <HiHashtag />
           </span>
           <input
+            autoFocus
             type="text"
             placeholder={mode == 'create' ? 'Create tag...' : 'Search tags...'}
             onFocus={() => (mode == 'none' ? setMode('search') : '')}
@@ -94,47 +112,29 @@ export const TagManager = ({ currentTags, setCurrentTags }) => {
           />
         </div>
       )}
-      <div></div>
       {isSearchTagOpened && (
         <>
           {mode == 'search' && (
             <div className={styles.expandedTagsMenu}>
-              <span className={styles.tagType}>Recent</span>
+              {/* <span className={styles.tagType}>Recent</span> */}
               <ul className={styles.availableTagsList}>
-                <li className={styles.availableTag}>
-                  <span
-                    style={{
-                      color: '#800080',
-                      // backgroundColor: hexToRgba('#800080', 0.075),
-                      backgroundColor: '#f7eef6',
-                    }}
+                {availableTags.map((tag) => (
+                  <li
+                    key={tag.id ?? tag.name}
+                    className={styles.availableTag}
+                    onClick={() => handleAddExistingTag(tag)}
                   >
-                    <HiHashtag />
-                  </span>
-                  Job
-                </li>
-                <li className={styles.availableTag}>
-                  <span
-                    style={{
-                      color: '#fa8008',
-                      backgroundColor: hexToRgba('#fa8008', 0.075),
-                    }}
-                  >
-                    <HiHashtag />
-                  </span>
-                  Sport
-                </li>
-                <li className={styles.availableTag}>
-                  <span
-                    style={{
-                      color: '#1f790f',
-                      backgroundColor: hexToRgba('#1f790f', 0.075),
-                    }}
-                  >
-                    <HiHashtag />
-                  </span>
-                  Programmin
-                </li>
+                    <span
+                      style={{
+                        color: tag.color,
+                        backgroundColor: hexToRgba(tag.color, 0.075),
+                      }}
+                    >
+                      <HiHashtag />
+                    </span>
+                    {tag.name}
+                  </li>
+                ))}
               </ul>
               <button
                 className={styles.addNewTag}
@@ -160,7 +160,7 @@ export const TagManager = ({ currentTags, setCurrentTags }) => {
                 >
                   Cancel
                 </Button>
-                <Button onClick={handleAddTag}>Create</Button>
+                <Button onClick={handleCreateTag}>Create</Button>
               </div>
             </div>
           )}

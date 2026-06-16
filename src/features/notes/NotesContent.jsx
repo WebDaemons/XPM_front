@@ -9,7 +9,7 @@ import { NotesWorkspace } from '@features/notes/components/NotesWorkspace/NotesW
 
 export const NotesContent = () => {
   const [token] = useState(localStorage.getItem('token'));
-  const { notes } = useNotes(token);
+  const { notes, tags } = useNotes(token);
   const [selectedNote, setSelectedNote] = useState(null);
   const EMPTY_NOTE = {
     id: null,
@@ -29,7 +29,7 @@ export const NotesContent = () => {
       }}
     >
       <NotesHeader onCreate={() => setSelectedNote(EMPTY_NOTE)} />
-      <NotesToolbar />
+      {/* <NotesToolbar /> */}
       <NotesWorkspace>
         <NotesGrid
           notes={notes}
@@ -40,6 +40,7 @@ export const NotesContent = () => {
         {selectedNote && (
           <NoteEditor
             note={selectedNote}
+            tags={tags}
             onClose={() => setSelectedNote(null)}
           />
         )}

@@ -46,6 +46,7 @@
   line-height: 1.1;
   margin-left: 3px;
   margin-right: 6px;
+  text-transform: lowercase;
 }
 
 .deleteTagBtn {
@@ -107,7 +108,7 @@
 
 .addNewTag {
   padding: 10px;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   color: var(--text-color);
   display: flex;
   align-items: center;
@@ -146,6 +147,11 @@
   /* border: 1px solid red; */
   border-radius: 8px;
   font-size: 14px;
+
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .tagType {
@@ -155,20 +161,36 @@
 }
 
 .availableTagsList {
-  /* padding: 0 10px; */
+  position: relative;
+  /* padding: 10px 0 0 0; */
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  overflow-y: scroll;
+  max-height: 100px;
 }
 
+/* .availableTagsList::after {
+  position: absolute;
+  content: '';
+  height: 1px;
+  width: calc(100% - 50px);
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  background-color: var(--accent-color);
+} */
+
 .availableTag {
-  padding: 5px 7px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 500;
   cursor: pointer;
   border-radius: 7px;
+  text-transform: lowercase;
   transition:
     0.2s color ease,
     0.2s background-color ease;
@@ -176,7 +198,7 @@
 
 .availableTag:hover {
   background-color: #fafcff;
-  color: #1f790f;
+  /* color: #1f790f; */
 }
 
 .availableTag span {
@@ -226,11 +248,17 @@
 }
 
 .creationTagWrapper {
-  padding: 5px 7px;
+  padding: 10px;
   /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border-radius: 10px;
+
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .creationTagActionBtns {

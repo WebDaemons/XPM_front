@@ -90,6 +90,9 @@
 .editorFooter {
   margin-top: auto;
   padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   /* background-color: azure; */
 }
 

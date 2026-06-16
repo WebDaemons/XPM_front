@@ -6,7 +6,7 @@ import { Button } from '@ui/index';
 import styles from './noteEditor.module.css';
 import { HiArrowLeft } from 'react-icons/hi';
 
-export const NoteEditor = ({ onClose, note }) => {
+export const NoteEditor = ({ onClose, note, tags }) => {
   const {
     title,
     setTitle,
@@ -56,6 +56,7 @@ export const NoteEditor = ({ onClose, note }) => {
         <TagManager
           currentTags={currentTags}
           setCurrentTags={setCurrentTags}
+          availableTags={tags}
         />
         <div className={styles.footerBtns}>
           <Button

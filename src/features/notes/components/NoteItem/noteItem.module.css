@@ -101,6 +101,7 @@
   white-space: nowrap;
   cursor: pointer;
   transition: 0.2s transform ease;
+  text-transform: lowercase;
 }
 
 .hashIcon {
