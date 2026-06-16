@@ -4,6 +4,9 @@ import {
   deleteNote,
   createNote,
   updateNote,
+  getTags,
+  createTag,
+  deleteTag,
 } from '@features/notes/api/noteApi';
 
 export const fetchNotes = createAsyncThunk(
@@ -48,11 +51,43 @@ export const editNote = createAsyncThunk(
     }
   },
 );
+export const fetchTags = createAsyncThunk(
+  'notes/fetchTags',
+  async (token, { rejectWithValue }) => {
+    try {
+      return await getTags(token);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+export const addTag = createAsyncThunk(
+  'notes/addTag',
+  async ({ token, data }, { rejectWithValue }) => {
+    try {
+      return await createTag(token, data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+export const removeTag = createAsyncThunk(
+  'notes/removeTag',
+  async ({ token, id }, { rejectWithValue }) => {
+    try {
+      await deleteTag(token, id);
+      return id;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
 const noteSlice = createSlice({
   name: 'notes',
   initialState: {
     notes: [],
+    tags: [],
     status: 'idle',
     error: null,
   },
@@ -91,6 +126,29 @@ const noteSlice = createSlice({
         }
       })
       .addCase(editNote.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(fetchTags.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchTags.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.tags = action.payload;
+      })
+      .addCase(fetchTags.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(addTag.fulfilled, (state, action) => {
+        state.tags.push(action.payload);
+      })
+      .addCase(addTag.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(removeTag.fulfilled, (state, action) => {
+        state.tags = state.tags.filter((tag) => tag.id !== action.payload);
+      })
+      .addCase(removeTag.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

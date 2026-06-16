@@ -53,3 +53,43 @@ export const updateNote = async (token, data, id) => {
     throw error;
   }
 };
+
+export const getTags = async (token) => {
+  try {
+    const response = await axiosInstance.get('/notes/tags', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching notes:', error);
+    throw error;
+  }
+};
+export const createTag = async (token, data) => {
+  try {
+    const response = await axiosInstance.post('/notes/tag/create/', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating note:', error);
+    throw error;
+  }
+};
+export const deleteTag = async (token, id) => {
+  try {
+    const response = await axiosInstance.delete(`/notes/tag/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting note:', error);
+    throw error;
+  }
+};
