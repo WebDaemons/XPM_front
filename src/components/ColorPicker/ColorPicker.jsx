@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
 
-import styles from './ColorPicker.module.css';
+import styles from './colorPicker.module.css';
 
 const PRESET_COLORS = [
   '#4F7CFF',
